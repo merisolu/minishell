@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 14:46:56 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:14:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,9 @@ int			ft_is_hidden(const char *path);
 
 int			ft_is_dir(const char *path);
 int			ft_points_to_dir(const char *path);
+
+int			ft_is_file(const char *path);
+int			ft_points_to_file(const char *path);
 
 void		ft_path_join(const char *a, const char *b, char dst[PATH_MAX + 1]);
 

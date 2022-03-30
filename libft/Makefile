@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/03/30 14:39:31 by jumanner         ###   ########.fr        #
+#    Updated: 2022/03/30 15:15:24 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC_FILES = ft_tolower.c ft_toupper.c \
 		ft_free_array.c ft_rev_array.c ft_free_null_array.c ft_null_array_len.c \
 		ft_dstchr.c \
 		ft_get_next_line.c \
-		ft_dir.c ft_path.c ft_path_validity.c
+		ft_file.c ft_dir.c ft_path.c ft_path_validity.c
 SRC_DIR = ./src
 SRCS := $(patsubst %, $(SRC_DIR)/%, $(SRC_FILES))
 
