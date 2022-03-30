@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 13:13:39 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:55:12 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include <sys/wait.h>
 
 # define PROMPT "$> "
 
@@ -23,12 +24,14 @@
 
 /* Errors */
 # define ERR_LINE_READ "Line read error."
+# define ERR_FORK_FAIL "Process creation failed."
+# define ERR_EXECVE_FAIL "Process execution failed."
 
 /* Types */
 
 typedef struct s_state
 {
-	const char	**env;
+	char *const	*env;
 	char		**paths;
 }	t_state;
 
@@ -66,10 +69,11 @@ void	token_free(t_token **token);
 void	token_list_free(t_token **list);
 
 /* env.c */
-char	*env_get(const char *name, const char **env);
+char	*env_get(const char *name, char *const *env);
 
 /* bin.c */
 void	bin_find(const char *name, t_state *state, char result[PATH_MAX]);
+void	bin_execute(const char *path, char *const *args, char *const *env);
 
 /* debug.c */
 void	print_tokens(t_token *list);

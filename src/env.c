@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:39:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 13:07:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:30:30 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * Attempts to find an environment variable matching the given name.
  * Returns NULL if not found.
  */
-char	*env_get(const char *name, const char **env)
+char	*env_get(const char *name, char *const *env)
 {
 	size_t	i;
 	char	*temp;

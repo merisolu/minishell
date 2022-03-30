@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 13:20:09 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:56:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,32 @@ void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
 	while ((*state).paths[i])
 	{
 		ft_path_join((*state).paths[i], name, path_buffer);
-		if (ft_path_has_valid_end(path_buffer))
+		if (ft_points_to_file(path_buffer) && access(path_buffer, X_OK) == 0)
 		{
 			ft_strcpy(result, path_buffer);
 			break ;
 		}
 		i++;
 	}
+}
+
+/*
+ * Attempts to fork the current process, transform it into a new process
+ * defined by the given path to a binary, and wait for its execution to finish.
+ * If fork or execve calls fail, an error message is printed to stderr.
+ */
+void	bin_execute(const char *path, char *const *args, char *const *env)
+{
+	pid_t	process_pid;
+
+	process_pid = fork();
+	if (process_pid == 0)
+	{
+		if (execve(path, args, env) == -1)
+			ft_putendl_fd(ERR_EXECVE_FAIL, STDERR_FILENO);
+	}
+	else if (process_pid == -1)
+		ft_putendl_fd(ERR_FORK_FAIL, STDERR_FILENO);
+	else
+		wait(NULL);
 }
