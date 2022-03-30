@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/03/29 12:13:47 by jumanner         ###   ########.fr        #
+#    Updated: 2022/03/30 14:55:18 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,38 +18,40 @@ INCLUDE_DIR = ./include
 
 LIB_DIR = ./libft
 LIB_INCLUDE_DIR = ./libft/include
+LIB_PATH = ./libft/libft.a
 
-SRCS_FILES = main.c lexer.c parser.c token.c token_list.c debug.c
-SRCS_DIR = ./src
-SRCS := $(patsubst %, $(SRCS_DIR)/%, $(SRCS_FILES))
+SRC_FILES = main.c lexer.c parser.c token.c token_list.c env.c bin.c debug.c
+SRC_DIR = ./src
+SRCS := $(patsubst %, $(SRC_DIR)/%, $(SRC_FILES))
 
-OBJS_DIR = ./obj
-OBJS := $(patsubst %, $(OBJS_DIR)/%, $(SRCS_FILES:.c=.o))
+OBJ_DIR = ./obj
+OBJS := $(patsubst %, $(OBJ_DIR)/%, $(SRC_FILES:.c=.o))
 
 GCC_FLAGS = -g -Wall -Wextra -Werror
 
-$(NAME): $(OBJS)
-	make -C $(LIB_DIR)
+$(NAME): $(LIB_PATH) $(OBJS)
 	$(CC) -L $(LIB_DIR) -lft $(OBJS) -o $(NAME)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(GCC_FLAGS) -I $(INCLUDE_DIR) -I $(LIB_INCLUDE_DIR) -c $< -o $@
 
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 .PHONY: all clean fclean re run
 
 all: $(NAME)
 
 clean:
-	rm -f $(OBJS)
-	rm -r $(OBJS_DIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+$(LIB_PATH):
+	make -C $(LIB_DIR)
 
 run: $(NAME)
 	./$(NAME)

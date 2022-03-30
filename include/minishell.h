@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 11:41:10 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:13:39 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define ERR_LINE_READ "Line read error."
 
 /* Types */
+
+typedef struct s_state
+{
+	const char	**env;
+	char		**paths;
+}	t_state;
 
 typedef enum e_token_type
 {
@@ -58,6 +64,12 @@ void	token_free(t_token **token);
 
 /* token_list.c */
 void	token_list_free(t_token **list);
+
+/* env.c */
+char	*env_get(const char *name, const char **env);
+
+/* bin.c */
+void	bin_find(const char *name, t_state *state, char result[PATH_MAX]);
 
 /* debug.c */
 void	print_tokens(t_token *list);
