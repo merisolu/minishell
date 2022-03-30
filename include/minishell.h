@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/28 16:17:46 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:41:10 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	parse(t_token *list);
 /* token.c */
 t_token	*token_new(t_token_type type, char *value);
 t_token	*token_add(t_token **list, t_token_type type, char *value);
+void	token_free(t_token **token);
 
 /* token_list.c */
-void	free_token(t_token **token);
-void	free_token_list(t_token **list);
+void	token_list_free(t_token **list);
 
 /* debug.c */
 void	print_tokens(t_token *list);
