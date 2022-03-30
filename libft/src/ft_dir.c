@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:56:11 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/18 15:13:50 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:36:36 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * Returns true if the given path is a directory. False otherwise.
  */
-int	ft_is_dir(char *path)
+int	ft_is_dir(const char *path)
 {
 	struct stat		temp;
 
@@ -29,7 +29,7 @@ int	ft_is_dir(char *path)
 /*
  * Returns true if the given path points to a directory. False otherwise.
  */
-int	ft_points_to_dir(char *path)
+int	ft_points_to_dir(const char *path)
 {
 	struct stat		temp;
 

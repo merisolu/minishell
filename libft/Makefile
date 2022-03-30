@@ -6,16 +6,17 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/03/25 13:21:58 by jumanner         ###   ########.fr        #
+#    Updated: 2022/03/30 14:39:31 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=libft.a
+NAME = libft.a
 
-SRCSDIR = ./src
-INCLUDESDIR = ./include
+CC = gcc
 
-FILES = ft_tolower.c ft_toupper.c \
+INCLUDE_DIR = ./include
+
+SRC_FILES = ft_tolower.c ft_toupper.c \
 		ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isprint.c ft_isascii.c \
 		ft_strlen.c ft_strdup.c ft_strnew.c ft_strdel.c ft_strclr.c ft_strncmp.c ft_strcmp.c \
 		ft_strncpy.c ft_strcpy.c ft_strncat.c ft_strcat.c ft_strlcat.c \
@@ -38,39 +39,42 @@ FILES = ft_tolower.c ft_toupper.c \
 		ft_free_array.c ft_rev_array.c ft_free_null_array.c ft_null_array_len.c \
 		ft_dstchr.c \
 		ft_get_next_line.c \
-		ft_file.c ft_dir.c ft_path.c ft_path_validity.c
+		ft_dir.c ft_path.c ft_path_validity.c
+SRC_DIR = ./src
+SRCS := $(patsubst %, $(SRC_DIR)/%, $(SRC_FILES))
 
-SRCS = $(patsubst %, $(SRCSDIR)/%, $(FILES))
-OBJS = $(FILES:.c=.o)
+OBJ_DIR = ./obj
+OBJS := $(patsubst %, $(OBJ_DIR)/%, $(SRC_FILES:.c=.o))
 
-PRINTF_FILES = ft_printf.c \
-		component_parsers.c \
-		dispatchers.c \
-		text_handlers.c \
-		num_handlers.c unum_handlers.c \
-		float_handlers.c float_helpers.c double_writer.c double_writer_helpers.c \
-		hex_handlers.c oct_handlers.c binary_handlers.c base36_handlers.c \
-		written_chars_handler.c \
-		width.c color.c
+FT_PRINTF_DIR = ./ft_printf
+FT_PRINTF_LIB = $(FT_PRINTF_DIR)/libftprintf.a
 
-PRINTF_SRCSDIR = ./ft_printf/srcs
-PRINTF_INCLUDESDIR = ./ft_printf/includes
+TEMP_LIB = .templib
 
-PRINTF_SRCS = $(patsubst %, $(PRINTF_SRCSDIR)/%, $(PRINTF_FILES))
-PRINTF_OBJS = $(PRINTF_FILES:.c=.o)
+GCC_FLAGS = -O3 -Wall -Wextra -Werror
 
-$(NAME):
-	gcc -O3 -Wall -Wextra -Werror -I $(INCLUDESDIR) -I $(PRINTF_INCLUDESDIR) -c $(SRCS) $(PRINTF_SRCS)
-	ar rcs $(NAME) $(OBJS) $(PRINTF_OBJS)
+$(NAME): $(OBJS) $(FT_PRINTF_LIB)
+	ar rcs $(TEMP_LIB) $(OBJS)
+	libtool -static -o $(NAME) $(TEMP_LIB) $(FT_PRINTF_LIB)
+	rm -f $(TEMP_LIB)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(GCC_FLAGS) -I $(INCLUDE_DIR) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 clean:
-	rm -f $(OBJS) $(PRINTF_OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+$(FT_PRINTF_LIB):
+	make -C $(FT_PRINTF_DIR)

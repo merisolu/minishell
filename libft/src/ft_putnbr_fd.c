@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 12:36:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/01/14 13:30:37 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	ft_putnbr_llong_fd(long long n, int fd)
 		ft_putchar_fd((n % 10) + 48, fd);
 }
 
-/* Writes the given unsigned long long to the given file descriptor. */
-void	ft_putnbr_ullong_fd(unsigned long long n, int fd)
+/* Writes the given t_ull to the given file descriptor. */
+void	ft_putnbr_ullong_fd(t_ull n, int fd)
 {
 	if (n > 9)
 		ft_putnbr_ullong_fd(n / 10, fd);

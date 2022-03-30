@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 10:34:29 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/04 18:25:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	ft_putnbrn_llong(long long n, int len)
 }
 
 /*
- * Writes the given unsigned long long to stdout, with the resulting output
+ * Writes the given t_ull to stdout, with the resulting output
  * being exactly the specified length. This means the number will either get
  * padding with zeros, print out completely, or be cut short.
 */
-void	ft_putnbrn_ullong(unsigned long long n, int len)
+void	ft_putnbrn_ullong(t_ull n, int len)
 {
 	ft_putnbrn_ullong_fd(n, len, 1);
 }

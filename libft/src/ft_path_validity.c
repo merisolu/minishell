@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:21:28 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/18 16:32:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:36:12 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * Returns true if the path exists.
  */
-int	ft_path_has_valid_end(char *path)
+int	ft_path_has_valid_end(const char *path)
 {
 	struct stat		temp;
 
@@ -28,7 +28,7 @@ int	ft_path_has_valid_end(char *path)
  * Returns true if the path points to a link that has a valid destination or
  * if the file is not a link, returns true if the file exists.
  */
-int	ft_path_has_valid_link(char *path)
+int	ft_path_has_valid_link(const char *path)
 {
 	struct stat		temp;
 

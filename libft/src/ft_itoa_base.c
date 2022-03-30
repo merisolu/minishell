@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 14:56:48 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/03 23:10:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_itoa_llong_base(long long n, int base)
 	if (base < 2 || base > 36)
 		return (NULL);
 	if (base != 10 && n < 0)
-		return (ft_itoa_ullong_base((unsigned long long) n, base));
+		return (ft_itoa_ullong_base((t_ull) n, base));
 	chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	size = ft_getdigits_llong_base(n, base);
 	result = ft_strnew(size);
@@ -96,10 +96,10 @@ char	*ft_itoa_llong_base(long long n, int base)
 }
 
 /* 
- * Turns the given unsigned long long n into a string representation
+ * Turns the given t_ull n into a string representation
  * in bases 2 to 36.
 */
-char	*ft_itoa_ullong_base(unsigned long long n, int base)
+char	*ft_itoa_ullong_base(t_ull n, int base)
 {
 	char	*result;
 	int		size;

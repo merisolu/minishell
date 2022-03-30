@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 11:02:13 by jumanner          #+#    #+#             */
-/*   Updated: 2022/01/20 13:34:41 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ long long	ft_min_llong(long long i1, long long i2)
 	return (i2);
 }
 
-/* Returns the smaller one of the two given unsigned long longs.*/
-unsigned long long	ft_min_ullong(unsigned long long i1, unsigned long long i2)
+/* Returns the smaller one of the two given t_ulls.*/
+t_ull	ft_min_ullong(t_ull i1, t_ull i2)
 {
 	if (i1 < i2)
 		return (i1);

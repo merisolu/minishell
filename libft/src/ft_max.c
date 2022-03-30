@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 11:00:48 by jumanner          #+#    #+#             */
-/*   Updated: 2022/01/20 13:33:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ long long	ft_max_llong(long long l1, long long l2)
 	return (l2);
 }
 
-/* Returns the larger one of the two given unsigned long longs.*/
-unsigned long long	ft_max_ullong(unsigned long long l1, unsigned long long l2)
+/* Returns the larger one of the two given t_ulls.*/
+t_ull	ft_max_ullong(t_ull l1, t_ull l2)
 {
 	if (l1 > l2)
 		return (l1);

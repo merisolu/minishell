@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 10:22:23 by jumanner          #+#    #+#             */
-/*   Updated: 2022/01/18 11:37:15 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_getnumlen_llong(long long n)
 }
 
 /* Returns how many characters are needed to store the given number. */
-int	ft_getnumlen_ullong(unsigned long long n)
+int	ft_getnumlen_ullong(t_ull n)
 {
 	return (ft_getdigits_ullong(n));
 }

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 11:11:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/18 12:25:56 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:18:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ static int	get_precision_len(t_flags f)
 static int	special_writer(long double n, t_flags f)
 {
 	int			len;
-	int			prec_len;
 
-	prec_len = get_precision_len(f);
 	len = 3;
 	if ((ft_strequ(f.length, "L") && ft_isnan_long(n))
 		|| ft_isnan(n))

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 12:36:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/16 11:55:09 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	ft_putnbrn_llong_fd(long long n, int len, int fd)
 }
 
 /*
- * Writes the given unsigned long long to the given file descriptor, with the
+ * Writes the given t_ull to the given file descriptor, with the
  * resulting output being exactly the specified length. This means the number
  * will either get padding with zeros, print out completely, or be cut short.
 */
-void	ft_putnbrn_ullong_fd(unsigned long long n, int len, int fd)
+void	ft_putnbrn_ullong_fd(t_ull n, int len, int fd)
 {
 	if (len <= 0)
 		return ;
