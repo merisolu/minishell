@@ -1,5 +1,6 @@
 .vscode/
-objs/
+obj/
+*.a
 *.o
 *.swp
 minishell
