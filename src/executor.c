@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 13:57:48 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:10:59 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	execute(char *name, char *const *args, t_state *state)
 			return (bin_execute(temp_path, args, state->env));
 		}
 		else
-			ft_putendl_fd(ERR_COM_NOT_FOUND, 2);
+			return (print_error(ERR_COM_NOT_FOUND, COMMAND_NOT_FOUND));
 	}
-	return (COMMAND_NOT_FOUND);
 }

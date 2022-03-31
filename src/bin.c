@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 15:21:22 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:10:21 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	bin_execute(const char *path, char *const *args, char *const *env)
 	if (process_pid == 0)
 	{
 		if (execve(path, args, env) == -1)
-			ft_putendl_fd(ERR_EXECVE_FAIL, STDERR_FILENO);
+			return (print_error(ERR_EXECVE_FAIL, 1));
 	}
 	else if (process_pid == -1)
-		ft_putendl_fd(ERR_FORK_FAIL, STDERR_FILENO);
+		return (print_error(ERR_FORK_FAIL, 1));
 	else
 		wait(NULL);
 	return (0);

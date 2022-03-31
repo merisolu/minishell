@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 15:22:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:05:29 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ int			execute(char *name, char *const *args, t_state *state);
 
 /* echo.c */
 int			echo(char *const *args, char *const *env);
+
+/* Utilities */
+
+/* utils.c */
+int			print_error(char *message, int return_value);
 
 /* debug.c */
 void		print_tokens(t_token *list);
