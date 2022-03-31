@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 16:56:22 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:21:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
 	}
 }
 
+// TODO: Handle return value.
 /*
  * Attempts to fork the current process, transform it into a new process
  * defined by the given path to a binary, and wait for its execution to finish.
  * If fork or execve calls fail, an error message is printed to stderr.
  */
-void	bin_execute(const char *path, char *const *args, char *const *env)
+int	bin_execute(const char *path, char *const *args, char *const *env)
 {
 	pid_t	process_pid;
 
@@ -55,4 +56,5 @@ void	bin_execute(const char *path, char *const *args, char *const *env)
 		ft_putendl_fd(ERR_FORK_FAIL, STDERR_FILENO);
 	else
 		wait(NULL);
+	return (0);
 }

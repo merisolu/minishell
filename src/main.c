@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 16:49:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:23:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(const int argc, const char **argv, char *const *env)
 	t_state	state;
 	char	*input;
 	int		line_read_result;
-	char	path[PATH_MAX];
 
 	(void)argc;
 	(void)argv;
@@ -39,14 +38,9 @@ int	main(const int argc, const char **argv, char *const *env)
 		line_read_result = ft_get_next_line(STDIN_FILENO, &input);
 		if (line_read_result == 1)
 		{
-			bin_find(input, &state, path);
+			char* args[] = { input, "-n", "Hello", NULL };
+			execute(input, args, &state);
 			free(input);
-			if (path[0])
-			{
-				ft_printf("Path: %s\n", path);
-				char* args[] = { "", NULL };
-				bin_execute(path, args, state.env);
-			}
 		}
 		else if (line_read_result == -1)
 		{

@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/03/30 14:55:18 by jumanner         ###   ########.fr        #
+#    Updated: 2022/03/31 13:46:41 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ LIB_DIR = ./libft
 LIB_INCLUDE_DIR = ./libft/include
 LIB_PATH = ./libft/libft.a
 
-SRC_FILES = main.c lexer.c parser.c token.c token_list.c env.c bin.c debug.c
+SRC_FILES = main.c lexer.c parser.c token.c token_list.c env.c bin.c executor.c \
+			built_ins.c echo.c \
+			debug.c
 SRC_DIR = ./src
 SRCS := $(patsubst %, $(SRC_DIR)/%, $(SRC_FILES))
 
