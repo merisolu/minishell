@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:02:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 14:47:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:35:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,14 @@ int	ft_is_hidden(const char *path)
 	if (!name)
 		return (0);
 	return (name[0] == '.');
+}
+
+/*
+ * Returns true if the given path is absolute.
+ */
+int	ft_path_is_absolute(const char *path)
+{
+	if (!path)
+		return (0);
+	return (path[0] == '/');
 }

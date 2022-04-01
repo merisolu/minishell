@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 15:14:09 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:35:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,7 @@ size_t		ft_dstchr(char *s, char c, size_t max);
 
 /* Path functions. */
 int			ft_is_hidden(const char *path);
+int			ft_path_is_absolute(const char *path);
 
 int			ft_is_dir(const char *path);
 int			ft_points_to_dir(const char *path);
