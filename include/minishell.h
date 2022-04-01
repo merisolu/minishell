@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 16:05:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 12:50:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define ERR_FORK_FAIL "Process creation failed."
 # define ERR_EXECVE_FAIL "Process execution failed."
 # define ERR_COM_NOT_FOUND "Command not found."
+# define ERR_TOO_MANY_ARGS "Too many arguments."
+# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory."
+# define ERR_CANNOT_GET_CWD "Unable to get current working directory."
+# define ERR_PATH_TOO_LONG "File name too long."
 
 /* Types */
 
@@ -97,6 +101,9 @@ int			execute(char *name, char *const *args, t_state *state);
 
 /* echo.c */
 int			echo(char *const *args, char *const *env);
+
+/* cd.c */
+int			cd(char *const *args, char *const *env);
 
 /* Utilities */
 
