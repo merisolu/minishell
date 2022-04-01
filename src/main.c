@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 16:07:42 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:26:54 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		line_read_result = ft_get_next_line(STDIN_FILENO, &input);
 		if (line_read_result == 1)
 		{
-			char* args[] = { input, NULL };
-			execute(input, args, &state);
+			execute(ft_strsplit(input, ' ')[0], ft_strsplit(input, ' '), &state);
 			free(input);
 		}
 		else if (line_read_result == -1)
