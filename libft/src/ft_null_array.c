@@ -6,11 +6,11 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 15:58:25 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/04 16:03:49 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libc.h"
+#include "libft.h"
 
 /* 
  * Frees each element of the given null-terminated array, then the pointer to
@@ -46,17 +46,55 @@ size_t	ft_null_array_len(void **array)
 }
 
 /*
- * Copies the null terminated array from source to target. Target needs to have
+ * Copies the null terminated array from src to dst. dst needs to have
  * enough space for the copy.
+ * 
+ * If the cpy function is NULL, the each pointer in the array is copied.
  */
-void	ft_copy_null_array(void **target, void **source)
+void	ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *))
 {
 	size_t	i;
 
 	i = 0;
-	while (source[i])
+	while (src[i])
 	{
-		target[i] = source[i];
+		if (cpy)
+			dst[i] = cpy(src[i]);
+		else
+			dst[i] = src[i];
 		i++;
 	}
+}
+
+/*
+ * Duplicates the null terminated array src, and puts the result to the
+ * address that result points to.
+ * 
+ * If the cpy function is NULL, the each pointer in the array is copied.
+ */
+void	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
+{
+	size_t	size;
+
+	size = ft_null_array_len(src);
+	*result = (void **)ft_memalloc(sizeof(void *) * (size + 1));
+	if (!(*result))
+		return ;
+	ft_copy_null_array(*result, src, cpy);
+}
+
+/*
+ * Resizes the given null terminated array to the given size and frees the
+ * original array pointer.
+ */
+void	ft_resize_null_array(void ***array, size_t size)
+{
+	void	**result;
+
+	result = (void **)ft_memalloc(sizeof(void *) * (size + 1));
+	if (!result)
+		return ;
+	ft_copy_null_array(result, *array, NULL);
+	free(*array);
+	*array = result;
 }
