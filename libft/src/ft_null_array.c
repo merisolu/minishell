@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 15:55:57 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:58:25 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,20 @@ size_t	ft_null_array_len(void **array)
 	while (array[result])
 		result++;
 	return (result);
+}
+
+/*
+ * Copies the null terminated array from source to target. Target needs to have
+ * enough space for the copy.
+ */
+void	ft_copy_null_array(void **target, void **source)
+{
+	size_t	i;
+
+	i = 0;
+	while (source[i])
+	{
+		target[i] = source[i];
+		i++;
+	}
 }

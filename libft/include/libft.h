@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 12:48:39 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:59:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,10 @@ int			ft_getnumlen_ullong(t_ull c);
 /* Array functions. */
 void		*ft_free_array(void **array, size_t size);
 void		*ft_free_null_array(void **array);
+
 size_t		ft_null_array_len(void **array);
+
+void		ft_copy_null_array(void **target, void **source);
 
 void		ft_rev_array(void **array, size_t size);
 void		ft_rev_null_array(void **array);
