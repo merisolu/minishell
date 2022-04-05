@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/04 16:03:49 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/05 11:32:12 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,30 +71,36 @@ void	ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *))
  * address that result points to.
  * 
  * If the cpy function is NULL, the each pointer in the array is copied.
+ * 
+ * Zero will be returned on error, one otherwise.
  */
-void	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
+int	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
 {
 	size_t	size;
 
 	size = ft_null_array_len(src);
 	*result = (void **)ft_memalloc(sizeof(void *) * (size + 1));
 	if (!(*result))
-		return ;
+		return (0);
 	ft_copy_null_array(*result, src, cpy);
+	return (1);
 }
 
 /*
  * Resizes the given null terminated array to the given size and frees the
  * original array pointer.
+ * 
+ * Zero will be returned on error, one otherwise.
  */
-void	ft_resize_null_array(void ***array, size_t size)
+int	ft_resize_null_array(void ***array, size_t size)
 {
 	void	**result;
 
 	result = (void **)ft_memalloc(sizeof(void *) * (size + 1));
 	if (!result)
-		return ;
+		return (0);
 	ft_copy_null_array(result, *array, NULL);
 	free(*array);
 	*array = result;
+	return (1);
 }
