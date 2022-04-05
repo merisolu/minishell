@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 16:10:21 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:06:47 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
  * defined by the given path to a binary, and wait for its execution to finish.
  * If fork or execve calls fail, an error message is printed to stderr.
  */
-int	bin_execute(const char *path, char *const *args, char *const *env)
+int	bin_execute(const char *path, char *const *args, char *const **env)
 {
 	pid_t	process_pid;
 
 	process_pid = fork();
 	if (process_pid == 0)
 	{
-		if (execve(path, args, env) == -1)
+		if (execve(path, args, *env) == -1)
 			return (print_error(ERR_EXECVE_FAIL, 1));
 	}
 	else if (process_pid == -1)

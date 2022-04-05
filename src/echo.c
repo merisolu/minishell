@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:12:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 15:20:49 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:09:48 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	echo(char *const *args, char *const *env)
+int	echo(char *const *args, char *const **env)
 {
 	int		no_newline;
 	size_t	len;

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 13:04:18 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:10:25 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	construct_path(char *target, char result[PATH_MAX + 1])
 	return (0);
 }
 
-int	cd(char *const *args, char *const *env)
+int	cd(char *const *args, char *const **env)
 {
 	char	*target;
 	char	path[PATH_MAX + 1];
@@ -49,7 +49,7 @@ int	cd(char *const *args, char *const *env)
 	arg_count = ft_null_array_len((void **)args);
 	if (arg_count > 2)
 		return (print_error(ERR_TOO_MANY_ARGS, 1));
-	target = get_target(args, arg_count, env);
+	target = get_target(args, arg_count, *env);
 	if (!target)
 		return (0);
 	if (!ft_path_is_within_limits(target))

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:18:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 16:39:25 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:07:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_built_in	*get_built_in(const char *name)
 	return (NULL);
 }
 
-int	run_built_in(t_built_in com, char *const *args, char *const *env)
+int	run_built_in(t_built_in com, char *const *args, char *const **env)
 {
 	return (com(args, env));
 }
