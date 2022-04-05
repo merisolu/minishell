@@ -109,6 +109,9 @@ int			echo(char *const *args, char *const **env);
 /* cd.c */
 int			cd(char *const *args, char *const **env);
 
+/* set_env.c */
+int			set_env(char *const *args, char *const **env);
+
 /* exit.c */
 int			shell_exit(char *const *args, char *const **env);
 

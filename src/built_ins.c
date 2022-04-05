@@ -18,6 +18,7 @@ t_built_in	*get_built_in(const char *name)
 	const static t_built_in_dispatch	dispatch_table[] = {
 	{"cd", &cd},
 	{"echo", &echo},
+	{"setenv", &set_env},
 	{"exit", &shell_exit},
 	{"", NULL}
 	};
