@@ -6,31 +6,37 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 14:26:54 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/04 15:21:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_state	get_state_struct(char *const *env)
+// TODO: Error on failed malloc.
+static void	*env_copy(void *var)
+{
+	return ((void *)ft_strdup((const char *)var));
+}
+
+static t_state	get_state_struct(char *const **env)
 {
 	t_state	result;
 
 	ft_bzero(&result, sizeof(t_state));
-	result.env = env;
-	result.paths = ft_strsplit(env_get("PATH", env), ':');
+	ft_dup_null_array((void **)*env, (void ***)&(result.env), env_copy);
+	result.paths = ft_strsplit(env_get("PATH", *env), ':');
 	return (result);
 }
 
 int	main(const int argc, const char **argv, char *const *env)
 {
-	t_state	state;
-	char	*input;
-	int		line_read_result;
+	t_state		state;
+	char		*input;
+	int			line_read_result;
 
 	(void)argc;
 	(void)argv;
-	state = get_state_struct(env);
+	state = get_state_struct(&env);
 	while (1)
 	{
 		ft_putstr(PROMPT);

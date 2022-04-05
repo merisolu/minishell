@@ -87,6 +87,7 @@ void		token_list_free(t_token **list);
 
 /* env.c */
 char		*env_get(const char *name, char *const *env);
+int			env_set(const char *name, const char *value, char *const **env);
 void		env_print_all(char *const *env);
 
 /* bin.c */
