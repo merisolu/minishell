@@ -113,6 +113,9 @@ int			cd(char *const *args, char *const **env);
 /* set_env.c */
 int			set_env(char *const *args, char *const **env);
 
+/* unset_env.c */
+int			unset_env(char *const *args, char *const **env);
+
 /* exit.c */
 int			shell_exit(char *const *args, char *const **env);
 

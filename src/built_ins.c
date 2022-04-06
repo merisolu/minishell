@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:18:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 16:07:22 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:23:47 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_built_in	*get_built_in(const char *name)
 	{"cd", &cd},
 	{"echo", &echo},
 	{"setenv", &set_env},
+	{"unsetenv", &unset_env},
 	{"exit", &shell_exit},
 	{"", NULL}
 	};
