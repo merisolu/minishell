@@ -6,27 +6,23 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 13:43:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 15:53:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
- * Attempts to find the given binary from all available paths. If the binary was
- * found its path will be stored in result. If nothing was found, result
+ * Attempts to find the given binary from all given paths. If the binary was
+ * found its path will be stored in result. If nothing was found, the result
  * will be empty.
  */
-void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
+void	bin_find(const char *name, char **paths, char result[PATH_MAX])
 {
 	size_t	i;
-	char	**paths;
 	char	path_buffer[PATH_MAX];
 
-	paths = ft_strsplit(env_get("PATH", state->env), ':');
 	ft_bzero(result, PATH_MAX);
-	if (!paths)
-		return ;
 	i = 0;
 	while (paths[i])
 	{
@@ -38,7 +34,6 @@ void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
 		}
 		i++;
 	}
-	ft_free_null_array((void **)paths);
 }
 
 // TODO: Handle return value.
