@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/05 11:32:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:16:41 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *))
  * 
  * If the cpy function is NULL, the each pointer in the array is copied.
  * 
- * Zero will be returned on error, one otherwise.
+ * One will be returned on success. Zero otherwise.
  */
 int	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
 {
@@ -90,7 +90,7 @@ int	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
  * Resizes the given null terminated array to the given size and frees the
  * original array pointer.
  * 
- * Zero will be returned on error, one otherwise.
+ * One will be returned on success. Zero otherwise.
  */
 int	ft_resize_null_array(void ***array, size_t size)
 {
