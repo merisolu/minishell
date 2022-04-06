@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:39:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/05 12:07:03 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:59:59 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*env_get(const char *name, char *const *env)
  * to the end of the list. If there already is a variable with the same name,
  * the value of it is updated.
  *
- * Returns zero on error, false otherwise.
+ * Returns one on success, zero otherwise.
  */
 int	env_set(const char *name, const char *value, char *const **env)
 {
@@ -78,6 +78,25 @@ int	env_set(const char *name, const char *value, char *const **env)
 		ft_strcpy(new + ft_strlen(name) + 1, value);
 	free(*destination_pointer);
 	*destination_pointer = new;
+	return (1);
+}
+
+/*
+ * Removes an environment variable, if it is set. If the variable is not set,
+ * nothing is done and one is returned.
+ *
+ * Returns one on success, zero otherwise.
+ */
+int	env_unset(const char *name, char *const **env)
+{
+	char	**removeable;
+
+	removeable = env_get_pointer(name, *env);
+	if (removeable)
+	{
+		if (!ft_remove_from_null_array((void ***)env, (void *)(*removeable)))
+			return (print_error(ERR_MALLOC_FAIL, 0));
+	}
 	return (1);
 }
 
