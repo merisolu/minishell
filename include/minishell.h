@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 13:36:34 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:40:12 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 typedef struct s_state
 {
 	char *const	*env;
-	char		**paths;
 }	t_state;
 
 typedef enum e_token_type

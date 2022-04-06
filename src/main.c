@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/04 15:21:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:40:53 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_state	get_state_struct(char *const **env)
 
 	ft_bzero(&result, sizeof(t_state));
 	ft_dup_null_array((void **)*env, (void ***)&(result.env), env_copy);
-	result.paths = ft_strsplit(env_get("PATH", *env), ':');
 	return (result);
 }
 

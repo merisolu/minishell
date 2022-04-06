@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 16:06:47 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:43:29 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@
 void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
 {
 	size_t	i;
+	char	**paths;
 	char	path_buffer[PATH_MAX];
 
+	paths = ft_strsplit(env_get("PATH", state->env), ':');
 	ft_bzero(result, PATH_MAX);
+	if (!paths)
+		return ;
 	i = 0;
-	while ((*state).paths[i])
+	while (paths[i])
 	{
-		ft_path_join((*state).paths[i], name, path_buffer);
+		ft_path_join(paths[i], name, path_buffer);
 		if (ft_points_to_file(path_buffer) && access(path_buffer, X_OK) == 0)
 		{
 			ft_strcpy(result, path_buffer);
@@ -34,6 +38,7 @@ void	bin_find(const char *name, t_state *state, char result[PATH_MAX])
 		}
 		i++;
 	}
+	ft_free_null_array((void **)paths);
 }
 
 // TODO: Handle return value.
