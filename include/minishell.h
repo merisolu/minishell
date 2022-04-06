@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 13:40:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:57:30 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ int			echo(char *const *args, char *const **env);
 
 /* cd.c */
 int			cd(char *const *args, char *const **env);
+
+/* env.c */
+int			env(char *const *args, char *const **env);
 
 /* set_env.c */
 int			set_env(char *const *args, char *const **env);
