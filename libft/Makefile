@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/04/01 15:54:16 by jumanner         ###   ########.fr        #
+#    Updated: 2022/04/06 12:21:15 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC_FILES = ft_tolower.c ft_toupper.c \
 		ft_pow.c \
 		ft_fmod.c ft_modf.c ft_frexp.c ft_round.c ft_getexponent.c ft_getmantissa.c ft_isinfinite.c ft_isnan.c \
 		ft_is_whitespace.c \
-		ft_free_array.c ft_rev_array.c ft_null_array.c \
+		ft_free_array.c ft_rev_array.c ft_null_array.c ft_null_array_properties.c \
 		ft_dstchr.c \
 		ft_get_next_line.c \
 		ft_file.c ft_dir.c ft_path.c ft_path_validity.c

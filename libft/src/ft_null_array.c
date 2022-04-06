@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 12:18:11 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:20:01 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,6 @@ void	*ft_free_null_array(void **array)
 	}
 	free(array);
 	return (NULL);
-}
-
-/*
- * Returns the length of a null-terminated array.
- */
-size_t	ft_null_array_len(void **array)
-{
-	size_t	result;
-
-	if (!array || !(*array))
-		return (0);
-	result = 0;
-	while (array[result])
-		result++;
-	return (result);
 }
 
 /*
