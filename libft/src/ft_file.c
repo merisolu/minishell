@@ -6,11 +6,11 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:11:34 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 15:13:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:20:36 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libc.h"
+#include "libft.h"
 
 /*
  * Returns true if the given path is a regular file. False otherwise.
