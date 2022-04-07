@@ -6,29 +6,11 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 12:20:01 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/07 09:38:24 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/* 
- * Frees each element of the given null-terminated array, then the pointer to
- * the array. Returns NULL when done.
- */
-void	*ft_free_null_array(void **array)
-{
-	size_t	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-	return (NULL);
-}
 
 /*
  * Copies the null terminated array from src to dst. dst needs to have
