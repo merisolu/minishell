@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 13:40:53 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/07 09:10:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(const int argc, const char **argv, char *const *env)
 {
 	t_state		state;
 	char		*input;
+	char		**args;
 	int			line_read_result;
 
 	(void)argc;
@@ -43,8 +44,10 @@ int	main(const int argc, const char **argv, char *const *env)
 		line_read_result = ft_get_next_line(STDIN_FILENO, &input);
 		if (line_read_result == 1)
 		{
-			execute(ft_strsplit(input, ' ')[0], ft_strsplit(input, ' '), &state);
+			args = ft_strsplit(input, ' ');
+			execute(args[0], args, &state);
 			free(input);
+			ft_free_null_array((void **)args);
 		}
 		else if (line_read_result == -1)
 			exit(print_error(ERR_LINE_READ, 1));
