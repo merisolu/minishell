@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:12:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 16:09:48 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/07 13:02:35 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int	echo(char *const *args, char *const **env)
 		if (i != len - 1)
 			ft_putchar(' ');
 		i++;
-	}
-	if (no_newline)
-	{
-		ft_putstr("\033[0;47;30m");
-		ft_putchar('%');
-		ft_putstr(COLOR_RESET);
 	}
 	ft_putchar('\n');
 	return (0);
