@@ -112,6 +112,8 @@ void	env_print_all(char *const *env)
 {
 	size_t	i;
 
+	if (!env)
+		return ;
 	i = 0;
 	while (env[i])
 	{
