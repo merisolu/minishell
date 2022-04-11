@@ -68,6 +68,13 @@ typedef struct s_built_in_dispatch
 	t_built_in		*run;
 }	t_built_in_dispatch;
 
+typedef struct s_shell_env
+{
+	int		exclusive;
+	char	**args;
+	char	**env;
+}	t_shell_env;
+
 /* Files */
 
 /* lexer.c */

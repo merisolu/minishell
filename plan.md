@@ -16,7 +16,9 @@ Within your mandatory part you are allowed to use the following functions:
 Built-ins:
 [x] echo
 [x] cd
-[ ] setenv
-[ ] unsetenv
-[ ] env
+[x] setenv
+[x] unsetenv
+[x] env
 [x] exit
+
+Should all built-in function names start with "shell_"?
