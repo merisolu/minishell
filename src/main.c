@@ -6,16 +6,11 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 09:17:34 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 09:32:13 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	*var_cpy(void *var)
-{
-	return ((void *)ft_strdup((const char *)var));
-}
 
 static t_state	get_state_struct(char *const **env)
 {

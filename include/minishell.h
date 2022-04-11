@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 09:19:39 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 09:32:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int			shell_exit(char *const *args, char *const **env);
 
 /* utils.c */
 int			print_error(char *message, int return_value);
+void		*var_cpy(void *var);
 
 /* debug.c */
 void		print_tokens(t_token *list);
