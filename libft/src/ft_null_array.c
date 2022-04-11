@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/07 09:38:24 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 09:14:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
  * enough space for the copy.
  * 
  * If the cpy function is NULL, the each pointer in the array is copied.
+ * 
+ * One will be returned on a successful copy. Zero otherwise.
  */
-void	ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *))
+int	ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *))
 {
 	size_t	i;
 
@@ -26,11 +28,16 @@ void	ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *))
 	while (src[i])
 	{
 		if (cpy)
+		{
 			dst[i] = cpy(src[i]);
+			if (!((src[i] && dst[i]) || (!(src[i]) && !(dst[i]))))
+				return (0);
+		}
 		else
 			dst[i] = src[i];
 		i++;
 	}
+	return (1);
 }
 
 /*
@@ -49,8 +56,7 @@ int	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
 	*result = (void **)ft_memalloc(sizeof(void *) * (size + 1));
 	if (!(*result))
 		return (0);
-	ft_copy_null_array(*result, src, cpy);
-	return (1);
+	return (ft_copy_null_array(*result, src, cpy));
 }
 
 /*
