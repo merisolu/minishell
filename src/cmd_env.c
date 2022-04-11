@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 10:20:34 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 10:38:18 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	parse_args(char *const *args, char *const *env, t_shell_env *cmd)
 	return (i);
 }
 
-int	env(char *const *args, char *const **env)
+int	cmd_env(char *const *args, char *const **env)
 {
 	t_shell_env	cmd;
 	int			i;

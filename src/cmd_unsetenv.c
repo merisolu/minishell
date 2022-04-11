@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   cmd_unsetenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 16:37:52 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 16:09:51 by jumanner         ###   ########.fr       */
+/*   Created: 2022/04/05 16:24:10 by jumanner          #+#    #+#             */
+/*   Updated: 2022/04/11 10:44:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	shell_exit(char *const *args, char *const **env)
+int	cmd_unsetenv(char *const *args, char *const **env)
 {
-	(void)args;
+	char	*name;
+
 	(void)env;
-	exit(0);
+	name = args[1];
+	if (!name)
+		return (print_error(ERR_TOO_FEW_ARGS, 0));
+	env_unset(name, env);
+	return (0);
 }

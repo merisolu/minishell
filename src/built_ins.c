@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:18:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/06 13:57:03 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 10:46:30 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ t_built_in	*get_built_in(const char *name)
 {
 	size_t								i;
 	const static t_built_in_dispatch	dispatch_table[] = {
-	{"cd", &cd},
-	{"echo", &echo},
-	{"env", &env},
-	{"setenv", &set_env},
-	{"unsetenv", &unset_env},
-	{"exit", &shell_exit},
+	{"cd", &cmd_cd},
+	{"echo", &cmd_echo},
+	{"env", &cmd_env},
+	{"setenv", &cmd_setenv},
+	{"unsetenv", &cmd_unsetenv},
+	{"exit", &cmd_exit},
 	{"", NULL}
 	};
 

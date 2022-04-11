@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 09:32:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 10:46:16 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,23 +112,23 @@ int			execute(char *name, char *const *args, t_state *state);
 
 /* Built-in commands */
 
-/* echo.c */
-int			echo(char *const *args, char *const **env);
+/* cmd_echo.c */
+int			cmd_echo(char *const *args, char *const **env);
 
-/* cd.c */
-int			cd(char *const *args, char *const **env);
+/* cmd_cd.c */
+int			cmd_cd(char *const *args, char *const **env);
 
-/* env.c */
-int			env(char *const *args, char *const **env);
+/* cmd_env.c */
+int			cmd_env(char *const *args, char *const **env);
 
-/* set_env.c */
-int			set_env(char *const *args, char *const **env);
+/* cmd_setenv.c */
+int			cmd_setenv(char *const *args, char *const **env);
 
-/* unset_env.c */
-int			unset_env(char *const *args, char *const **env);
+/* cmd_unsetenv.c */
+int			cmd_unsetenv(char *const *args, char *const **env);
 
-/* exit.c */
-int			shell_exit(char *const *args, char *const **env);
+/* cmd_exit.c */
+int			cmd_exit(char *const *args, char *const **env);
 
 /* Utilities */
 

@@ -20,5 +20,3 @@ Built-ins:
 [x] unsetenv
 [x] env
 [x] exit
-
-Should all built-in function names start with "shell_"?

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 16:10:25 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 10:37:58 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	construct_path(char *target, char result[PATH_MAX + 1])
 	return (0);
 }
 
-int	cd(char *const *args, char *const **env)
+int	cmd_cd(char *const *args, char *const **env)
 {
 	char	*target;
 	char	path[PATH_MAX + 1];
