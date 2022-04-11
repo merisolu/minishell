@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 10:37:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 12:20:40 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,22 @@ static char	*get_target(char *const *args, size_t count, char *const *env)
 	return (args[1]);
 }
 
-static int	construct_path(char *target, char result[PATH_MAX + 1])
+static int	construct_path(char *target, char **result)
 {
-	char	path_buffer[PATH_MAX + 1];
+	char	*path;
 
 	if (ft_path_is_absolute(target))
-		ft_strncpy(result, target, PATH_MAX);
+	{
+		*result = ft_strdup(target);
+		if (!(*result))
+			return (print_error(ERR_MALLOC_FAIL, 1));
+	}
 	else
 	{
-		if (!getcwd(path_buffer, PATH_MAX + 1))
+		path = getcwd(NULL, 0);
+		if (!path)
 			return (print_error(ERR_CANNOT_GET_CWD, 1));
-		ft_path_join(path_buffer, target, result);
+		ft_path_join(path, target, result);
 	}
 	return (0);
 }
@@ -42,7 +47,7 @@ static int	construct_path(char *target, char result[PATH_MAX + 1])
 int	cmd_cd(char *const *args, char *const **env)
 {
 	char	*target;
-	char	path[PATH_MAX + 1];
+	char	*path;
 	size_t	arg_count;
 	int		return_code;
 
@@ -54,7 +59,7 @@ int	cmd_cd(char *const *args, char *const **env)
 		return (0);
 	if (!ft_path_is_within_limits(target))
 		return (print_error(ERR_PATH_TOO_LONG, 1));
-	return_code = construct_path(target, path);
+	return_code = construct_path(target, &path);
 	if (return_code != 0)
 		return (return_code);
 	if (!ft_points_to_dir(path))

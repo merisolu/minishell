@@ -6,28 +6,30 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:02:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/31 16:35:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:54:33 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
- * Joins two paths together, and puts the result into dst.
+ * Joins two paths together, and puts the result into dst. If the allocation
+ * fails, *dst will be NULL.
  */
-void	ft_path_join(const char *a, const char *b, char dst[PATH_MAX + 1])
+void	ft_path_join(const char *a, const char *b, char **dst)
 {
-	size_t	i;
+	int		trailing_slash;
 
-	ft_bzero(dst, PATH_MAX + 1);
-	ft_strcpy(dst, a);
-	i = ft_strlen(a);
-	if (a[i - 1] != '/')
-	{
-		dst[ft_strlen(a)] = '/';
-		i++;
-	}
-	ft_strcpy((dst + i), b);
+	if (!dst)
+		return ;
+	trailing_slash = a[ft_strlen(a) - 1] == '/';
+	*dst = ft_strnew(ft_strlen(a) + ft_strlen(b) + !trailing_slash);
+	if (!(*dst))
+		return ;
+	ft_strcat(*dst, a);
+	if (!trailing_slash)
+		(*dst)[ft_strlen(*dst)] = '/';
+	ft_strcat(*dst + ft_strlen(*dst), b);
 }
 
 /*

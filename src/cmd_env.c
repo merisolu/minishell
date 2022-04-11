@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 10:38:18 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 12:23:21 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	cmd_env(char *const *args, char *const **env)
 {
 	t_shell_env	cmd;
 	int			i;
-	char		path[PATH_MAX];
+	char		*path;
 	int			return_value;
 
 	ft_bzero(&cmd, sizeof(t_shell_env));
@@ -81,7 +81,7 @@ int	cmd_env(char *const *args, char *const **env)
 	}
 	if (!ft_dup_null_array((void **)(args + i), (void ***)&(cmd.args), var_cpy))
 		return (print_error(ERR_MALLOC_FAIL, free_env_args(&cmd, 1)));
-	if (!bin_env_find(args[i], *env, path))
+	if (!bin_env_find(args[i], *env, &path))
 		return (1);
 	return_value = bin_execute(path, cmd.args, (char *const **)&(cmd.env));
 	return (free_env_args(&cmd, return_value));

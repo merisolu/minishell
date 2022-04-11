@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 09:22:16 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:59:17 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,27 @@
  *
  * If the binary was found its path will be stored in result. If nothing was
  * found, the result will be empty.
+ *
+ * *result should be freed after it is no longer needed.
  */
-void	bin_find(const char *name, char **paths, char result[PATH_MAX])
+void	bin_find(const char *name, char **paths, char **result)
 {
 	size_t	i;
-	char	path_buffer[PATH_MAX];
 
-	ft_bzero(result, PATH_MAX);
 	i = 0;
 	if ((name[0] == '/' || ft_strnequ(name, "./", 2))
 		&& ft_points_to_file(name) && access(name, X_OK) == 0)
 	{
-		ft_strcpy(result, name);
+		*result = ft_strdup(name);
 		return ;
 	}
 	while (paths[i])
 	{
-		ft_path_join(paths[i], name, path_buffer);
-		if (ft_points_to_file(path_buffer) && access(path_buffer, X_OK) == 0)
-		{
-			ft_strcpy(result, path_buffer);
+		ft_path_join(paths[i], name, result);
+		if (ft_points_to_file(*result) && access(*result, X_OK) == 0)
 			break ;
-		}
+		else
+			ft_memdel((void **)result);
 		i++;
 	}
 }
@@ -54,7 +53,7 @@ void	bin_find(const char *name, char **paths, char result[PATH_MAX])
  *
  * Returns one on success, zero on failure.
  */
-int	bin_env_find(const char *name, char *const *env, char result[PATH_MAX])
+int	bin_env_find(const char *name, char *const *env, char **result)
 {
 	char	**paths;
 
@@ -63,14 +62,17 @@ int	bin_env_find(const char *name, char *const *env, char result[PATH_MAX])
 		return (print_error(ERR_MALLOC_FAIL, 0));
 	bin_find(name, paths, result);
 	ft_free_null_array((void **)paths);
-	return (1);
+	return (result != NULL);
 }
 
 // TODO: Handle return value.
 /*
  * Attempts to fork the current process, transform it into a new process
  * defined by the given path to a binary, and wait for its execution to finish.
+ *
  * If fork or execve calls fail, an error message is printed to stderr.
+ *
+ * Before this function returns, it frees path.
  */
 int	bin_execute(const char *path, char **args, char *const **env)
 {
@@ -87,8 +89,12 @@ int	bin_execute(const char *path, char **args, char *const **env)
 			return (print_error(ERR_EXECVE_FAIL, 1));
 	}
 	else if (process_pid == -1)
+	{
+		free((void *)path);
 		return (print_error(ERR_FORK_FAIL, 1));
+	}
 	else
 		wait(NULL);
+	free((void *)path);
 	return (0);
 }
