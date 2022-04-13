@@ -62,7 +62,7 @@ int	ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *))
 /*
  * Resizes the given null terminated array to the given size and frees the
  * original array pointer.
- * 
+ *
  * One will be returned on success. Zero otherwise.
  */
 int	ft_resize_null_array(void ***array, size_t size)
@@ -72,7 +72,8 @@ int	ft_resize_null_array(void ***array, size_t size)
 	result = (void **)ft_memalloc(sizeof(void *) * (size + 1));
 	if (!result)
 		return (0);
-	ft_copy_null_array(result, *array, NULL);
+	if (!ft_copy_null_array(result, *array, NULL))
+		return (0);
 	free(*array);
 	*array = result;
 	return (1);
