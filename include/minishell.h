@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 11:11:59 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:47:47 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,13 @@ typedef struct s_shell_env
 t_token		*tokenize(char *line);
 
 /* parser.c */
-void		parse(t_token *list);
+char		**parse(t_token *list, t_state *state);
+int			expect_token(t_token **cursor, t_token_type type, t_token *on_fail);
+int			add_to_result(char ***result, char *value);
+
+/* expansions.c */
+int			expand_param(t_token **cursor, t_state *state, char ***result);
+int			expand_tilde(t_token **cursor, t_state *state, char ***result);
 
 /* token.c */
 t_token		*token_new(t_token_type type, char *value);

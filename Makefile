@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/04/11 10:44:29 by jumanner         ###   ########.fr        #
+#    Updated: 2022/04/13 14:47:06 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ LIB_DIR = ./libft
 LIB_INCLUDE_DIR = ./libft/include
 LIB_PATH = ./libft/libft.a
 
-SRC_FILES = main.c lexer.c parser.c token.c token_list.c environment.c bin.c executor.c \
+SRC_FILES = main.c \
+			lexer.c parser.c expansions.c \
+			token.c token_list.c \
+			environment.c \
+			bin.c executor.c \
 			built_ins.c cmd_cd.c cmd_echo.c cmd_env.c cmd_setenv.c \
 			cmd_unsetenv.c cmd_exit.c \
 			utils.c debug.c
