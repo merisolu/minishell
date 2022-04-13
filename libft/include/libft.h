@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 11:00:23 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:06:13 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ size_t		ft_null_array_len(void **array);
 int			ft_copy_null_array(void **dst, void **src, void *(*cpy)(void *));
 int			ft_dup_null_array(void **src, void ***result, void *(*cpy)(void *));
 int			ft_resize_null_array(void ***array, size_t size);
+int			ft_add_to_null_array(void ***array, void *new);
 int			ft_remove_from_null_array(void ***array, void *removeable);
 
 void		ft_rev_array(void **array, size_t size);

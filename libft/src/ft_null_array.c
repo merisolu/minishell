@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:52:47 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 09:14:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:29:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,23 @@ int	ft_resize_null_array(void ***array, size_t size)
 	ft_copy_null_array(result, *array, NULL);
 	free(*array);
 	*array = result;
+	return (1);
+}
+
+/*
+ * Increases the given null terminated array's size by one and adds
+ * the provided element to the newly-created slot.
+ *
+ * One will be returned on success. Zero otherwise.
+ */
+int	ft_add_to_null_array(void ***array, void *new)
+{
+	size_t	new_len;
+
+	new_len = ft_null_array_len(*array) + 1;
+	if (!ft_resize_null_array(array, new_len))
+		return (0);
+	(*array)[new_len - 1] = new;
 	return (1);
 }
 
