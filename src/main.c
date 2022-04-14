@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/14 14:48:13 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:00:55 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	main(const int argc, const char **argv, char *const *env)
 	char		**args;
 	int			line_read_result;
 
-	(void)argc, argv;
+	(void)argc;
+	(void)argv;
 	if (!get_state_struct(&env, &state))
 		exit(print_error(ERR_MALLOC_FAIL, 1));
 	while (1)
 	{
 		ft_putstr(PROMPT);
-		line_read_result = 0;
 		line_read_result = ft_get_next_line(STDIN_FILENO, &input);
 		if (line_read_result == 1)
 		{
