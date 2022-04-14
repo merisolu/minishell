@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:35 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:25:55 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		if (line_read_result == 1)
 		{
 			args = parse(tokenize(input), &state);
-			if ((args[0]))
+			if (args && (args[0]))
 				execute(args[0], args, &state);
 			free(input);
 			ft_free_null_array((void **)args);

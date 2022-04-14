@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/13 15:04:02 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/14 14:16:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,46 @@ int	expect_token(t_token **cursor, t_token_type type, t_token *on_fail)
 	return (result);
 }
 
-// TODO: Handle error.
-// TODO: Doc string.
 int	add_to_result(char ***result, char *value)
 {
 	if (ft_add_to_null_array((void ***)result, ft_strdup(value)))
 		return (1);
-	return (-1);
+	return (print_error(ERR_MALLOC_FAIL, -1));
 }
 
-static int	check_whitespace(t_token **cursor)
+static int	check_literals(t_token **cursor, t_state *state, char ***result)
 {
 	t_token	*original;
 
+	(void)state;
 	original = *cursor;
-	if (!expect_token(cursor, TOKEN_WHITESPACE, original))
-		return (0);
-	return (1);
+	if (expect_token(cursor, TOKEN_WHITESPACE, original))
+		return (1);
+	if (expect_token(cursor, TOKEN_LITERAL, original))
+		return (add_to_result(result, original->value));
+	return (0);
 }
 
-static int	check_literal(t_token **cursor, char ***result)
+int	run_functions(t_token **cursor, t_state *state, char ***result)
 {
-	t_token	*original;
+	int						func_return;
+	static t_parse_function	*functions[] = {
+		&expand_tilde,
+		&expand_param,
+		&check_literals,
+		NULL
+	};
+	size_t					i;
 
-	original = *cursor;
-	if (!expect_token(cursor, TOKEN_LITERAL, original))
-		return (0);
-	add_to_result(result, original->value);
-	return (1);
+	i = 0;
+	while (functions[i] != NULL)
+	{
+		func_return = (*functions[i])(cursor, state, result);
+		if (func_return != 0)
+			return (func_return);
+		i++;
+	}
+	return (0);
 }
 
 /*
@@ -83,6 +95,7 @@ char	**parse(t_token *list, t_state *state)
 {
 	t_token	*cursor;
 	char	**result;
+	int		func_result;
 
 	cursor = list;
 	result = (char **)ft_memalloc(sizeof(char *));
@@ -90,15 +103,13 @@ char	**parse(t_token *list, t_state *state)
 		return (NULL);
 	while (cursor)
 	{
-		if (!(expand_tilde(&cursor, state, &result)
-				|| expand_param(&cursor, state, &result)
-				|| check_literal(&cursor, &result)
-				|| check_whitespace(&cursor))
-			&& cursor)
-		{
+		func_result = run_functions(&cursor, state, &result);
+		if (func_result == 0 && cursor)
 			add_to_result(&result, cursor->value);
+		else if (func_result == -1)
+			break ;
+		if (cursor)
 			cursor = cursor->next;
-		}
 	}
 	token_list_free(&list);
 	return (result);

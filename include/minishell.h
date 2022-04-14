@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/13 14:47:47 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:05:49 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_built_in_dispatch
 	const char		*name;
 	t_built_in		*run;
 }	t_built_in_dispatch;
+
+typedef int	t_parse_function(t_token **cursor, t_state *state, char ***result);
 
 typedef struct s_shell_env
 {
