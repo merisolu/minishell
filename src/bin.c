@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 14:59:17 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/19 10:29:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	bin_find(const char *name, char **paths, char **result)
 	{
 		ft_path_join(paths[i], name, result);
 		if (ft_points_to_file(*result) && access(*result, X_OK) == 0)
-			break ;
+			return ;
 		else
 			ft_memdel((void **)result);
 		i++;
 	}
+	*result = ft_strdup("");
 }
 
 /*
@@ -57,6 +58,11 @@ int	bin_env_find(const char *name, char *const *env, char **result)
 {
 	char	**paths;
 
+	if (!env_get("PATH", env))
+	{
+		*result = NULL;
+		return (print_error(ERR_COM_NOT_FOUND, 0));
+	}
 	paths = ft_strsplit(env_get("PATH", env), ':');
 	if (!paths)
 		return (print_error(ERR_MALLOC_FAIL, 0));
@@ -78,6 +84,11 @@ int	bin_execute(const char *path, char **args, char *const **env)
 {
 	pid_t	process_pid;
 
+	if (!ft_path_has_valid_end(path))
+	{
+		free((void *)path);
+		return (print_error(ERR_NO_SUCH_FILE_OR_DIR, 1));
+	}
 	free(args[0]);
 	args[0] = ft_strdup(path);
 	if (!(args[0]))
@@ -86,12 +97,12 @@ int	bin_execute(const char *path, char **args, char *const **env)
 	if (process_pid == 0)
 	{
 		if (execve(path, args, *env) == -1)
-			return (print_error(ERR_EXECVE_FAIL, 1));
+			exit(print_error(ERR_CHILD_PROC_FAIL, 1));
 	}
 	else if (process_pid == -1)
 	{
 		free((void *)path);
-		return (print_error(ERR_FORK_FAIL, 1));
+		return (print_error(ERR_CHILD_PROC_FAIL, 1));
 	}
 	else
 		wait(NULL);

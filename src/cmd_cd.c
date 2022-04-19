@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 12:20:40 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/19 10:26:59 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	cmd_cd(char *const *args, char *const **env)
 	if (!target)
 		return (0);
 	if (!ft_path_is_within_limits(target))
-		return (print_error(ERR_PATH_TOO_LONG, 1));
+		return (print_error(ERR_INVALID_PATH, 1));
 	return_code = construct_path(target, &path);
 	if (return_code != 0)
 		return (return_code);
 	if (!ft_points_to_dir(path))
 		return (print_error(ERR_NO_SUCH_FILE_OR_DIR, 1));
 	if (!ft_path_is_within_limits(path))
-		return (print_error(ERR_PATH_TOO_LONG, 1));
+		return (print_error(ERR_INVALID_PATH, 1));
 	return (ft_abs(chdir(path)));
 }

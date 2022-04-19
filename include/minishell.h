@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/14 13:05:49 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/19 10:32:43 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@
 # define RETURN_COMMAND_NOT_FOUND 127
 
 /* Errors */
-# define ERR_LINE_READ "Line read error."
-# define ERR_FORK_FAIL "Process creation failed."
-# define ERR_EXECVE_FAIL "Process execution failed."
-# define ERR_COM_NOT_FOUND "Command not found."
-# define ERR_TOO_FEW_ARGS "Too few arguments."
-# define ERR_TOO_MANY_ARGS "Too many arguments."
-# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory."
-# define ERR_CANNOT_GET_CWD "Unable to get current working directory."
-# define ERR_PATH_TOO_LONG "File name too long."
-# define ERR_MALLOC_FAIL "Memory allocation failed."
+# define ERR_LINE_READ "input read error"
+# define ERR_CHILD_PROC_FAIL "cannot make child process"
+# define ERR_COM_NOT_FOUND "command not found"
+# define ERR_TOO_FEW_ARGS "too few arguments"
+# define ERR_TOO_MANY_ARGS "too many arguments"
+# define ERR_NO_SUCH_FILE_OR_DIR "no such file or directory"
+# define ERR_CANNOT_GET_CWD "error retrieving current directory"
+# define ERR_INVALID_PATH "path is invalid"
+# define ERR_MALLOC_FAIL "memory allocation failed"
 
 /* Types */
 
