@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:02:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/19 15:24:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:31:54 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ char	*ft_get_path_name_ptr(const char *path)
 	if (!result)
 		return ((char *)path);
 	return (result + 1);
+}
+
+/*
+ * Returns a dynamically allocated string which contains the path of the parent
+ * directory of the given path. Returns NULL on error.
+ */
+char	*ft_get_path_parent(const char *path)
+{
+	if ((size_t)(ft_strrchr(path, '/') - path) > 0)
+		return (ft_strsub(path, 0, (size_t)(ft_strrchr(path, '/') - path)));
+	return (ft_strdup("/"));
 }

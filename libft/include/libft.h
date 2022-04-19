@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/13 12:06:13 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:18:13 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,9 @@ int			ft_points_to_file(const char *path);
 void		ft_path_join(const char *a, const char *b, char **dst);
 
 char		*ft_get_path_name_ptr(const char *path);
+
+char		*ft_get_path_parent(const char *path);
+
 int			ft_path_is_self_or_parent(const char *path);
 
 int			ft_path_has_valid_end(const char *path);
