@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:21:28 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/01 14:29:55 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:18:54 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,40 @@ int	ft_path_is_within_limits(const char *path)
 	}
 	ft_free_null_array((void **)names);
 	return (1);
+}
+
+/*
+ * Normalizes the given path by handling "..", ".", and repeating slashes. The
+ * normalized path will be stored inside *dst. *dst should be freed when it's
+ * no longer needed.
+ *
+ * *dst will be set to NULL on error.
+ */
+void	ft_normalize_path(const char *path, char **dst)
+{
+	char	**split;
+	char	*temp;
+	size_t	i;
+
+	*dst = NULL;
+	split = ft_strsplit(path, '/');
+	if (split)
+		*dst = ft_strdup("/");
+	i = 0;
+	while (*dst && split[i])
+	{
+		if (ft_strequ(split[i], ".."))
+		{
+			if (ft_strchr(*dst, '/') != ft_strrchr(*dst, '/'))
+				temp = ft_get_path_parent(*dst);
+			else
+				temp = ft_strdup("/");
+		}
+		else if (!ft_strequ(split[i], ".") && !ft_strequ(split[i], ""))
+			ft_path_join(*dst, split[i], &temp);
+		free(*dst);
+		*dst = temp;
+		i++;
+	}
+	ft_free_null_array((void **)split);
 }

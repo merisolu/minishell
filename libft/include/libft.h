@@ -305,6 +305,8 @@ int			ft_path_is_self_or_parent(const char *path);
 int			ft_path_has_valid_end(const char *path);
 int			ft_path_has_valid_link(const char *path);
 
+void		ft_normalize_path(const char *path, char **dst);
+
 /* GNL */
 int			ft_get_next_line(const int fd, char **line);
 
