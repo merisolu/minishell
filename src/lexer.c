@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:32:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/12 14:37:01 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:43:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ t_token	*tokenize(char *line)
 
 	result = NULL;
 	i = 0;
-	changed = 0;
+	while (line[i] && (int)get_token_type(line[i]) == TOKEN_WHITESPACE)
+		i++;
+	changed = i;
 	type = get_token_type(line[i]);
 	while (line[i])
 	{
