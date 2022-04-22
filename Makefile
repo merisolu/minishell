@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/04/13 14:47:06 by jumanner         ###   ########.fr        #
+#    Updated: 2022/04/20 12:43:59 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIB_INCLUDE_DIR = ./libft/include
 LIB_PATH = ./libft/libft.a
 
 SRC_FILES = main.c \
+			input.c \
 			lexer.c parser.c expansions.c \
 			token.c token_list.c \
 			environment.c \

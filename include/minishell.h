@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/22 11:33:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:10:15 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 # include "libft.h"
 # include <sys/wait.h>
 # include <signal.h>
+# include <termios.h>
 
 # define PROMPT "$> "
+
+# define BUF_SIZE 16
 
 /* Return values */
 # define RETURN_SUCCESS 1
@@ -35,6 +38,7 @@
 # define ERR_CANNOT_GET_CWD "error retrieving current directory"
 # define ERR_INVALID_PATH "path is invalid"
 # define ERR_MALLOC_FAIL "memory allocation failed"
+# define ERR_TERMIOS_FAIL "failed to set terminal attributes"
 
 /* Signals */
 # define SIG_HUP 1
@@ -111,6 +115,10 @@ typedef struct s_shell_env
 }	t_shell_env;
 
 /* Files */
+
+/* input.c */
+int			configure_input(void);
+int			get_input(char **line);
 
 /* lexer.c */
 t_token		*tokenize(char *line);
