@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 09:48:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/22 14:10:52 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:11:53 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s2_len;
 	size_t	i;
 
-	if (!s1 || !s2)
-		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	result = ft_strnew(s1_len + s2_len);
