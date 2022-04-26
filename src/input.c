@@ -6,11 +6,24 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/26 11:12:32 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:41:48 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	handle_char(char buf[BUF_SIZE], int *index)
+{
+	if (buf[0] == 0xA)
+	{
+		ft_putchar('\n');
+		return (1);
+	}
+	*index += check_escape_sequence(buf);
+	if (ft_isprint(buf[*index]))
+		ft_putchar(buf[*index]);
+	return (0);
+}
 
 int	configure_input(void)
 {
@@ -36,13 +49,8 @@ int	get_input(char **input)
 	i = 0;
 	while (i < read_count)
 	{
-		if (buf[0] == 0xA)
-		{
-			ft_putchar('\n');
+		if (handle_char(buf, &i))
 			return (1);
-		}
-		if (ft_isprint(buf[i]))
-			ft_putchar(buf[i]);
 		temp = ft_strnjoin(*input, buf + i, 1);
 		if (!temp)
 			return (-1);

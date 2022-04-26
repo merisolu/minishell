@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/22 15:10:15 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:40:53 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,14 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef int	t_input_handler(char buf[16]);
+
+typedef struct s_input_handler_dispatch
+{
+	const char		control_char;
+	t_input_handler	*run;
+}	t_input_handler_dispatch;
+
 typedef int	t_built_in(char *const *args, char *const **env);
 
 typedef struct s_built_in_dispatch
@@ -119,6 +127,9 @@ typedef struct s_shell_env
 /* input.c */
 int			configure_input(void);
 int			get_input(char **line);
+
+/* escapes.c */
+int			check_escape_sequence(char buf[BUF_SIZE]);
 
 /* lexer.c */
 t_token		*tokenize(char *line);
