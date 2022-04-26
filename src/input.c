@@ -6,22 +6,26 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/26 11:41:48 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:59:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	handle_char(char buf[BUF_SIZE], int *index)
+static int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 {
 	if (buf[0] == 0xA)
 	{
+		state->cursor = ft_strlen(PROMPT);
 		ft_putchar('\n');
 		return (1);
 	}
-	*index += check_escape_sequence(buf);
+	*index += check_escape_sequence(buf, state);
 	if (ft_isprint(buf[*index]))
+	{
+		state->cursor++;
 		ft_putchar(buf[*index]);
+	}
 	return (0);
 }
 
@@ -37,7 +41,7 @@ int	configure_input(void)
 	return (1);
 }
 
-int	get_input(char **input)
+int	get_input(t_state *state)
 {
 	int		read_count;
 	char	*temp;
@@ -49,13 +53,13 @@ int	get_input(char **input)
 	i = 0;
 	while (i < read_count)
 	{
-		if (handle_char(buf, &i))
+		if (handle_char(buf, &i, state))
 			return (1);
-		temp = ft_strnjoin(*input, buf + i, 1);
+		temp = ft_strnjoin(state->input, buf + i, 1);
 		if (!temp)
 			return (-1);
-		free(*input);
-		*input = temp;
+		free(state->input);
+		state->input = temp;
 		i++;
 	}
 	return (0);

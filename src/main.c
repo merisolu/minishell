@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/22 15:10:34 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:59:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	print_prompt(void)
 static int	get_state_struct(char *const **env, t_state *res)
 {
 	ft_bzero(res, sizeof(t_state));
+	res->cursor = ft_strlen(PROMPT);
 	return (ft_dup_null_array((void **)*env, (void ***)&(res->env), var_cpy));
 }
 
@@ -40,7 +41,6 @@ static int	tokenize_and_execute(char **input, t_state *state)
 int	main(const int argc, const char **argv, char *const *env)
 {
 	t_state		state;
-	char		*input;
 	int			line_read_result;
 
 	(void)argc;
@@ -52,11 +52,11 @@ int	main(const int argc, const char **argv, char *const *env)
 	print_prompt();
 	while (1)
 	{
-		line_read_result = get_input(&input);
+		line_read_result = get_input(&state);
 		if (line_read_result == 1)
 		{
-			if (ft_strlen(input) != 0)
-				tokenize_and_execute(&input, &state);
+			if (ft_strlen(state.input) != 0)
+				tokenize_and_execute(&(state.input), &state);
 			print_prompt();
 		}
 		else if (line_read_result == -1)
