@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/22 15:08:42 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:12:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	get_input(char **input)
 			ft_putchar('\n');
 			return (1);
 		}
-		ft_putchar(buf[i]);
+		if (ft_isprint(buf[i]))
+			ft_putchar(buf[i]);
 		temp = ft_strnjoin(*input, buf + i, 1);
 		if (!temp)
 			return (-1);
