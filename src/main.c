@@ -6,16 +6,11 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/26 14:59:09 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:00:19 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	print_prompt(void)
-{
-	ft_putstr(PROMPT);
-}
 
 static int	get_state_struct(char *const **env, t_state *res)
 {
@@ -49,7 +44,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		return (print_error(ERR_TERMIOS_FAIL, 1));
 	if (!get_state_struct(&env, &state))
 		return (print_error(ERR_MALLOC_FAIL, 1));
-	print_prompt();
+	print_state(&state);
 	while (1)
 	{
 		line_read_result = get_input(&state);
@@ -57,7 +52,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		{
 			if (ft_strlen(state.input) != 0)
 				tokenize_and_execute(&(state.input), &state);
-			print_prompt();
+			print_state(&state);
 		}
 		else if (line_read_result == -1)
 			return (print_error(ERR_LINE_READ, 1));

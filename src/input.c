@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/27 12:48:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:59:11 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ static int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 		return (return_value);
 	*index += check_escape_sequence(buf, state);
 	if (ft_isprint(buf[*index]))
-	{
 		state->cursor++;
-		ft_putchar(buf[*index]);
-	}
 	return (0);
 }
 
@@ -84,11 +81,13 @@ int	get_input(t_state *state)
 			return (1);
 		if (ft_isprint(buf[i]))
 		{
-			temp = ft_strnjoin(state->input, buf + i, 1);
+			temp = ft_strins(state->input,
+					state->cursor - ft_strlen(PROMPT) - 1, buf[i]);
 			if (!temp)
 				return (-1);
 			free(state->input);
 			state->input = temp;
+			print_state(state);
 		}
 		i++;
 	}

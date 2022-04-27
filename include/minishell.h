@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/26 15:00:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:57:27 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ int			cmd_exit(char *const *args, char *const **env);
 /* Utilities */
 
 /* utils.c */
+void		print_state(t_state *state);
 int			print_error(char *message, int return_value);
 void		*var_cpy(void *var);
 
