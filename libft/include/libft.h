@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/27 13:56:03 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:09:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int			ft_strlen_int(const char *c);
 char		*ft_strdup(const char *s1);
 char		*ft_strnew(size_t size);
 void		ft_strdel(char **as);
+char		*ft_strdelchar(const char *s, size_t i);
 void		ft_strclr(char *s);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strcmp(const char *s1, const char *s2);
