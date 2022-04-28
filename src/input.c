@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/27 14:59:11 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:30:02 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ static int	handle_delete(char buf[BUF_SIZE], t_state *state)
 {
 	char	*temp;
 
-	if (!(buf[0] == 0x7F && ft_strlen(state->input) > 0))
+	if (!(buf[0] == 0x7F && ft_strlen(state->input) > 0
+			&& state->cursor > ft_strlen(PROMPT)))
 		return (0);
-	ft_putstr("\033[1D\033[0K");
-	temp = ft_strsub(state->input, 0, ft_strlen(state->input) - 1);
+	temp = ft_strdelchar(state->input, state->cursor - ft_strlen(PROMPT) - 1);
 	if (!temp)
 		return (-1);
 	free(state->input);
 	state->input = temp;
 	state->cursor--;
+	print_state(state);
 	return (0);
 }
 
