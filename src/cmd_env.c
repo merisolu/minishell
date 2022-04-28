@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 12:23:21 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:14:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 static int	free_env_args(t_shell_env *env_args, int return_value)
 {
-	if (env_args->args)
-	{
-		ft_free_null_array_elements((void **)(env_args->args + 1));
-		free(env_args->args);
-	}
+	ft_free_null_array((void **)(env_args->args));
 	ft_free_null_array((void **)(env_args->env));
 	return (return_value);
 }
