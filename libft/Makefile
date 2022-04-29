@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/04/27 15:09:38 by jumanner         ###   ########.fr        #
+#    Updated: 2022/04/29 15:55:12 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_FILES = ft_tolower.c ft_toupper.c \
 		ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strstr.c ft_strnequ.c ft_strequ.c \
 		ft_strins.c \
 		ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c \
-		ft_strtolower.c ft_strtoupper.c \
+		ft_strtolower.c ft_strtoupper.c ft_strisempty.c \
 		ft_memset.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c ft_memichr.c ft_memcmp.c ft_memalloc.c ft_memdel.c \
 		ft_putchar_fd.c ft_putcharn_fd.c ft_putstr_fd.c ft_putstrn_fd.c ft_putendl_fd.c ft_putchar.c ft_putcharn.c ft_putstr.c ft_putstrn.c ft_putendl.c \
 		ft_putnbr_fd.c ft_putnbr.c ft_putnbrn_fd.c ft_putnbrn.c \
