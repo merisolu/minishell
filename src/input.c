@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 11:20:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:24:14 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	handle_delete(char buf[BUF_SIZE], t_state *state)
 	free(state->input);
 	state->input = temp;
 	state->cursor--;
-	print_state(state);
+	print_state(state, 0);
 	return (0);
 }
 
@@ -76,7 +76,7 @@ int	get_input(t_state *state)
 				return (-1);
 			free(state->input);
 			state->input = temp;
-			print_state(state);
+			print_state(state, 0);
 		}
 		i++;
 	}

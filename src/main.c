@@ -6,11 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 13:35:46 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:28:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_last_signal;
 
 static int	get_state_struct(char *const **env, t_state *res)
 {
@@ -33,6 +35,11 @@ static int	tokenize_and_execute(char **input, t_state *state)
 	return (result);
 }
 
+static void	set_signal_handling(void)
+{
+	signal(SIG_INT, handle_sigint);
+}
+
 int	main(const int argc, const char **argv, char *const *env)
 {
 	t_state		state;
@@ -40,20 +47,27 @@ int	main(const int argc, const char **argv, char *const *env)
 
 	(void)argc;
 	(void)argv;
+	set_signal_handling();
 	if (!get_state_struct(&env, &state))
 		return (print_error(ERR_MALLOC_FAIL, 1));
 	if (!configure_input(&state))
 		return (print_error(ERR_TERMIOS_FAIL, 1));
-	print_state(&state);
+	print_state(&state, 0);
 	while (1)
 	{
+		if (g_last_signal != 0)
+		{
+			print_state(&state, 1);
+			g_last_signal = 0;
+		}
 		line_read_result = get_input(&state);
 		if (line_read_result == 1)
 		{
 			set_prev_config(&state);
 			if (ft_strlen(state.input) != 0)
 				tokenize_and_execute(&(state.input), &state);
-			print_state(&state);
+			if (g_last_signal == 0)
+				print_state(&state, 0);
 			set_raw_config(&state);
 		}
 		else if (line_read_result == -1)

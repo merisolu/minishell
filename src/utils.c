@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/27 14:59:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:22:35 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	*var_cpy(void *var)
 	return ((void *)ft_strdup((const char *)var));
 }
 
-void	print_state(t_state *state)
+void	print_state(t_state *state, int newline)
 {
+	if (newline)
+		ft_putchar('\n');
 	if (state->input)
 		ft_printf(
 			"\033[2K\033[0G%s%s\033[%zuG",

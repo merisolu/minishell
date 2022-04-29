@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 14:13:11 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:23:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,9 @@ typedef struct s_shell_env
 
 /* Files */
 
+/* signal.c */
+void		handle_sigint(int signal);
+
 /* input.c */
 int			get_input(t_state *state);
 
@@ -204,7 +207,7 @@ int			cmd_exit(char *const *args, char *const **env);
 /* Utilities */
 
 /* utils.c */
-void		print_state(t_state *state);
+void		print_state(t_state *state, int newline);
 int			print_error(char *message, int return_value);
 void		*var_cpy(void *var);
 
