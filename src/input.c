@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/28 10:30:02 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 11:20:29 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,6 @@ static int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 	if (ft_isprint(buf[*index]))
 		state->cursor++;
 	return (0);
-}
-
-int	configure_input(void)
-{
-	struct termios	conf;
-
-	if (tcgetattr(STDIN_FILENO, &conf) == -1)
-		return (0);
-	conf.c_lflag = ISIG;
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &conf) == -1)
-		return (0);
-	return (1);
 }
 
 int	get_input(t_state *state)

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/27 14:57:27 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:13:11 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <termios.h>
+# include <fcntl.h>
 
 # define PROMPT "$> "
 
@@ -77,9 +78,13 @@
 
 typedef struct s_state
 {
-	char *const	*env;
-	char		*input;
-	size_t		cursor;
+	char *const		*env;
+	char			*input;
+	size_t			cursor;
+	struct termios	conf;
+	struct termios	prev_conf;
+	int				flags;
+	int				prev_flags;
 }	t_state;
 
 typedef enum e_token_type
@@ -127,8 +132,12 @@ typedef struct s_shell_env
 /* Files */
 
 /* input.c */
-int			configure_input(void);
 int			get_input(t_state *state);
+
+/* input_configuration.c */
+int			configure_input(t_state *state);
+int			set_raw_config(t_state *state);
+int			set_prev_config(t_state *state);
 
 /* escapes.c */
 int			check_escape_sequence(char buf[BUF_SIZE], t_state *state);
