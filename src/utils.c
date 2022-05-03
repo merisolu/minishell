@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 14:22:35 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:41:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 void	*var_cpy(void *var)
 {
 	return ((void *)ft_strdup((const char *)var));
+}
+
+void	clear_input(t_state *state)
+{
+	ft_strdel(&(state->input));
+	state->cursor = ft_strlen(PROMPT);
 }
 
 void	print_state(t_state *state, int newline)
