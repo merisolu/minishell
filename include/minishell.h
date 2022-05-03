@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 13:40:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:46:59 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_state
 	struct termios	prev_conf;
 	int				flags;
 	int				prev_flags;
+	int				exiting;
 }	t_state;
 
 typedef enum e_token_type
