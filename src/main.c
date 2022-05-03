@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 14:23:59 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:45:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ int	main(const int argc, const char **argv, char *const *env)
 		check_signal(&state);
 		if (get_input(&state) == 1)
 		{
-			set_prev_config(&state);
+			set_orig_config(&state);
 			if (!ft_strisempty(state.input))
 				tokenize_and_execute(&(state.input), &state);
 			if (g_last_signal == 0 && !state.exiting)
 				print_state(&state, 0);
-			set_raw_config(&state);
+			set_input_config(&state);
 		}
 	}
-	if (!set_prev_config(&state))
+	if (!set_orig_config(&state))
 		return (print_error(ERR_TERMIOS_FAIL, 1));
 	return (0);
 }

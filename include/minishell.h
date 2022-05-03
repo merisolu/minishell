@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 14:41:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:45:24 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ typedef struct s_state
 	char *const		*env;
 	char			*input;
 	size_t			cursor;
-	struct termios	conf;
-	struct termios	prev_conf;
-	int				flags;
-	int				prev_flags;
+	struct termios	input_conf;
+	struct termios	orig_conf;
+	int				input_flags;
+	int				orig_flags;
 	int				exiting;
 }	t_state;
 
@@ -141,8 +141,8 @@ int			get_input(t_state *state);
 
 /* input_configuration.c */
 int			configure_input(t_state *state);
-int			set_raw_config(t_state *state);
-int			set_prev_config(t_state *state);
+int			set_input_config(t_state *state);
+int			set_orig_config(t_state *state);
 
 /* escapes.c */
 int			check_escape_sequence(char buf[BUF_SIZE], t_state *state);
