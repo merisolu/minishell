@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 13:36:35 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:40:50 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	free_env_args(t_shell_env *env_args, int return_value)
+static int	free_env_args(t_built_in_env *env_args, int return_value)
 {
 	ft_free_null_array((void **)(env_args->args));
 	ft_free_null_array((void **)(env_args->env));
@@ -30,7 +30,7 @@ static int	handle_invalid_flag(char flag)
 	return (1);
 }
 
-static int	parse_args(char *const *args, char *const *env, t_shell_env *cmd)
+static int	parse_args(char *const *args, char *const *env, t_built_in_env *cmd)
 {
 	int	i;
 
@@ -61,12 +61,12 @@ static int	parse_args(char *const *args, char *const *env, t_shell_env *cmd)
 
 int	cmd_env(char *const *args, t_state *state)
 {
-	t_shell_env	cmd;
-	int			i;
-	char		*path;
-	int			return_value;
+	t_built_in_env	cmd;
+	int				i;
+	char			*path;
+	int				return_value;
 
-	ft_bzero(&cmd, sizeof(t_shell_env));
+	ft_bzero(&cmd, sizeof(t_built_in_env));
 	i = parse_args(args, state->env, &cmd);
 	if (i < 0)
 		return (1);
