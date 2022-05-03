@@ -6,11 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 14:24:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:39:58 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_last_signal;
 
 static int	handle_newline(char buf[BUF_SIZE], t_state *state)
 {
@@ -54,7 +56,7 @@ static int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 	return (0);
 }
 
-int	get_input(t_state *state)
+static int	get_line(t_state *state)
 {
 	int		read_count;
 	char	*temp;
@@ -81,4 +83,16 @@ int	get_input(t_state *state)
 		i++;
 	}
 	return (0);
+}
+
+int	get_input(t_state *state)
+{
+	int	result;
+
+	result = get_line(state);
+	if (result == 1)
+		return (1);
+	else if (result == -1)
+		return (print_error(ERR_LINE_READ, 1));
+	return (result);
 }

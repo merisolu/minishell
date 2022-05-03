@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 14:23:32 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:40:03 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ typedef struct s_shell_env
 /* Files */
 
 /* signal.c */
-void		handle_sigint(int signal);
+void		check_signal(t_state *state);
+void		set_signal_handling(void);
 
 /* input.c */
 int			get_input(t_state *state);
