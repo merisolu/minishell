@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:20:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 15:38:27 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:44:02 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	set_signal_handling(void)
 void	check_signal(t_state *state)
 {
 	if (g_last_signal != 0)
+	{
+		clear_input(state);
 		print_state(state, 1);
+	}
 	g_last_signal = 0;
 }
