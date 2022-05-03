@@ -6,19 +6,19 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:12:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 10:46:30 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:34:24 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmd_echo(char *const *args, char *const **env)
+int	cmd_echo(char *const *args, t_state *state)
 {
 	int		no_newline;
 	size_t	len;
 	size_t	i;
 
-	(void)env;
+	(void)state;
 	len = ft_null_array_len((void **)args);
 	i = 1;
 	no_newline = ft_strequ(args[i], "-n");

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 15:40:03 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:33:48 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_input_handler_dispatch
 	t_input_handler	*run;
 }	t_input_handler_dispatch;
 
-typedef int	t_built_in(char *const *args, char *const **env);
+typedef int	t_built_in(char *const *args, t_state *state);
 
 typedef struct s_built_in_dispatch
 {
@@ -180,7 +180,7 @@ int			bin_run(const char *name, char *const *args, char *const **env);
 
 /* built_ins.c */
 t_built_in	*get_built_in(const char *name);
-int			run_built_in(t_built_in com, char *const *args, char *const **env);
+int			run_built_in(t_built_in com, char *const *args, t_state *state);
 
 /* executor.c */
 int			execute(char *name, char *const *args, t_state *state);
@@ -188,22 +188,22 @@ int			execute(char *name, char *const *args, t_state *state);
 /* Built-in commands */
 
 /* cmd_echo.c */
-int			cmd_echo(char *const *args, char *const **env);
+int			cmd_echo(char *const *args, t_state *state);
 
 /* cmd_cd.c */
-int			cmd_cd(char *const *args, char *const **env);
+int			cmd_cd(char *const *args, t_state *state);
 
 /* cmd_env.c */
-int			cmd_env(char *const *args, char *const **env);
+int			cmd_env(char *const *args, t_state *state);
 
 /* cmd_setenv.c */
-int			cmd_setenv(char *const *args, char *const **env);
+int			cmd_setenv(char *const *args, t_state *state);
 
 /* cmd_unsetenv.c */
-int			cmd_unsetenv(char *const *args, char *const **env);
+int			cmd_unsetenv(char *const *args, t_state *state);
 
 /* cmd_exit.c */
-int			cmd_exit(char *const *args, char *const **env);
+int			cmd_exit(char *const *args, t_state *state);
 
 /* Utilities */
 

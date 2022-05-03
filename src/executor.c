@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/11 13:07:21 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:31:47 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	execute(char *name, char *const *args, t_state *state)
 
 	built_in = get_built_in(name);
 	if (built_in)
-		return (run_built_in(built_in, args, &(state->env)));
+		return (run_built_in(built_in, args, state));
 	else
 	{
 		if (!bin_env_find(name, state->env, &temp_path))

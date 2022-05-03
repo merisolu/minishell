@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/28 12:14:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:36:35 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	parse_args(char *const *args, char *const *env, t_shell_env *cmd)
 	return (i);
 }
 
-int	cmd_env(char *const *args, char *const **env)
+int	cmd_env(char *const *args, t_state *state)
 {
 	t_shell_env	cmd;
 	int			i;
@@ -67,7 +67,7 @@ int	cmd_env(char *const *args, char *const **env)
 	int			return_value;
 
 	ft_bzero(&cmd, sizeof(t_shell_env));
-	i = parse_args(args, *env, &cmd);
+	i = parse_args(args, state->env, &cmd);
 	if (i < 0)
 		return (1);
 	if (!args[i])
@@ -77,7 +77,7 @@ int	cmd_env(char *const *args, char *const **env)
 	}
 	if (!ft_dup_null_array((void **)(args + i), (void ***)&(cmd.args), var_cpy))
 		return (print_error(ERR_MALLOC_FAIL, free_env_args(&cmd, 1)));
-	if (!bin_env_find(args[i], *env, &path))
+	if (!bin_env_find(args[i], state->env, &path))
 		return (1);
 	return_value = bin_execute(path, cmd.args, (char *const **)&(cmd.env));
 	return (free_env_args(&cmd, return_value));
