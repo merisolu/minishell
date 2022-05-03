@@ -64,7 +64,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		if (line_read_result == 1)
 		{
 			set_prev_config(&state);
-			if (ft_strlen(state.input) != 0)
+			if (!ft_strisempty(state.input))
 				tokenize_and_execute(&(state.input), &state);
 			if (g_last_signal == 0)
 				print_state(&state, 0);
