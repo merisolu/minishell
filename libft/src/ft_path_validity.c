@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:21:28 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/19 15:18:54 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:40:29 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	ft_normalize_path(const char *path, char **dst)
 		}
 		else if (!ft_strequ(split[i], ".") && !ft_strequ(split[i], ""))
 			ft_path_join(*dst, split[i], &temp);
+		else
+			ft_path_join(*dst, "", &temp);
 		free(*dst);
 		*dst = temp;
 		i++;
