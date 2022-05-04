@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 14:45:24 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:10:02 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@
 # define ERR_COM_NOT_FOUND "command not found"
 # define ERR_TOO_FEW_ARGS "too few arguments"
 # define ERR_TOO_MANY_ARGS "too many arguments"
-# define ERR_NO_SUCH_FILE_OR_DIR "no such file or directory"
+# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory"
+# define ERR_IS_DIR "is a directory"
+# define ERR_IS_NOT_DIR "Not a directory"
 # define ERR_CANNOT_GET_CWD "error retrieving current directory"
 # define ERR_INVALID_PATH "path is invalid"
 # define ERR_MALLOC_FAIL "memory allocation failed"

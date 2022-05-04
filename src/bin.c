@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/20 10:54:45 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:04:47 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * a slash.
  *
  * If the binary was found its path will be stored in result. If nothing was
- * found, the result will be empty.
+ * found, the result will be NULL.
  *
  * *result should be freed after it is no longer needed.
  */
@@ -42,7 +42,7 @@ void	bin_find(const char *name, char **paths, char **result)
 			ft_memdel((void **)result);
 		i++;
 	}
-	*result = ft_strdup("");
+	*result = NULL;
 }
 
 /*
@@ -68,7 +68,7 @@ int	bin_env_find(const char *name, char *const *env, char **result)
 		return (print_error(ERR_MALLOC_FAIL, 0));
 	bin_find(name, paths, result);
 	ft_free_null_array((void **)paths);
-	return (result != NULL);
+	return (*result != NULL);
 }
 
 static int	replace_name_with_path(const char *path, char **args)
@@ -96,11 +96,6 @@ int	bin_execute(const char *path, char **args, char *const **env)
 {
 	pid_t	process_pid;
 
-	if (!ft_path_has_valid_end(path))
-	{
-		free((void *)path);
-		return (print_error(ERR_NO_SUCH_FILE_OR_DIR, 1));
-	}
 	if (!replace_name_with_path(path, args))
 		return (print_error(ERR_MALLOC_FAIL, 1));
 	process_pid = fork();
