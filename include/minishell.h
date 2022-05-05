@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/04 11:10:02 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:07:40 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef enum e_token_type
 	TOKEN_WHITESPACE,
 	TOKEN_DOLLAR,
 	TOKEN_TILDE,
+	TOKEN_DOUBLEQUOTE,
 	TOKEN_CURLY_OPEN,
 	TOKEN_CURLY_CLOSED
 }	t_token_type;
