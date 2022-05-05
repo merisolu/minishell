@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 14:07:40 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:06:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_state
 {
 	char *const		*env;
 	char			*input;
+	int				continue_previous_node;
+	int				in_double_quotes;
 	size_t			cursor;
 	struct termios	input_conf;
 	struct termios	orig_conf;
@@ -147,6 +149,9 @@ int			configure_input(t_state *state);
 int			set_input_config(t_state *state);
 int			set_orig_config(t_state *state);
 
+/* literals.c */
+int			check_literals(t_token **cursor, t_state *state, char ***result);
+
 /* escapes.c */
 int			check_escape_sequence(char buf[BUF_SIZE], t_state *state);
 
@@ -156,7 +161,7 @@ t_token		*tokenize(char *line);
 /* parser.c */
 char		**parse(t_token *list, t_state *state);
 int			expect_token(t_token **cursor, t_token_type type, t_token *on_fail);
-int			add_to_result(char ***result, char *value);
+int			add_to_result(char ***result, char *value, t_state *state);
 
 /* expansions.c */
 int			expand_param(t_token **cursor, t_state *state, char ***result);
