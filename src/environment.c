@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:39:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/07 10:38:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:45:23 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ char	*env_get(const char *name, char *const *env)
  * to the end of the list. If there already is a variable with the same name,
  * the value of it is updated.
  *
- * If value is NULL, then the function assumes that the complete key=value pair
- * is provided in the name variable.
- *
  * Returns one on success, zero otherwise.
  */
 int	env_set(const char *name, const char *value, char *const **env)
@@ -72,15 +69,12 @@ int	env_set(const char *name, const char *value, char *const **env)
 			return (print_error(ERR_MALLOC_FAIL, 0));
 		destination_pointer = (char **)*env + new_size - 1;
 	}
-	new = ft_strnew(ft_strlen(name) + (value != NULL) + ft_strlen(value));
+	new = ft_strnew(ft_strlen(name) + 1 + ft_strlen(value));
 	if (!new)
 		return (print_error(ERR_MALLOC_FAIL, 0));
 	ft_strcpy(new, name);
-	if (value)
-	{
-		new[ft_strlen(name)] = '=';
-		ft_strcpy(new + ft_strlen(name) + 1, value);
-	}
+	new[ft_strlen(name)] = '=';
+	ft_strcpy(new + ft_strlen(name) + 1, value);
 	free(*destination_pointer);
 	*destination_pointer = new;
 	return (1);
