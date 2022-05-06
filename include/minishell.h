@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:55:00 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:46:54 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@
 # define RETURN_SUCCESS 1
 # define RETURN_FAIL -1
 
+# define RETURN_NO_PERMISSION 126
 # define RETURN_COMMAND_NOT_FOUND 127
 
 /* Errors */
 # define ERR_LINE_READ "input read error"
 # define ERR_CHILD_PROC_FAIL "cannot make child process"
 # define ERR_COM_NOT_FOUND "command not found"
+# define ERR_NO_PERMISSION "Permission denied"
 # define ERR_TOO_FEW_ARGS "too few arguments"
 # define ERR_TOO_MANY_ARGS "too many arguments"
 # define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory"

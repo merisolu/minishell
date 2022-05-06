@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 13:42:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:51:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	bin_find(const char *name, char **paths, char **result)
 
 	i = 0;
 	if ((name[0] == '/' || ft_strnequ(name, "./", 2))
-		&& ft_points_to_file(name) && access(name, X_OK) == 0)
+		&& ft_points_to_file(name))
 	{
 		*result = ft_strdup(name);
 		return ;
@@ -36,7 +36,7 @@ void	bin_find(const char *name, char **paths, char **result)
 	while (paths[i])
 	{
 		ft_path_join(paths[i], name, result);
-		if (ft_points_to_file(*result) && access(*result, X_OK) == 0)
+		if (ft_points_to_file(*result))
 			return ;
 		else
 			ft_memdel((void **)result);
@@ -96,6 +96,12 @@ int	bin_execute(const char *path, char **args, char *const **env)
 {
 	pid_t	process_pid;
 
+	if (access(path, X_OK) == -1)
+		return (
+			print_named_error(
+				(char *)path, ERR_NO_PERMISSION, RETURN_NO_PERMISSION
+			)
+		);
 	if (!replace_name_with_path(path, args))
 		return (print_error(ERR_MALLOC_FAIL, 1));
 	process_pid = fork();
