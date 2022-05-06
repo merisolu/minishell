@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:21:28 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/04 13:40:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:29:13 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,11 @@ void	ft_normalize_path(const char *path, char **dst)
 	i = 0;
 	while (*dst && split[i])
 	{
-		if (ft_strequ(split[i], ".."))
-		{
-			if (ft_strchr(*dst, '/') != ft_strrchr(*dst, '/'))
-				temp = ft_get_path_parent(*dst);
-			else
-				temp = ft_strdup("/");
-		}
+		if (ft_strequ(split[i], "..")
+			&& ft_strchr(*dst, '/') != ft_strrchr(*dst, '/'))
+			temp = ft_get_path_parent(*dst);
+		else if (ft_strequ(split[i], ".."))
+			temp = ft_strdup("/");
 		else if (!ft_strequ(split[i], ".") && !ft_strequ(split[i], ""))
 			ft_path_join(*dst, split[i], &temp);
 		else
