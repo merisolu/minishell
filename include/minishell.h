@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:25:02 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:55:00 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ int			expect_token(t_token **cursor, t_token_type type, t_token *on_fail);
 int			add_to_result(char ***result, char *value, t_state *state);
 
 /* expansions.c */
-int			expand_param(t_token **cursor, t_state *state, char ***result);
 int			expand_tilde(t_token **cursor, t_state *state, char ***result);
+int			expand_variable(t_token **cursor, t_state *state, char ***result);
 
 /* token.c */
 t_token		*token_new(t_token_type type, char *value);

@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:12:51 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:24:10 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	expand_param(t_token **cursor, t_state *state, char ***res)
+int	expand_tilde(t_token **cursor, t_state *state, char ***res)
 {
 	t_token	*orig;
 
@@ -31,7 +31,7 @@ int	expand_param(t_token **cursor, t_state *state, char ***res)
 	return (0);
 }
 
-int	expand_tilde(t_token **cursor, t_state *state, char ***res)
+int	expand_variable(t_token **cursor, t_state *state, char ***res)
 {
 	t_token	*orig;
 

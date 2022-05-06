@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:06:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:24:20 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	run_functions(t_token **cursor, t_state *state, char ***result)
 {
 	int						func_return;
 	static t_parse_function	*functions[] = {
+		&expand_variable,
 		&expand_tilde,
-		&expand_param,
 		&check_literals,
 		NULL
 	};
