@@ -14,20 +14,28 @@
 
 int	expand_tilde(t_token **cursor, t_state *state, char ***res)
 {
+	char	*previous;
 	t_token	*orig;
 
 	orig = *cursor;
 	if (!expect_token(cursor, TOKEN_TILDE, orig))
 		return (0);
-	if (*cursor == NULL || expect_token(cursor, TOKEN_WHITESPACE, orig))
+	previous = (*res)[ft_null_array_len((void **)(*res)) - 1];
+	if (state->continue_previous_node
+		&& !ft_strchr(":=", previous[ft_strlen(previous) - 1]))
 	{
-		if (env_get("HOME", state->env) && !state->in_double_quotes)
-			return (
-				add_to_result(res, env_get("HOME", state->env), state)
-			);
-		else
-			return (add_to_result(res, "~", state));
+		orig = *cursor;
+		return (add_to_result(res, "~", state));
 	}
+	if (*cursor
+		&& ((*cursor)->value[0] != '/' && !ft_strisempty((*cursor)->value)))
+		return (add_to_result(res, "~", state));
+	if (env_get("HOME", state->env) && !state->in_double_quotes)
+		return (
+			add_to_result(res, env_get("HOME", state->env), state)
+		);
+	else
+		return (add_to_result(res, "~", state));
 	return (0);
 }
 

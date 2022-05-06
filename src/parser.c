@@ -69,7 +69,7 @@ int	add_to_result(char ***result, char *value, t_state *state)
 	}
 	else
 	{
-		state->continue_previous_node = state->in_double_quotes;
+		state->continue_previous_node = 1;
 		temp = ft_strdup(value);
 		if (!temp)
 			return (print_error(ERR_MALLOC_FAIL, -1));
@@ -123,7 +123,10 @@ char	**parse(t_token *list, t_state *state)
 	{
 		func_result = run_functions(&cursor, state, &result);
 		if (func_result == 0 && cursor)
+		{
 			func_result = add_to_result(&result, cursor->value, state);
+			cursor = cursor->next;
+		}
 		if (func_result == -1)
 			break ;
 	}
