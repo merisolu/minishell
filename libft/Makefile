@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/04/29 15:55:12 by jumanner         ###   ########.fr        #
+#    Updated: 2022/05/09 11:39:11 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC_FILES = ft_tolower.c ft_toupper.c \
 		ft_getdigits.c ft_getdigits_base.c ft_getnumlen.c ft_getsign.c \
 		ft_bzero.c ft_realloc.c \
 		ft_sort.c \
-		ft_max.c ft_min.c \
+		ft_max.c ft_min.c ft_clamp.c \
 		ft_abs.c ft_abs_float.c \
 		ft_pow.c \
 		ft_fmod.c ft_modf.c ft_frexp.c ft_round.c ft_getexponent.c ft_getmantissa.c ft_isinfinite.c ft_isnan.c \

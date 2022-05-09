@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 15:55:34 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:39:37 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,12 +198,14 @@ long		ft_min_long(long l1, long l2);
 long long	ft_min_llong(long long l1, long long l2);
 t_ull		ft_min_ullong(t_ull l1, t_ull l2);
 size_t		ft_min_size_t(size_t s1, size_t s2);
-int			ft_max(int i1, int i2);
 
+int			ft_max(int i1, int i2);
 long		ft_max_long(long l1, long l2);
 long long	ft_max_llong(long long l1, long long l2);
 t_ull		ft_max_ullong(t_ull l1, t_ull l2);
 size_t		ft_max_size_t(size_t s1, size_t s2);
+
+int			ft_clamp(int value, int min, int max);
 
 /* Math functions. */
 int			ft_pow(int n, unsigned int pow);
