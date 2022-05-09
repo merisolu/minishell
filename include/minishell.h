@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 14:46:54 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:06:53 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define PROMPT "$> "
 
 # define BUF_SIZE 16
+# define HISTORY_SIZE 50
 
 /* Return values */
 # define RETURN_SUCCESS 1
@@ -32,6 +33,7 @@
 
 /* Errors */
 # define ERR_LINE_READ "input read error"
+# define ERR_HISTORY_RECALL "history recall error"
 # define ERR_CHILD_PROC_FAIL "cannot make child process"
 # define ERR_COM_NOT_FOUND "command not found"
 # define ERR_NO_PERMISSION "Permission denied"
@@ -91,6 +93,8 @@ typedef struct s_state
 	struct termios	orig_conf;
 	int				input_flags;
 	int				orig_flags;
+	char			*history[HISTORY_SIZE];
+	int				history_index;
 	int				exiting;
 }	t_state;
 
@@ -150,6 +154,10 @@ int			get_input(t_state *state);
 int			configure_input(t_state *state);
 int			set_input_config(t_state *state);
 int			set_orig_config(t_state *state);
+
+/* history.c */
+int			history_store(char *input, t_state *state);
+int			history_recall(int diff, t_state *state);
 
 /* literals.c */
 int			check_literals(t_token **cursor, t_state *state, char ***result);

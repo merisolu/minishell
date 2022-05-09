@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 14:49:17 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:56:15 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	get_state_struct(char *const **env, t_state *res)
 {
 	ft_bzero(res, sizeof(t_state));
 	res->cursor = ft_strlen(PROMPT);
+	res->history_index = -1;
 	return (ft_dup_null_array((void **)*env, (void ***)&(res->env), var_cpy));
 }
 
@@ -27,6 +28,8 @@ static int	tokenize_and_execute(char **input, t_state *state)
 	char		**args;
 
 	result = 0;
+	history_store(*input, state);
+	state->history_index = -1;
 	args = parse(tokenize(*input), state);
 	if (args && !ft_strisempty(args[0]))
 		result = execute(args[0], args, state);
@@ -69,5 +72,6 @@ int	main(const int argc, const char **argv, char *const *env)
 	}
 	if (!set_orig_config(&state))
 		return (print_error(ERR_TERMIOS_FAIL, 1));
+	ft_free_array_elements((void **)state.history, HISTORY_SIZE);
 	return (0);
 }
