@@ -265,7 +265,7 @@ int			ft_getnumlen_ullong(t_ull c);
 void		*ft_free_array(void **array, size_t size);
 void		ft_free_array_elements(void **array, size_t size);
 void		*ft_free_null_array(void **array);
-void		*ft_free_null_array_elements(void **array);
+void		ft_free_null_array_elements(void **array);
 
 size_t		ft_null_array_len(void **array);
 

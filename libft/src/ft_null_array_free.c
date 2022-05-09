@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 09:38:21 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/07 10:37:24 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:58:14 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ void	*ft_free_null_array(void **array)
 
 /* 
  * Frees each element of the given null-terminated array, but not the pointer to
- * the array itself. Returns NULL when done.
+ * the array itself.
  */
-void	*ft_free_null_array_elements(void **array)
+void	ft_free_null_array_elements(void **array)
 {
 	size_t	i;
 
 	if (!array)
-		return (NULL);
+		return ;
 	i = 0;
 	while (array[i])
 	{
 		free(array[i]);
 		i++;
 	}
-	return (NULL);
 }
