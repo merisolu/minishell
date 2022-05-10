@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 11:23:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:43:30 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	check_path_validity(char *path)
 
 int	execute(char *name, char *const *args, t_state *state)
 {
-	t_built_in	*built_in;
-	char		*path;
+	t_cmd	*built_in;
+	char	*path;
 
 	built_in = get_built_in(name);
 	if (built_in)

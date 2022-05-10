@@ -6,16 +6,16 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:18:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 13:33:59 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:44:03 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_built_in	*get_built_in(const char *name)
+t_cmd	*get_built_in(const char *name)
 {
-	size_t								i;
-	const static t_built_in_dispatch	dispatch_table[] = {
+	size_t						i;
+	const static t_cmd_dispatch	dispatch_table[] = {
 	{"cd", &cmd_cd},
 	{"echo", &cmd_echo},
 	{"env", &cmd_env},
@@ -35,7 +35,7 @@ t_built_in	*get_built_in(const char *name)
 	return (NULL);
 }
 
-int	run_built_in(t_built_in com, char *const *args, t_state *state)
+int	run_built_in(t_cmd cmd, char *const *args, t_state *state)
 {
-	return (com(args, state));
+	return (cmd(args, state));
 }
