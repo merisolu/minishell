@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/09 14:06:53 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:26:44 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_state
 	int				orig_flags;
 	char			*history[HISTORY_SIZE];
 	int				history_index;
+	int				last_return_value;
 	int				exiting;
 }	t_state;
 
@@ -194,7 +195,7 @@ void		env_print_all(char *const *env);
 /* bin.c */
 void		bin_find(const char *name, char **paths, char **result);
 int			bin_env_find(const char *name, char *const *env, char **result);
-int			bin_execute(const char *path, char **args, char *const **env);
+int			bin_execute(const char *path, char **args, char *const **env, t_state *state);
 int			bin_run(const char *name, char *const *args, char *const **env);
 
 /* built_ins.c */
@@ -203,6 +204,11 @@ int			run_built_in(t_built_in com, char *const *args, t_state *state);
 
 /* executor.c */
 int			execute(char *name, char *const *args, t_state *state);
+
+/* return_value.c */
+void		set_return_value(int return_value, t_state *state);
+void		set_return_value_from_status(int status, t_state *state);
+void		reset_return_value(t_state *state);
 
 /* Built-in commands */
 

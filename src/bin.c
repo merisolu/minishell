@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 15:51:32 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:26:56 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static int	replace_name_with_path(const char *path, char **args)
 	return (1);
 }
 
-// TODO: Handle return value.
 /*
  * Attempts to fork the current process, transform it into a new process
  * defined by the given path to a binary, and wait for its execution to finish.
@@ -92,9 +91,10 @@ static int	replace_name_with_path(const char *path, char **args)
  *
  * Before this function returns, it frees path.
  */
-int	bin_execute(const char *path, char **args, char *const **env)
+int	bin_execute(const char *path, char **args, char *const **env, t_state *state)
 {
 	pid_t	process_pid;
+	int		status;
 
 	if (access(path, X_OK) == -1)
 		return (
@@ -107,7 +107,7 @@ int	bin_execute(const char *path, char **args, char *const **env)
 	process_pid = fork();
 	if (process_pid == 0)
 	{
-		if (execve(path, args, *env) == -1)
+		if (execve(path, args, *((char *const **)env)) == -1)
 			exit(print_error(ERR_CHILD_PROC_FAIL, 1));
 	}
 	else if (process_pid == -1)
@@ -115,8 +115,8 @@ int	bin_execute(const char *path, char **args, char *const **env)
 		free((void *)path);
 		return (print_error(ERR_CHILD_PROC_FAIL, 1));
 	}
-	else
-		wait(NULL);
+	wait(&status);
+	set_return_value_from_status(status, state);
 	free((void *)path);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:24:04 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:23:19 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_path_validity(char *path)
 int	execute(char *name, char *const *args, t_state *state)
 {
 	t_built_in	*built_in;
-	char		*temp_path;
+	char		*path;
 
 	built_in = get_built_in(name);
 	if (built_in)
@@ -44,19 +44,19 @@ int	execute(char *name, char *const *args, t_state *state)
 	{
 		if (ft_strchr(name, '/'))
 		{
-			temp_path = ft_strdup(name);
-			if (!temp_path)
+			path = ft_strdup(name);
+			if (!path)
 				return (print_error(ERR_MALLOC_FAIL, 1));
-			if (!check_path_validity(temp_path))
+			if (!check_path_validity(path))
 				return (1);
-			return (bin_execute(temp_path, (char **)args, &(state->env)));
+			return (bin_execute(path, (char **)args, &(state->env), state));
 		}
-		else if (!bin_env_find(name, state->env, &temp_path))
+		else if (!bin_env_find(name, state->env, &path))
 			return (
 				print_named_error(
 					name, ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
 				)
 			);
-		return (bin_execute(temp_path, (char **)args, &(state->env)));
+		return (bin_execute(path, (char **)args, &(state->env), state));
 	}
 }

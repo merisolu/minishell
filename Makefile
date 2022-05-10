@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/05/09 11:35:40 by jumanner         ###   ########.fr        #
+#    Updated: 2022/05/10 11:17:24 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_FILES = main.c \
 			lexer.c parser.c expansions.c \
 			token.c token_list.c \
 			environment.c \
-			bin.c executor.c \
+			bin.c executor.c return_value.c \
 			built_ins.c cmd_cd.c cmd_echo.c cmd_env.c cmd_setenv.c \
 			cmd_unsetenv.c cmd_exit.c \
 			utils.c debug.c

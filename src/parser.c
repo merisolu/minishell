@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 13:24:20 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:30:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	add_to_result(char ***result, char *value, t_state *state)
 	char	**destination;
 	char	*temp;
 
+	if (!value)
+		return (print_error(ERR_MALLOC_FAIL, -1));
 	if (state->continue_previous_node)
 	{
 		destination = ((*result) + ft_null_array_len((void **)(*result)) - 1);
