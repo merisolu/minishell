@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 11:55:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:16:19 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void	env_print_all(char *const *env);
 /* bin.c */
 void	bin_find(const char *name, char **paths, char **result);
 int		bin_env_find(const char *name, char *const *env, char **result);
-int		bin_execute(const char *path, char **args, char *const *env, t_state *state);
+int		bin_execute(char *path, char **args, char *const *env, t_state *state);
 int		bin_run(const char *name, char *const *args, char *const **env);
 
 /* built_ins.c */
