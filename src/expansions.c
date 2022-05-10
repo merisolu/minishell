@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 13:19:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:25:58 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ int	expand_variable(t_token **cursor, t_state *state, char ***res)
 	{
 		temp = orig->next->value;
 		if (ft_strequ(temp, "?"))
-			return (add_to_result(res, ft_itoa(state->last_return_value), state));
+			return (add_to_result(
+					res, ft_itoa(state->last_return_value), state
+				));
 		else
 			return (add_to_result(res, env_get(temp, state->env), state));
 	}
@@ -59,10 +61,8 @@ int	expand_variable(t_token **cursor, t_state *state, char ***res)
 		&& expect_token(cursor, TOKEN_CURLY_OPEN, orig)
 		&& expect_token(cursor, TOKEN_LITERAL, orig)
 		&& expect_token(cursor, TOKEN_CURLY_CLOSED, orig))
-		return (
-			add_to_result(
+		return (add_to_result(
 				res, env_get(orig->next->next->value, state->env), state
-			)
-		);
+			));
 	return (0);
 }
