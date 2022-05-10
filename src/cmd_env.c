@@ -30,6 +30,17 @@ static int	handle_invalid_flag(char flag)
 	return (1);
 }
 
+static int	arg_to_env(char *value, t_cmd_env *cmd)
+{
+	char	*temp;
+
+	temp = ft_strchr(value, '=') + 1;
+	value[ft_dstchr(value, '=', ft_strlen(value))] = '\0';
+	if (!env_set(value, temp, (char *const **)&(cmd->env)))
+		return (free_env_args(cmd, -1));
+	return (0);
+}
+
 static int	parse_args(char *const *args, char *const *env, t_cmd_env *cmd)
 {
 	int	i;
@@ -52,8 +63,8 @@ static int	parse_args(char *const *args, char *const *env, t_cmd_env *cmd)
 		return (-1);
 	while (args[i] && ft_strchr(args[i], '='))
 	{
-		if (!env_set(args[i], NULL, (char *const **)&(cmd->env)))
-			free_env_args(cmd, -1);
+		if (arg_to_env(args[i], cmd) == -1)
+			return (-1);
 		i++;
 	}
 	return (i);
