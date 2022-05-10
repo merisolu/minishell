@@ -6,11 +6,31 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 13:36:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:14:03 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	print_cd_error(char *name, char *message, int return_value)
+{
+	ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+	ft_putstr_fd(name, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(message, STDERR_FILENO);
+	return (return_value);
+}
+
+static int	check_destination_errors(char *name, char *path)
+{
+	if (ft_points_to_file(path))
+		return (print_cd_error(name, ERR_IS_NOT_DIR, 1));
+	if (!ft_points_to_dir(path))
+		return (print_cd_error(name, ERR_NO_SUCH_FILE_OR_DIR, 1));
+	if (!ft_path_is_within_limits(path))
+		return (print_cd_error(name, ERR_INVALID_PATH, 1));
+	return (0);
+}
 
 static char	*get_target(char *const *args, size_t count, char *const *env)
 {
@@ -53,17 +73,17 @@ int	cmd_cd(char *const *args, t_state *state)
 	int		return_value;
 
 	arg_count = ft_null_array_len((void **)args);
-	if (arg_count > 2)
-		return (print_error(ERR_TOO_MANY_ARGS, 1));
 	target = get_target(args, arg_count, state->env);
 	if (!ft_path_is_within_limits(target))
-		return (print_error(ERR_INVALID_PATH, 1));
+		return (print_cd_error(target, ERR_INVALID_PATH, 1));
 	if (!construct_path(target, &path))
 		return (1);
-	if (!ft_points_to_dir(path))
-		return (print_error(ERR_NO_SUCH_FILE_OR_DIR, 1));
-	if (!ft_path_is_within_limits(path))
-		return (print_error(ERR_INVALID_PATH, 1));
+	return_value = check_destination_errors(target, path);
+	if (return_value != 0)
+	{
+		free(path);
+		return (return_value);
+	}
 	if (env_get("PWD", state->env))
 		env_set("OLDPWD", env_get("PWD", state->env), &(state->env));
 	ft_normalize_path(path, &target);
