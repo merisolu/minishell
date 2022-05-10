@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 11:43:30 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:55:50 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	execute(char *name, char *const *args, t_state *state)
 				return (print_error(ERR_MALLOC_FAIL, 1));
 			if (!check_path_validity(path))
 				return (1);
-			return (bin_execute(path, (char **)args, &(state->env), state));
+			return (bin_execute(path, (char **)args, state->env, state));
 		}
 		else if (!bin_env_find(name, state->env, &path))
 			return (
@@ -57,6 +57,6 @@ int	execute(char *name, char *const *args, t_state *state)
 					name, ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
 				)
 			);
-		return (bin_execute(path, (char **)args, &(state->env), state));
+		return (bin_execute(path, (char **)args, state->env, state));
 	}
 }

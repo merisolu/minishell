@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 11:26:56 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:55:24 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,23 +91,21 @@ static int	replace_name_with_path(const char *path, char **args)
  *
  * Before this function returns, it frees path.
  */
-int	bin_execute(const char *path, char **args, char *const **env, t_state *state)
+int	bin_execute(const char *path, char **args, char *const *env, t_state *state)
 {
 	pid_t	process_pid;
 	int		status;
 
 	if (access(path, X_OK) == -1)
-		return (
-			print_named_error(
+		return (print_named_error(
 				(char *)path, ERR_NO_PERMISSION, RETURN_NO_PERMISSION
-			)
-		);
+			));
 	if (!replace_name_with_path(path, args))
 		return (print_error(ERR_MALLOC_FAIL, 1));
 	process_pid = fork();
 	if (process_pid == 0)
 	{
-		if (execve(path, args, *((char *const **)env)) == -1)
+		if (execve(path, args, env) == -1)
 			exit(print_error(ERR_CHILD_PROC_FAIL, 1));
 	}
 	else if (process_pid == -1)
