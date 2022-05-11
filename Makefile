@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/05/10 11:17:24 by jumanner         ###   ########.fr        #
+#    Updated: 2022/05/11 12:30:01 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIB_PATH = ./libft/libft.a
 
 SRC_FILES = main.c \
 			signal.c \
-			input.c input_configuration.c history.c \
+			input.c input_configuration.c input_handlers.c history.c \
 			literals.c escapes.c \
 			lexer.c parser.c expansions.c \
 			token.c token_list.c \

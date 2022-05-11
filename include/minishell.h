@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 13:16:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:33:39 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,12 @@ int		get_input(t_state *state);
 int		configure_input(t_state *state);
 int		set_input_config(t_state *state);
 int		set_orig_config(t_state *state);
+
+/* input_handlers.c */
+int		handle_char(char buf[BUF_SIZE], int *index, t_state *state);
+int		handle_delete_char(char buf[BUF_SIZE], t_state *state);
+int		handle_delete_word(char buf[BUF_SIZE], t_state *state);
+int		handle_newline(char buf[BUF_SIZE], t_state *state);
 
 /* history.c */
 int		history_store(char *input, t_state *state);
