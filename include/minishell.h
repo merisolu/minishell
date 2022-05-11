@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/11 12:33:39 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:57:46 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,9 +241,11 @@ int		cmd_exit(char *const *args, t_state *state);
 /* utils.c */
 void	clear_input(t_state *state);
 void	print_state(t_state *state, int newline);
+void	*var_cpy(void *var);
+
+/* error.c */
 int		print_error(char *message, int return_value);
 int		print_named_error(char *name, char *message, int return_value);
-void	*var_cpy(void *var);
 
 /* debug.c */
 void	print_tokens(t_token *list);

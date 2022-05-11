@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:25:15 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:00:42 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,4 @@ void	print_state(t_state *state, int newline)
 			state->cursor + 1);
 	else
 		ft_putstr(PROMPT);
-}
-
-/*
- * Prints the given error message to stderr, and returns the given value.
- */
-int	print_error(char *message, int return_value)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putendl_fd(message, STDERR_FILENO);
-	return (return_value);
-}
-
-/*
- * Prints the given name and error message to stderr, and returns the
- * given return_value.
- */
-int	print_named_error(char *name, char *message, int return_value)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(name, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putendl_fd(message, STDERR_FILENO);
-	return (return_value);
 }
