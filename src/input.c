@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/04/29 15:39:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:52:43 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,28 @@ static int	handle_newline(char buf[BUF_SIZE], t_state *state)
 static int	handle_delete(char buf[BUF_SIZE], t_state *state)
 {
 	char	*temp;
+	int		mode;
+	size_t	del_count;
 
-	if (!(buf[0] == 0x7F && ft_strlen(state->input) > 0
-			&& state->cursor > ft_strlen(PROMPT)))
+	if (buf[0] == 0x7F)
+		mode = 1;
+	else if (buf[0] == 0x17)
+		mode = 2;
+	else
 		return (0);
-	temp = ft_strdelchar(state->input, state->cursor - ft_strlen(PROMPT) - 1);
+	if (!(ft_strlen(state->input) > 0 && state->cursor > ft_strlen(PROMPT)))
+		return (0);
+	temp = NULL;
+	del_count = 1;
+	if (mode == 1)
+		temp = ft_strdelchar(state->input, state->cursor - ft_strlen(PROMPT) - 1);
+	else if (mode == 2)
+		temp = ft_strdelword(state->input, state->cursor - ft_strlen(PROMPT) - 1, &del_count);
 	if (!temp)
 		return (-1);
 	free(state->input);
 	state->input = temp;
-	state->cursor--;
+	state->cursor -= del_count;
 	print_state(state, 0);
 	return (0);
 }
