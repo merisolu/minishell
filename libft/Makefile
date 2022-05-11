@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/05/09 11:39:11 by jumanner         ###   ########.fr        #
+#    Updated: 2022/05/10 15:40:29 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDE_DIR = ./include
 
 SRC_FILES = ft_tolower.c ft_toupper.c \
 		ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isprint.c ft_isascii.c \
-		ft_strlen.c ft_strdup.c ft_strnew.c ft_strdel.c ft_strdelchar.c ft_strclr.c \
+		ft_strlen.c ft_strdup.c ft_strnew.c ft_strdel.c ft_strdelchar.c ft_strdelword.c ft_strclr.c \
 		ft_strncmp.c ft_strcmp.c \
 		ft_strncpy.c ft_strcpy.c ft_strncat.c ft_strcat.c ft_strlcat.c \
 		ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strstr.c ft_strnequ.c ft_strequ.c \
