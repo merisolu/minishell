@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:21:28 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 16:29:13 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:02:47 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,13 @@ int	ft_path_has_valid_link(const char *path)
 }
 
 /*
- * Returns true if the given path as a whole does not exceed PATH_MAX, and
- * each individual name on the path does not exceed NAME_MAX.
+ * Returns true if each individual segment on the path does not exceed NAME_MAX.
  */
 int	ft_path_is_within_limits(const char *path)
 {
 	char	**names;
 	size_t	i;
 
-	if (ft_strlen(path) >= PATH_MAX)
-		return (0);
 	names = ft_strsplit(path, '/');
 	if (!names)
 		return (0);
