@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/11 13:57:46 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:26:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <signal.h>
 # include <termios.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
 
 # define PROMPT "$> "
 
@@ -46,6 +47,7 @@
 # define ERR_INVALID_PATH "path is invalid"
 # define ERR_MALLOC_FAIL "memory allocation failed"
 # define ERR_TERMIOS_FAIL "failed to set terminal attributes"
+# define ERR_WIDTH_GET_FAIL "failed to read terminal width"
 
 /* Signals */
 # define SIG_HUP 1
@@ -86,6 +88,7 @@ typedef struct s_state
 {
 	char *const		*env;
 	char			*input;
+	size_t			prev_input_len;
 	int				continue_previous_node;
 	int				in_double_quotes;
 	size_t			cursor;
