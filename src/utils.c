@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/13 15:29:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:18:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	clear_input(t_state *state)
  * 			prompt was printed.
  * 		- Then, the everything from the cursor to the end of the screen is
  * 			erased (this doesn't move the cursor).
- * 		- Finally, the prompt and the input are printed back on to the screen.
+ * 		- After that, the prompt and the input are printed back on to
+ * 			the screen.
+ * 		- Finally, the cursor is moved to the saved position.
  */
 void	print_state(t_state *state, int newline)
 {
@@ -53,7 +55,7 @@ void	print_state(t_state *state, int newline)
 		print_error(ERR_WIDTH_GET_FAIL, 0);
 		return ;
 	}
-	rows = (state->prev_input_len + ft_strlen(PROMPT) - 1) / width;
+	rows = ((state->prev_cursor - 1) / width);
 	if (newline)
 		ft_putchar('\n');
 	if (state->input)
@@ -61,8 +63,12 @@ void	print_state(t_state *state, int newline)
 		if (rows > 0)
 			ft_printf("\033[%zuA", rows);
 		ft_printf("\033[0G\033[0J%s%s", PROMPT, state->input);
+		ft_printf("\033[%zuG", ((state->cursor - 1) % width) + 2);
+		rows = (ft_strlen(state->input) + ft_strlen(PROMPT) - 1) / width;
+		if (rows - ((state->cursor - 1) / width))
+			ft_printf("\033[%zuA", rows - ((state->cursor - 1) / width));
 	}
 	else
 		ft_putstr(PROMPT);
-	state->prev_input_len = ft_strlen(state->input);
+	state->prev_cursor = state->cursor;
 }

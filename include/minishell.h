@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/13 15:26:09 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:45:28 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ typedef struct s_state
 {
 	char *const		*env;
 	char			*input;
-	size_t			prev_input_len;
 	int				continue_previous_node;
 	int				in_double_quotes;
 	size_t			cursor;
+	size_t			prev_cursor;
 	struct termios	input_conf;
 	struct termios	orig_conf;
 	int				input_flags;
