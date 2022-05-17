@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 13:35:03 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:45:36 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <termios.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
+# include <poll.h>
 
 # define PROMPT "$> "
 
@@ -96,6 +97,7 @@ typedef struct s_state
 	struct termios	orig_conf;
 	int				input_flags;
 	int				orig_flags;
+	struct pollfd	pollfd;
 	char			*history[HISTORY_SIZE];
 	int				history_index;
 	int				last_return_value;

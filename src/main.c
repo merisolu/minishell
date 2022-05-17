@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 13:42:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:56:35 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	setup(char *const **env, t_state *state)
 		return (print_error(ERR_MALLOC_FAIL, 0));
 	if (!configure_input(state))
 		return (print_error(ERR_TERMIOS_FAIL, 0));
+	state->pollfd = (struct pollfd){STDIN_FILENO, POLLIN, POLLIN};
 	return (1);
 }
 
