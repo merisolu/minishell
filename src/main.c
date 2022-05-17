@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 11:47:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:16:01 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static int	tokenize_and_execute(char **input, t_state *state)
 	result = 0;
 	history_store(*input, state);
 	state->history_index = -1;
+	state->cursor = ft_strlen(*input) + ft_strlen(PROMPT) + 1;
+	ft_putstr("\033[2A");
+	print_state(state, 1);
+	ft_putchar('\n');
 	args = parse(tokenize(*input), state);
 	if (args && !ft_strisempty(args[0]))
 		result = execute(args[0], args, state);
