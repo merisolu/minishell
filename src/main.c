@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 13:16:01 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:42:58 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ static int	setup(char *const **env, t_state *state)
 	return (1);
 }
 
+static void	cleanup(t_state *state)
+{
+	ft_free_array_elements((void **)state->history, HISTORY_SIZE);
+	ft_free_null_array((void **)(state->env));
+}
+
 int	main(const int argc, const char **argv, char *const *env)
 {
 	t_state		state;
@@ -77,6 +83,6 @@ int	main(const int argc, const char **argv, char *const *env)
 	}
 	if (!set_orig_config(&state))
 		return (print_error(ERR_TERMIOS_FAIL, 1));
-	ft_free_array_elements((void **)state.history, HISTORY_SIZE);
+	cleanup(&state);
 	return (0);
 }
