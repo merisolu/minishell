@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/16 16:18:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/17 12:49:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static unsigned short	get_terminal_width(void)
+size_t	get_terminal_width(void)
 {
 	struct winsize	size;
 
