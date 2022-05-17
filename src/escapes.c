@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:58:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/09 14:07:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:38:31 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,17 @@ static int	handle_cursor(char buf[BUF_SIZE], t_state *state)
 	if (buf[2] == 0x43)
 	{
 		if (state->cursor + 1 <= ft_strlen(state->input) + ft_strlen(PROMPT))
-		{
-			ft_putstr("\033[1C");
 			state->cursor++;
-		}
 	}
 	else if (buf[2] == 0x44)
 	{
 		if (state->cursor - 1 >= ft_strlen(PROMPT))
-		{
-			ft_putstr("\033[1D");
 			state->cursor--;
-		}
 	}
 	else
 		return (0);
+	if (state->input)
+		print_state(state, 0);
 	return (3);
 }
 
