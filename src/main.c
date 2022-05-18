@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 15:56:35 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:43:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(const int argc, const char **argv, char *const *env)
 			if (!ft_strisempty(state.input))
 				tokenize_and_execute(&(state.input), &state);
 			if (!state.exiting)
-				print_state(&state, 0);
+				print_state(&state, state.last_return_value > 128);
 			set_input_config(&state);
 			g_last_signal = 0;
 		}

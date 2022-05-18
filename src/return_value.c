@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:16:34 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/11 12:41:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:36:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	set_return_value_from_status(int status, t_state *state)
 	reset_return_value(state);
 	if (WIFEXITED(status))
 		set_return_value(WEXITSTATUS(status), state);
+	if (WIFSIGNALED(status))
+		set_return_value(128 + WTERMSIG(status), state);
 }
 
 /*
