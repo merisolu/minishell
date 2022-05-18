@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/05/11 14:05:25 by jumanner         ###   ########.fr        #
+#    Updated: 2022/05/18 10:48:37 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_FILES = main.c \
 			bin.c executor.c return_value.c \
 			built_ins.c cmd_cd.c cmd_echo.c cmd_env.c cmd_setenv.c \
 			cmd_unsetenv.c cmd_exit.c \
-			utils.c error.c debug.c
+			utils.c error.c
 SRC_DIR = ./src
 SRCS := $(patsubst %, $(SRC_DIR)/%, $(SRC_FILES))
 

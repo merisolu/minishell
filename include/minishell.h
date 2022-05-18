@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 15:45:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:48:41 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,8 +252,5 @@ size_t	get_terminal_width(void);
 /* error.c */
 int		print_error(char *message, int return_value);
 int		print_named_error(char *name, char *message, int return_value);
-
-/* debug.c */
-void	print_tokens(t_token *list);
 
 #endif
