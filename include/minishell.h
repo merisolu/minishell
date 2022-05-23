@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/19 16:21:28 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:30:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 
 # define BUF_SIZE 16
 # define HISTORY_SIZE 50
-
-/* Return values */
-# define RETURN_SUCCESS 1
-# define RETURN_FAIL -1
 
 # define RETURN_NO_PERMISSION 126
 # define RETURN_COMMAND_NOT_FOUND 127
