@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/23 15:00:11 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:36:00 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	clear_input(t_state *state)
 	state->cursor = ft_strlen(PROMPT);
 }
 
-// TODO: Better name.
-static void	set_cursor(t_state *state, size_t width)
+static void	move_cursor_to_saved_position(t_state *state, size_t width)
 {
 	size_t	cursor_rows;
 	size_t	text_rows;
@@ -90,7 +89,7 @@ void	print_state(t_state *state, int newline)
 			load_cursor(state);
 		}
 		ft_printf("\033[0J%s%s", PROMPT, state->input);
-		set_cursor(state, width);
+		move_cursor_to_saved_position(state, width);
 	}
 	else
 		ft_putstr(PROMPT);
