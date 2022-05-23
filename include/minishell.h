@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/18 10:48:41 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:21:28 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define ERR_INVALID_PATH "path is invalid"
 # define ERR_MALLOC_FAIL "memory allocation failed"
 # define ERR_TERMIOS_FAIL "failed to set terminal attributes"
-# define ERR_WIDTH_GET_FAIL "failed to read terminal width"
+# define ERR_SIZE_GET_FAIL "failed to read terminal size"
 
 /* Signals */
 # define SIG_HUP 1
@@ -89,10 +89,12 @@ typedef struct s_state
 {
 	char *const		*env;
 	char			*input;
+	size_t			prev_input_len;
 	int				continue_previous_node;
 	int				in_double_quotes;
 	size_t			cursor;
-	size_t			prev_cursor;
+	size_t			input_start_x;
+	size_t			input_start_y;
 	struct termios	input_conf;
 	struct termios	orig_conf;
 	int				input_flags;
@@ -166,6 +168,11 @@ int		handle_char(char buf[BUF_SIZE], int *index, t_state *state);
 int		handle_delete_char(char buf[BUF_SIZE], t_state *state);
 int		handle_delete_word(char buf[BUF_SIZE], t_state *state);
 int		handle_newline(char buf[BUF_SIZE], t_state *state);
+
+/* cursor.c */
+void	save_cursor(void);
+int		parse_cursor(char buf[BUF_SIZE], t_state *state);
+void	load_cursor(t_state *state);
 
 /* history.c */
 int		history_store(char *input, t_state *state);
@@ -247,7 +254,7 @@ int		cmd_exit(char *const *args, t_state *state);
 void	clear_input(t_state *state);
 void	print_state(t_state *state, int newline);
 void	*var_cpy(void *var);
-size_t	get_terminal_width(void);
+int		get_terminal_size(size_t *width, size_t *length);
 
 /* error.c */
 int		print_error(char *message, int return_value);

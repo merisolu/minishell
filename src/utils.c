@@ -6,19 +6,27 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 12:49:52 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:00:11 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	get_terminal_width(void)
+/*
+ * Attempts to get the terminal's size and put the width and length in
+ * characters to the given pointers.
+ *
+ * Returns 1 if successful, zero otherwise.
+ */
+int	get_terminal_size(size_t *width, size_t *length)
 {
 	struct winsize	size;
 
 	if (ioctl(STDIN_FILENO, TIOCGSIZE, &size) == -1)
 		return (0);
-	return (size.ws_col);
+	*width = size.ws_col;
+	*length = size.ws_row;
+	return (1);
 }
 
 void	*var_cpy(void *var)
@@ -32,6 +40,22 @@ void	clear_input(t_state *state)
 	state->cursor = ft_strlen(PROMPT);
 }
 
+// TODO: Better name.
+static void	set_cursor(t_state *state, size_t width)
+{
+	size_t	cursor_rows;
+	size_t	text_rows;
+
+	ft_printf(
+		"\033[%zuG", ((state->input_start_x + state->cursor - 2) % width) + 2
+		);
+	cursor_rows = (state->input_start_x + state->cursor - 2) / width;
+	text_rows = (ft_strlen(state->input) + ft_strlen(PROMPT) \
+		+ state->input_start_x - 2) / width;
+	if ((text_rows - cursor_rows) > 0)
+		ft_printf("\033[%zuA", text_rows - cursor_rows);
+}
+
 /*
  * Redraws the prompt and current input.
  *
@@ -42,33 +66,33 @@ void	clear_input(t_state *state)
  * 			erased (this doesn't move the cursor).
  * 		- After that, the prompt and the input are printed back on to
  * 			the screen.
- * 		- Finally, the cursor is moved to the saved position.
+ * 		- Finally, the cursor is moved to stored cursor position.
  */
 void	print_state(t_state *state, int newline)
 {
 	size_t	width;
+	size_t	length;
 	size_t	rows;
 
-	width = get_terminal_width();
-	if (width == 0)
+	if (!get_terminal_size(&width, &length))
 	{
-		print_error(ERR_WIDTH_GET_FAIL, 0);
+		print_error(ERR_SIZE_GET_FAIL, 0);
 		return ;
 	}
-	rows = ((state->prev_cursor - 1) / width);
-	if (newline)
-		ft_putchar('\n');
+	rows = (state->prev_input_len + state->input_start_x - 2) / width;
 	if (state->input)
 	{
-		if (rows > 0)
-			ft_printf("\033[%zuA", rows);
-		ft_printf("\033[0G\033[0J%s%s", PROMPT, state->input);
-		ft_printf("\033[%zuG", ((state->cursor - 1) % width) + 2);
-		rows = (ft_strlen(state->input) + ft_strlen(PROMPT) - 1) / width;
-		if (rows - ((state->cursor - 1) / width))
-			ft_printf("\033[%zuA", rows - ((state->cursor - 1) / width));
+		load_cursor(state);
+		if (state->input_start_y + rows + newline > length)
+		{
+			state->input_start_y -= (state->input_start_y + rows + newline) \
+				- length;
+			load_cursor(state);
+		}
+		ft_printf("\033[0J%s%s", PROMPT, state->input);
+		set_cursor(state, width);
 	}
 	else
 		ft_putstr(PROMPT);
-	state->prev_cursor = state->cursor;
+	state->prev_input_len = ft_strlen(PROMPT) + ft_strlen(state->input);
 }
