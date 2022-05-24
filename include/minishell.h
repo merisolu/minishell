@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/23 15:30:22 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 09:55:18 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,10 +201,13 @@ void	token_free(t_token **token);
 void	token_list_free(t_token **list);
 
 /* environment.c */
-char	*env_get(const char *name, char *const *env);
 int		env_set(const char *name, const char *value, char *const **env);
 int		env_unset(const char *name, char *const **env);
 void	env_print_all(char *const *env);
+
+/* environment_getters.c */
+char	*env_get(const char *name, char *const *env);
+char	**env_get_pointer(const char *name, char *const *env);
 
 /* bin.c */
 void	bin_find(const char *name, char **paths, char **result);
