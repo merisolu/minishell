@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 13:25:58 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 09:57:31 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ int	expand_variable(t_token **cursor, t_state *state, char ***res)
 					res, ft_itoa(state->last_return_value), state
 				));
 		else
-			return (add_to_result(res, env_get(temp, state->env), state));
+			return (
+				add_to_result(res, env_get_or(temp, "", state->env), state));
 	}
 	if (expect_token(cursor, TOKEN_DOLLAR, orig)
 		&& expect_token(cursor, TOKEN_CURLY_OPEN, orig)
 		&& expect_token(cursor, TOKEN_LITERAL, orig)
 		&& expect_token(cursor, TOKEN_CURLY_CLOSED, orig))
 		return (add_to_result(
-				res, env_get(orig->next->next->value, state->env), state
-			));
+				res, env_get_or(orig->next->next->value, "", state->env),
+				state));
 	return (0);
 }
