@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 13:06:54 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 08:34:36 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int	cmd_env(char *const *args, t_state *state)
 	if (!bin_env_find(args[i], state->env, &path))
 		return (1);
 	return_value = bin_execute(path, cmd.args, cmd.env, state);
+	free(path);
 	return (free_env_args(&cmd, return_value));
 }

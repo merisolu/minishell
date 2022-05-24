@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 13:16:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 08:34:13 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ static int	replace_name_with_path(const char *path, char **args)
  * defined by the given path to a binary, and wait for its execution to finish.
  *
  * If fork or execve calls fail, an error message is printed to stderr.
- *
- * Before this function returns, it frees path.
  */
 int	bin_execute(char *path, char **args, char *const *env, t_state *state)
 {
@@ -109,12 +107,8 @@ int	bin_execute(char *path, char **args, char *const *env, t_state *state)
 			exit(print_error(ERR_CHILD_PROC_FAIL, 1));
 	}
 	else if (process_pid == -1)
-	{
-		free((void *)path);
 		return (print_error(ERR_CHILD_PROC_FAIL, 1));
-	}
 	wait(&status);
 	set_return_value_from_status(status, state);
-	free((void *)path);
 	return (0);
 }
