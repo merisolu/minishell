@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 09:55:18 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:00:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void	env_print_all(char *const *env);
 
 /* environment_getters.c */
 char	*env_get(const char *name, char *const *env);
+char	*env_get_or(char *name, char *on_fail, char *const *env);
 char	**env_get_pointer(const char *name, char *const *env);
 
 /* bin.c */

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 09:52:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 09:58:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:00:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,18 @@ char	*env_get(const char *name, char *const *env)
 	if (temp)
 		return (ft_strchr(*temp, '=') + 1);
 	return (NULL);
+}
+
+/*
+ * Attempts to return the value of the environment variable matching the given
+ * name. Returns on_fail if nothing was found.
+ */
+char	*env_get_or(char *name, char *on_fail, char *const *env)
+{
+	char	*temp;
+
+	temp = env_get(name, env);
+	if (temp)
+		return (temp);
+	return (on_fail);
 }
