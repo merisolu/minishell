@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:32:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/06 13:24:31 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/05/24 09:35:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,22 @@ static t_token_type	get_token_type(char value)
 
 t_token	*tokenize(char *line)
 {
-	t_token	*result;
-	int		type;
-	int		changed;
-	int		i;
+	t_token			*result;
+	t_token_type	type;
+	int				changed;
+	int				i;
 
 	result = NULL;
 	i = 0;
-	while (line[i] && (int)get_token_type(line[i]) == TOKEN_WHITESPACE)
+	while (line[i] && get_token_type(line[i]) == TOKEN_WHITESPACE)
 		i++;
 	changed = i;
 	type = get_token_type(line[i]);
 	while (line[i])
 	{
-		if ((int)get_token_type(line[i]) != type
-			|| (type != TOKEN_LITERAL && type != TOKEN_WHITESPACE))
+		if ((get_token_type(line[i]) != type
+				|| (type != TOKEN_LITERAL && type != TOKEN_WHITESPACE))
+			&& (i - changed) > 0)
 		{
 			token_add(&result, type, ft_strsub(line, changed, i - changed));
 			type = get_token_type(line[i]);
