@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 09:52:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 10:00:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/06 11:18:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 char	**env_get_pointer(const char *name, char *const *env)
 {
 	size_t	i;
-	char	*temp;
 
 	i = 0;
 	while (env[i])
 	{
-		temp = ft_strnstr(env[i], name, ft_strlen(name));
-		if (temp)
+		if (ft_strncmp(env[i], name, \
+			ft_dstchr(env[i], '=', ft_strlen(env[i]))) == 0)
 			return ((char **)env + i);
 		i++;
 	}
