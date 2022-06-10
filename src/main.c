@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/23 15:10:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/10 11:27:14 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 extern int	g_last_signal;
 
-static int	get_state_struct(char *const **env, t_state *res)
+static int	get_state_struct(char *const **env, t_state *result)
 {
-	ft_bzero(res, sizeof(t_state));
-	res->cursor = ft_strlen(PROMPT);
-	res->history_index = -1;
-	return (ft_dup_null_array((void **)*env, (void ***)&(res->env), var_cpy));
+	ft_bzero(result, sizeof(t_state));
+	result->cursor = ft_strlen(PROMPT);
+	result->history_index = -1;
+	return (
+		ft_dup_null_array((void **)*env, (void ***)&(result->env), var_cpy)
+	);
 }
 
 static int	tokenize_and_execute(char **input, t_state *state)
