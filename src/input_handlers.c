@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:29:22 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/11 12:35:10 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/10 09:51:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	handle_newline(char buf[BUF_SIZE], t_state *state)
 {
-	if (buf[0] != 0xA)
-		return (0);
+	(void)buf;
 	state->cursor = ft_strlen(PROMPT);
 	ft_putchar('\n');
 	return (1);
@@ -26,8 +25,7 @@ int	handle_delete_word(char buf[BUF_SIZE], t_state *state)
 	char	*temp;
 	size_t	del_count;
 
-	if (buf[0] != 0x17)
-		return (0);
+	(void)buf;
 	if (!(ft_strlen(state->input) > 0 && state->cursor > ft_strlen(PROMPT)))
 		return (0);
 	temp = ft_strdelword(
@@ -46,8 +44,7 @@ int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
 {
 	char	*temp;
 
-	if (buf[0] != 0x7F)
-		return (0);
+	(void)buf;
 	if (!(ft_strlen(state->input) > 0 && state->cursor > ft_strlen(PROMPT)))
 		return (0);
 	temp = NULL;
@@ -63,17 +60,21 @@ int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
 
 int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 {
-	int	return_value;
+	size_t									i;
+	const static t_input_handler_dispatch	dispatch_table[] = {
+	{0xA, &handle_newline},
+	{0x17, &handle_delete_word},
+	{0x7F, &handle_delete_char},
+	{0, NULL}
+	};
 
-	return_value = handle_newline(buf, state);
-	if (return_value != 0)
-		return (return_value);
-	return_value = handle_delete_char(buf, state);
-	if (return_value != 0)
-		return (return_value);
-	return_value = handle_delete_word(buf, state);
-	if (return_value != 0)
-		return (return_value);
+	i = 0;
+	while (dispatch_table[i].run != NULL)
+	{
+		if (dispatch_table[i].control_char == buf[0])
+			return (dispatch_table[i].run(buf, state));
+		i++;
+	}
 	*index += check_escape_sequence(buf, state);
 	if (ft_isprint(buf[*index]))
 		state->cursor++;
