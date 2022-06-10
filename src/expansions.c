@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 11:53:02 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/10 11:25:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,31 @@ int	expand_tilde(t_token **cursor, t_state *state, char ***res)
 	return (0);
 }
 
-int	expand_variable(t_token **c, t_state *state, char ***res)
+int	expand_variable(t_token **cursor, t_state *state, char ***res)
 {
-	t_token	*og;
-	char	*tmp;
+	t_token	*original;
+	char	*temp;
 	int		return_code;
 
-	og = *c;
-	if (expect_token(c, TOKEN_DOLLAR, og) && expect_token(c, TOKEN_LITERAL, og))
+	original = *cursor;
+	if (expect_token(cursor, TOKEN_DOLLAR, original) \
+		&& expect_token(cursor, TOKEN_LITERAL, original))
 	{
-		tmp = og->next->value;
-		if (ft_strequ(tmp, "?"))
+		temp = original->next->value;
+		if (ft_strequ(temp, "?"))
 		{
-			tmp = ft_itoa(state->last_return_value);
-			return_code = add_to_result(res, tmp, state);
-			free(tmp);
+			temp = ft_itoa(state->last_return_value);
+			return_code = add_to_result(res, temp, state);
+			free(temp);
 			return (return_code);
 		}
-		else
-			return (add_to_result(res, env_get_or(tmp, "", state->env), state));
+		return (add_to_result(res, env_get_or(temp, "", state->env), state));
 	}
-	if (expect_token(c, TOKEN_DOLLAR, og)
-		&& expect_token(c, TOKEN_CURLY_OPEN, og)
-		&& expect_token(c, TOKEN_LITERAL, og)
-		&& expect_token(c, TOKEN_CURLY_CLOSED, og))
-		return (add_to_result(res, env_get_or(og->next->next->value, "",
+	if (expect_token(cursor, TOKEN_DOLLAR, original)
+		&& expect_token(cursor, TOKEN_CURLY_OPEN, original)
+		&& expect_token(cursor, TOKEN_LITERAL, original)
+		&& expect_token(cursor, TOKEN_CURLY_CLOSED, original))
+		return (add_to_result(res, env_get_or(original->next->next->value, "",
 					state->env), state));
 	return (0);
 }
