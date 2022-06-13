@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 10:00:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/13 11:35:06 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/ioctl.h>
 # include <poll.h>
+# include <dirent.h>
 
 # define PROMPT "$> "
 
@@ -173,6 +174,9 @@ void	load_cursor(t_state *state);
 /* history.c */
 int		history_store(char *input, t_state *state);
 int		history_recall(int diff, t_state *state);
+
+/* autocomplete.c */
+void	autocomplete(t_state *state);
 
 /* literals.c */
 int		check_literals(t_token **cursor, t_state *state, char ***result);

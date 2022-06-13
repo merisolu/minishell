@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/17 15:58:51 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:55:18 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ static int	get_line(t_state *state)
 	{
 		if (handle_char(buf, &i, state))
 			return (1);
-		if (ft_isprint(buf[i]))
+		if (buf[i] == '\t')
+			autocomplete(state);
+		else if (ft_isprint(buf[i]))
 		{
 			temp = ft_strins(state->input,
 					state->cursor - ft_strlen(PROMPT) - 1, buf[i]);
