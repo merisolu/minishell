@@ -6,13 +6,25 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:07:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/13 17:10:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:03:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO: Check that file can be executed?
+static int	check_execution_rights(char *path, char *name)
+{
+	int		result;
+	char	*temp;
+
+	ft_path_join(path, name, &temp);
+	if (!temp)
+		return (-1);
+	result = access(temp, X_OK) == 0;
+	free(temp);
+	return (result);
+}
+
 /*
  * Searches the specific path for an executable file with a name matching
  * partial_name. The resulting file name will be put in *result. *result will
@@ -31,7 +43,8 @@ static int	search_path(char *path, char *partial_name, char **result)
 	entry = readdir(dir);
 	while (entry)
 	{
-		if (ft_strnequ(partial_name, entry->d_name, ft_strlen(partial_name)))
+		if (ft_strnequ(partial_name, entry->d_name, ft_strlen(partial_name))
+			&& check_execution_rights(path, entry->d_name))
 		{
 			*result = ft_strdup(entry->d_name);
 			closedir(dir);
