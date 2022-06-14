@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:58:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/19 16:05:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/14 11:06:44 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static int	handle_history(char buf[BUF_SIZE], t_state *state)
 
 static int	handle_cursor(char buf[BUF_SIZE], t_state *state)
 {
-	if (buf[2] == 0x43)
+	if (buf[2] == 0x43 || buf[1] == 0x66)
 	{
 		if (state->cursor + 1 <= ft_strlen(state->input) + ft_strlen(PROMPT))
 			state->cursor++;
 	}
-	else if (buf[2] == 0x44)
+	else if (buf[2] == 0x44 || buf[1] == 0x62)
 	{
 		if (state->cursor - 1 >= ft_strlen(PROMPT))
 			state->cursor--;
@@ -39,7 +39,7 @@ static int	handle_cursor(char buf[BUF_SIZE], t_state *state)
 		return (0);
 	if (state->input)
 		print_state(state, 0);
-	return (3);
+	return (3 - ((buf[2] == 0x66 || buf[2] == 0x62) * 3));
 }
 
 int	handle_arrows(char buf[BUF_SIZE], t_state *state)
@@ -63,6 +63,8 @@ int	check_escape_sequence(char buf[BUF_SIZE], t_state *state)
 	size_t									i;
 	const static t_input_handler_dispatch	dispatch_table[] = {
 	{0x5B, &handle_arrows},
+	{0x62, &handle_arrows},
+	{0x66, &handle_arrows},
 	{0, NULL}
 	};
 
