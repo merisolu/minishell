@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/13 10:55:18 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/14 11:50:46 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,23 @@
 
 extern int	g_last_signal;
 
+static int	append_input(t_state *state, char character)
+{
+	char	*temp;
+
+	temp = ft_strins(state->input,
+			state->cursor - ft_strlen(PROMPT) - 1, character);
+	if (!temp)
+		return (-1);
+	free(state->input);
+	state->input = temp;
+	print_state(state, 0);
+	return (1);
+}
+
 static int	get_line(t_state *state)
 {
 	int		read_count;
-	char	*temp;
 	char	buf[BUF_SIZE];
 	int		i;
 
@@ -32,13 +45,8 @@ static int	get_line(t_state *state)
 			autocomplete(state);
 		else if (ft_isprint(buf[i]))
 		{
-			temp = ft_strins(state->input,
-					state->cursor - ft_strlen(PROMPT) - 1, buf[i]);
-			if (!temp)
+			if (append_input(state, buf[i]) != 1)
 				return (-1);
-			free(state->input);
-			state->input = temp;
-			print_state(state, 0);
 		}
 		i++;
 	}
