@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:07:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/13 18:03:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/14 11:23:27 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	search_path(char *path, char *partial_name, char **result)
 		{
 			*result = ft_strdup(entry->d_name);
 			closedir(dir);
-			if (!result)
+			if (!(*result))
 				return (-1);
 			return (1);
 		}
@@ -103,8 +103,9 @@ void	autocomplete(t_state *state)
 
 	if (ft_strlen(state->input) == 0)
 		return ;
-	temp = NULL;
-	search_from_paths(state, &temp);
+	temp = search_for_built_in(state->input);
+	if (!temp)
+		search_from_paths(state, &temp);
 	if (temp)
 	{
 		free(state->input);
