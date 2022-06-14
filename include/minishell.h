@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/13 11:35:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:32:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ int		bin_run(const char *name, char *const *args, char *const **env);
 
 /* built_ins.c */
 t_cmd	*get_built_in(const char *name);
+char	*search_for_built_in(const char *partial_name);
 int		run_built_in(t_cmd cmd, char *const *args, t_state *state);
 
 /* executor.c */

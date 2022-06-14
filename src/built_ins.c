@@ -6,15 +6,14 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:18:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 15:16:41 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/14 11:21:20 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*get_built_in(const char *name)
+const static t_cmd_dispatch	*get_built_in_dispatch(void)
 {
-	size_t						i;
 	const static t_cmd_dispatch	dispatch_table[] = {
 	{"cd", &cmd_cd},
 	{"echo", &cmd_echo},
@@ -25,6 +24,32 @@ t_cmd	*get_built_in(const char *name)
 	{"", NULL}
 	};
 
+	return (&(dispatch_table[0]));
+}
+
+char	*search_for_built_in(const char *partial_name)
+{
+	const t_cmd_dispatch	*dispatch_table;
+	size_t					i;
+
+	dispatch_table = get_built_in_dispatch();
+	i = 0;
+	while (dispatch_table[i].run != NULL)
+	{
+		if (ft_strnequ(
+				partial_name, dispatch_table[i].name, ft_strlen(partial_name)))
+			return (ft_strdup((char *)dispatch_table[i].name));
+		i++;
+	}
+	return (NULL);
+}
+
+t_cmd	*get_built_in(const char *name)
+{
+	const t_cmd_dispatch	*dispatch_table;
+	size_t					i;
+
+	dispatch_table = get_built_in_dispatch();
 	i = 0;
 	while (dispatch_table[i].run != NULL)
 	{
