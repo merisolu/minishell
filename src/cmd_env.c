@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 08:34:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/14 11:31:48 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ int	cmd_env(char *const *args, t_state *state)
 		return (free_env_args(&cmd, 0));
 	}
 	if (!ft_dup_null_array((void **)(args + i), (void ***)&(cmd.args), var_cpy))
-		return (print_error(ERR_MALLOC_FAIL, free_env_args(&cmd, 1)));
+		return (
+			print_named_error("env", ERR_MALLOC_FAIL, free_env_args(&cmd, 1))
+		);
 	if (!bin_env_find(args[i], state->env, &path))
 		return (1);
 	return_value = bin_execute(path, cmd.args, cmd.env, state);
