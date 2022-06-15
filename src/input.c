@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/14 11:50:46 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:47:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	append_input(t_state *state, char character)
 		return (-1);
 	free(state->input);
 	state->input = temp;
-	print_state(state, 0);
 	return (1);
 }
 
@@ -63,5 +62,6 @@ int	get_input(t_state *state)
 		return (1);
 	else if (result == -1)
 		return (print_error(ERR_LINE_READ, 1));
+	print_state(state, 1);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:29:22 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/10 09:51:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:32:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	handle_newline(char buf[BUF_SIZE], t_state *state)
 {
 	(void)buf;
 	state->cursor = ft_strlen(PROMPT);
-	ft_putchar('\n');
 	return (1);
 }
 
@@ -36,7 +35,6 @@ int	handle_delete_word(char buf[BUF_SIZE], t_state *state)
 	free(state->input);
 	state->input = temp;
 	state->cursor -= del_count;
-	print_state(state, 0);
 	return (0);
 }
 
@@ -54,7 +52,6 @@ int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
 	free(state->input);
 	state->input = temp;
 	state->cursor--;
-	print_state(state, 0);
 	return (0);
 }
 

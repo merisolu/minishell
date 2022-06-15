@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:20:31 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 13:31:15 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 11:25:34 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int	history_recall(int diff, t_state *state)
 	else if (!swap_input("", state))
 		return (print_error(ERR_HISTORY_RECALL, 0));
 	state->cursor = ft_strlen(PROMPT) + ft_strlen(state->input);
-	if (state->history_index != new_index)
-		print_state(state, 0);
 	state->history_index = new_index;
 	return (1);
 }

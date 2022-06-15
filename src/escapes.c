@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:58:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/14 11:06:44 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 11:25:30 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static int	handle_cursor(char buf[BUF_SIZE], t_state *state)
 	}
 	else
 		return (0);
-	if (state->input)
-		print_state(state, 0);
 	return (3 - ((buf[2] == 0x66 || buf[2] == 0x62) * 3));
 }
 

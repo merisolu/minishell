@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:07:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/14 11:23:27 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 11:25:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,5 @@ void	autocomplete(t_state *state)
 		state->input = temp;
 		state->cursor = ft_strlen(PROMPT) + ft_strlen(state->input);
 	}
-	print_state(state, 0);
 	return ;
 }

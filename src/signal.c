@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:20:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/23 15:12:54 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:35:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_signal(t_state *state)
 		clear_input(state);
 		ft_putchar('\n');
 		save_cursor();
-		print_state(state, 1);
+		print_state(state, 0);
 	}
 	g_last_signal = 0;
 }
