@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/10 11:27:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 11:21:18 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ static int	get_state_struct(char *const **env, t_state *result)
 	);
 }
 
-static int	tokenize_and_execute(char **input, t_state *state)
+static int	tokenize_and_execute(t_state *state)
 {
 	int			result;
 	char		**args;
 
 	result = 0;
-	if (ft_strisempty(*input))
+	if (ft_strisempty(state->input))
 		return (result);
-	history_store(*input, state);
+	history_store(state->input, state);
 	state->history_index = -1;
-	state->cursor = ft_strlen(*input) + ft_strlen(PROMPT) + 1;
+	state->cursor = ft_strlen(state->input) + ft_strlen(PROMPT) + 1;
 	print_state(state, 1);
 	ft_putchar('\n');
-	args = parse(tokenize(*input), state);
+	args = parse(tokenize(state->input), state);
 	if (args && !ft_strisempty(args[0]))
 		result = execute(args[0], args, state);
 	ft_free_null_array((void **)args);
@@ -81,7 +81,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		if (get_input(&state) == 1)
 		{
 			set_orig_config(&state);
-			tokenize_and_execute(&(state.input), &state);
+			tokenize_and_execute(&state);
 			set_input_config(&state);
 			if (!state.exiting)
 			{
