@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/13 18:32:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/16 13:38:00 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_state
 	char			*history[HISTORY_SIZE];
 	int				history_index;
 	int				last_return_value;
+	int				exit_return_value;
 	int				exiting;
 }	t_state;
 

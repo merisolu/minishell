@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 15:34:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/16 13:38:06 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	cleanup(t_state *state)
 		return (print_error(ERR_TERMIOS_FAIL, 1));
 	ft_free_array_elements((void **)state->history, HISTORY_SIZE);
 	ft_free_null_array((void **)(state->env));
-	return (0);
+	return (state->exit_return_value);
 }
 
 int	main(const int argc, const char **argv, char *const *env)
