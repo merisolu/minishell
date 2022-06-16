@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:29:22 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 15:32:52 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:36:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 			return (dispatch_table[i].run(buf, state));
 		i++;
 	}
-	*index += check_escape_sequence(buf, state);
 	if (ft_isprint(buf[*index]))
 		state->cursor++;
 	return (0);
