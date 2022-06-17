@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:07:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 11:25:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:01:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	search_path(char *path, char *partial_name, char **result)
 	while (entry)
 	{
 		if (ft_strnequ(partial_name, entry->d_name, ft_strlen(partial_name))
-			&& check_execution_rights(path, entry->d_name))
+			&& check_execution_rights(path, entry->d_name) == 1)
 		{
 			*result = ft_strdup(entry->d_name);
 			closedir(dir);
