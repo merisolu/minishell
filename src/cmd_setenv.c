@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:04:07 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/14 11:32:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:16:07 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	cmd_setenv(char *const *args, t_state *state)
 	char	*name;
 	char	*value;
 
-	(void)state;
 	name = args[1];
 	if (!name)
 	{
