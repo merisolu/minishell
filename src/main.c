@@ -40,7 +40,8 @@ static int	tokenize_and_execute(t_state *state)
 		return (result);
 	}
 	history_store(state->input, state);
-	state->cursor = ft_strlen(state->input) + ft_strlen(PROMPT) + 1;
+	state->cursor = ft_strlen(state->input) + ft_strlen(PROMPT);
+	print_state(state, 1);
 	ft_putchar('\n');
 	args = parse(tokenize(state->input), state);
 	if (args && !ft_strisempty(args[0]))
