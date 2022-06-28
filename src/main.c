@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/16 13:38:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/28 09:56:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ static int	tokenize_and_execute(t_state *state)
 	int			result;
 	char		**args;
 
+	if (!set_orig_config(state))
+		return (print_error(ERR_TERMIOS_FAIL, 1));
 	result = 0;
 	if (ft_strisempty(state->input))
 	{
 		ft_putchar('\n');
+		if (!set_input_config(state))
+			print_error(ERR_TERMIOS_FAIL, 1);
 		return (result);
 	}
 	history_store(state->input, state);
@@ -44,6 +48,8 @@ static int	tokenize_and_execute(t_state *state)
 		result = execute(args[0], args, state);
 	ft_free_null_array((void **)args);
 	clear_input(state);
+	if (!set_input_config(state))
+		print_error(ERR_TERMIOS_FAIL, 1);
 	return (result);
 }
 
@@ -82,9 +88,7 @@ int	main(const int argc, const char **argv, char *const *env)
 		check_signal(&state);
 		if (get_input(&state) == 1)
 		{
-			set_orig_config(&state);
 			tokenize_and_execute(&state);
-			set_input_config(&state);
 			if (!state.exiting)
 			{
 				if (g_last_signal != 0 && state.last_return_value > 128)
