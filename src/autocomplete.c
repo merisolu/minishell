@@ -20,7 +20,20 @@ static int	check_execution_rights(char *path, char *name)
 	ft_path_join(path, name, &temp);
 	if (!temp)
 		return (-1);
-	result = access(temp, X_OK) == 0;
+	result = (access(temp, X_OK) == 0);
+	free(temp);
+	return (result);
+}
+
+static int	check_match_is_file(char *path, char *name)
+{
+	int		result;
+	char	*temp;
+
+	ft_path_join(path, name, &temp);
+	if (!temp)
+		return (print_error(ERR_MALLOC_FAIL, 0));
+	result = (ft_is_file(temp) || ft_points_to_file(temp));
 	free(temp);
 	return (result);
 }
@@ -44,7 +57,8 @@ static int	search_path(char *path, char *partial_name, char **result)
 	while (entry)
 	{
 		if (ft_strnequ(partial_name, entry->d_name, ft_strlen(partial_name))
-			&& check_execution_rights(path, entry->d_name) == 1)
+			&& check_execution_rights(path, entry->d_name) == 1
+			&& check_match_is_file(path, entry->d_name) == 1)
 		{
 			*result = ft_strdup(entry->d_name);
 			closedir(dir);
