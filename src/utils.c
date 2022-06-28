@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/28 13:23:44 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/28 13:33:11 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_terminal_size(size_t *width, size_t *length)
 	return (1);
 }
 
-void	*var_cpy(void *var)
+void	*var_copy(void *var)
 {
 	return ((void *)ft_strdup((const char *)var));
 }

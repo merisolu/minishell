@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/14 11:31:48 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/28 13:32:57 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	parse_args(char *const *args, char *const *env, t_cmd_env *cmd)
 		if (!cmd->env)
 			return (-1);
 	}
-	else if (!ft_dup_null_array((void **)env, (void ***)&(cmd->env), var_cpy))
+	else if (!ft_dup_null_array((void **)env, (void ***)&(cmd->env), var_copy))
 		return (-1);
 	while (args[i] && ft_strchr(args[i], '='))
 	{
@@ -86,7 +86,8 @@ int	cmd_env(char *const *args, t_state *state)
 		env_print_all(cmd.env);
 		return (free_env_args(&cmd, 0));
 	}
-	if (!ft_dup_null_array((void **)(args + i), (void ***)&(cmd.args), var_cpy))
+	if (!ft_dup_null_array((void **)(args + i), (void ***)&(cmd.args),
+		var_copy))
 		return (
 			print_named_error("env", ERR_MALLOC_FAIL, free_env_args(&cmd, 1))
 		);
