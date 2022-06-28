@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 14:43:20 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/28 13:23:44 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	print_state(t_state *state, int newline)
 		print_error(ERR_SIZE_GET_FAIL, 0);
 		return ;
 	}
-	rows = (state->prev_input_len + state->input_start_x - 2) / width;
 	if (state->input)
 	{
+		rows = (state->prev_input_len + state->input_start_x - 2) / width;
 		if (state->input_start_y + rows + newline > length + 1)
 			state->input_start_y -= (state->input_start_y + rows + newline) \
 				- length - 1;
