@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 14:13:18 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/10 12:48:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/28 10:26:25 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	parse_cursor(char buf[BUF_SIZE], t_state *state)
 	size_t	y;
 	size_t	i;
 
-	if (ft_dstchr(buf, 0x52, BUF_SIZE - 1) == BUF_SIZE)
+	if (ft_dstchr(buf, 'R', BUF_SIZE - 1) == BUF_SIZE)
 		return (0);
 	x = 0;
 	y = 0;
