@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:39:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 09:52:25 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/29 14:18:11 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	env_set(const char *name, const char *value, char *const **env)
 	char	**destination_pointer;
 	char	*new;
 
+	if (ft_strisempty(name))
+		return (1);
 	destination_pointer = env_get_pointer(name, *env);
 	if (!destination_pointer)
 	{
