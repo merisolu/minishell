@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/28 13:32:57 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:38:43 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,22 @@ static int	free_env_args(t_cmd_env *env_args, int return_value)
 	return (return_value);
 }
 
-static int	handle_invalid_flag(char flag)
+static int	print_env_error(char *str1, char *str2, char *str3, int value)
 {
-	if (ft_strchr("i", flag))
-		return (0);
-	ft_putstr_fd("env: illegal option -- ", STDERR_FILENO);
-	ft_putchar_fd(flag, STDERR_FILENO);
+	ft_putstr_fd("env: ", STDERR_FILENO);
+	ft_putstr_fd(str1, STDERR_FILENO);
+	ft_putstr_fd(str2, STDERR_FILENO);
+	ft_putstr_fd(str3, STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
-	ft_putendl("usage: env [-i] [name=value ...] [utility [argument ...]]");
-	return (1);
+	return (value);
 }
 
-static int	arg_to_env(char *value, t_cmd_env *cmd)
+static int	args_to_env(char *const *args, char *const *env, int *index, \
+t_cmd_env *cmd)
 {
+	char	*pair;
 	char	*temp;
 
-	temp = ft_strchr(value, '=') + 1;
-	value[ft_dstchr(value, '=', ft_strlen(value))] = '\0';
-	if (!env_set(value, temp, (char *const **)&(cmd->env)))
-		return (free_env_args(cmd, -1));
-	return (0);
-}
-
-static int	parse_args(char *const *args, char *const *env, t_cmd_env *cmd)
-{
-	int	i;
-
-	i = 1;
-	while (args[i] && args[i][0] == '-')
-	{
-		if (handle_invalid_flag(args[i][1]))
-			return (-1);
-		cmd->exclusive += (args[i][1] == 'i' || args[i][1] == '\0');
-		i++;
-	}
 	if (cmd->exclusive)
 	{
 		cmd->env = (char **)ft_memalloc(sizeof(char *));
@@ -61,12 +43,43 @@ static int	parse_args(char *const *args, char *const *env, t_cmd_env *cmd)
 	}
 	else if (!ft_dup_null_array((void **)env, (void ***)&(cmd->env), var_copy))
 		return (-1);
-	while (args[i] && ft_strchr(args[i], '='))
+	while (args[*index] && ft_strchr(args[*index], '='))
 	{
-		if (arg_to_env(args[i], cmd) == -1)
-			return (-1);
+		pair = args[*index];
+		temp = ft_strchr(pair, '=') + 1;
+		pair[ft_dstchr(pair, '=', ft_strlen(pair))] = '\0';
+		if (!env_set(pair, temp, (char *const **)&(cmd->env)))
+			return (free_env_args(cmd, -1));
+		(*index)++;
+	}
+	return (0);
+}
+
+static int	parse_args(char *const *args, char *const *env, t_cmd_env *cmd)
+{
+	int	i;
+	int	o;
+
+	i = 1;
+	while (args[i] && args[i][0] == '-')
+	{
+		o = 1;
+		while (args[i][o])
+		{
+			if (args[i][o] == 'i')
+				cmd->exclusive = 1;
+			else
+				return (print_env_error(
+						"illegal option -- ", args[i] + 1,
+						"\nusage: env [-i] [name=value ...] \
+[utility [argument ...]]", -1)
+				);
+			o++;
+		}
 		i++;
 	}
+	if (args_to_env(args, env, &i, cmd) == -1)
+		return (-1);
 	return (i);
 }
 
@@ -92,7 +105,8 @@ int	cmd_env(char *const *args, t_state *state)
 			print_named_error("env", ERR_MALLOC_FAIL, free_env_args(&cmd, 1))
 		);
 	if (!bin_env_find(args[i], state->env, &path))
-		return (1);
+		return (print_env_error(args[i], ": ", ERR_NO_SUCH_FILE_OR_DIR,
+				free_env_args(&cmd, 1)));
 	return_value = bin_execute(path, cmd.args, cmd.env, state);
 	free(path);
 	return (free_env_args(&cmd, return_value));
