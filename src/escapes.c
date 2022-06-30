@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:58:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 11:25:30 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:05:36 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	check_escape_sequence(char buf[BUF_SIZE], t_state *state)
 	size_t									i;
 	const static t_input_handler_dispatch	dispatch_table[] = {
 	{0x5B, &handle_arrows},
-	{0x62, &handle_arrows},
-	{0x66, &handle_arrows},
+	{0x62, &handle_cursor},
+	{0x66, &handle_cursor},
 	{0, NULL}
 	};
 
