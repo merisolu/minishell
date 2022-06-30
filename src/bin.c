@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/29 10:02:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:01:41 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ int	bin_env_find(const char *name, char *const *env, char **result)
 	return (*result != NULL);
 }
 
-static int	replace_name_with_path(const char *path, char **args)
-{
-	free(args[0]);
-	args[0] = ft_strdup(path);
-	if (!(args[0]))
-	{
-		free((void *)path);
-		return (0);
-	}
-	return (1);
-}
-
 /*
  * Attempts to fork the current process, transform it into a new process
  * defined by the given path to a binary, and wait for its execution to finish.
@@ -98,8 +86,6 @@ int	bin_execute(char *path, char **args, char *const *env, t_state *state)
 		return (print_named_error(
 				(char *)path, ERR_NO_PERMISSION, RETURN_NO_PERMISSION
 			));
-	if (!replace_name_with_path(path, args))
-		return (print_error(ERR_MALLOC_FAIL, 1));
 	process_pid = fork();
 	if (process_pid == 0)
 	{
