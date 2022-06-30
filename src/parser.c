@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 11:30:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:58:27 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ char	**parse(t_token *list, t_state *state)
 
 	state->continue_previous_node = 0;
 	state->in_double_quotes = 0;
+	if (!list)
+		return (NULL);
 	cursor = list;
 	result = (char **)ft_memalloc(sizeof(char *));
 	if (!result)
