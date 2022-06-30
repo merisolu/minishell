@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:20:31 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/28 13:25:10 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:14:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	history_store(char *input, t_state *state)
 {
 	if (!state || !input)
 		return (0);
+	state->history_index = -1;
 	if (ft_strequ(state->history[0], input))
 		return (1);
 	history_move_up(state);
 	state->history[0] = ft_strdup(input);
-	state->history_index = -1;
 	return (state->history[0] != NULL);
 }
 
