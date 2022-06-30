@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:58:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/30 11:05:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:12:28 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ int	handle_arrows(char buf[BUF_SIZE], t_state *state)
 	int	return_value;
 
 	return_value = parse_cursor(buf, state);
-	if (return_value > 0)
-		return (return_value);
-	return_value = handle_history(buf, state);
 	if (return_value > 0)
 		return (return_value);
 	return_value = handle_history(buf, state);
