@@ -38,8 +38,7 @@ void	bin_find(const char *name, char **paths, char **result)
 		ft_path_join(paths[i], name, result);
 		if (ft_points_to_file(*result))
 			return ;
-		else
-			ft_memdel((void **)result);
+		ft_memdel((void **)result);
 		i++;
 	}
 	*result = NULL;

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 08:36:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:00:07 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,19 @@ int	execute(char *name, char *const *args, t_state *state)
 	built_in = get_built_in(name);
 	if (built_in)
 		return (run_built_in(built_in, args, state));
-	else
+	if (ft_strchr(name, '/'))
 	{
-		if (ft_strchr(name, '/'))
-		{
-			if (!check_path_validity(name))
-				return (1);
-			return (bin_execute(name, (char **)args, state->env, state));
-		}
-		else if (!bin_env_find(name, state->env, &path))
-			return (
-				print_named_error(
-					name, ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
-				)
-			);
-		return_value = bin_execute(path, (char **)args, state->env, state);
-		free(path);
-		return (return_value);
+		if (!check_path_validity(name))
+			return (1);
+		return (bin_execute(name, (char **)args, state->env, state));
 	}
+	else if (!bin_env_find(name, state->env, &path))
+		return (
+			print_named_error(
+				name, ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
+			)
+		);
+	return_value = bin_execute(path, (char **)args, state->env, state);
+	free(path);
+	return (return_value);
 }

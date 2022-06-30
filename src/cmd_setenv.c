@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:04:07 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/29 11:19:50 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:59:50 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	cmd_setenv(char *const *args, t_state *state)
 		value = ft_strchr(name, '=');
 		if (!value)
 			return (0);
-		else
-			value += 1;
+		value += 1;
 		name[ft_dstchr(name, '=', ft_strlen(name))] = '\0';
 	}
 	return (!env_set(name, value, &(state->env)));
