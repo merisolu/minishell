@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/28 13:32:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:41:16 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,21 @@ static int	get_state_struct(char *const **env, t_state *result)
 	);
 }
 
-static int	tokenize_and_execute(t_state *state)
+static void	tokenize_and_execute(t_state *state)
 {
-	int			result;
 	char		**args;
 
 	if (!set_orig_config(state))
-		return (print_error(ERR_TERMIOS_FAIL, 1));
-	result = 0;
+	{
+		print_error(ERR_TERMIOS_FAIL, 1);
+		return ;
+	}
 	if (ft_strisempty(state->input))
 	{
 		ft_putchar('\n');
 		if (!set_input_config(state))
 			print_error(ERR_TERMIOS_FAIL, 1);
-		return (result);
+		return ;
 	}
 	history_store(state->input, state);
 	state->cursor = ft_strlen(state->input) + ft_strlen(PROMPT);
@@ -45,12 +46,11 @@ static int	tokenize_and_execute(t_state *state)
 	ft_putchar('\n');
 	args = parse(tokenize(state->input), state);
 	if (args && !ft_strisempty(args[0]))
-		result = execute(args[0], args, state);
+		execute(args[0], args, state);
 	ft_free_null_array((void **)args);
 	clear_input(state);
 	if (!set_input_config(state))
 		print_error(ERR_TERMIOS_FAIL, 1);
-	return (result);
 }
 
 static int	setup(char *const **env, t_state *state)
