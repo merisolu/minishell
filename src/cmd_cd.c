@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/10 15:14:03 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:05:59 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ static char	*get_target(char *const *args, size_t count, char *const *env)
 	else
 	{
 		if (ft_strequ(args[1], "-"))
+		{
+			if (ft_is_dir(env_get("OLDPWD", env)))
+				ft_putendl(env_get("OLDPWD", env));
 			return (env_get("OLDPWD", env));
+		}
 	}
 	return (args[1]);
 }
