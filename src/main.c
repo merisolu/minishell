@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/01 10:34:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:45:45 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	tokenize_and_execute(t_state *state)
 	}
 	if (ft_strisempty(state->input))
 	{
+		clear_input(state);
 		ft_putchar('\n');
 		if (!set_input_config(state))
 			print_error(ERR_TERMIOS_FAIL, 1);
