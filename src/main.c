@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/30 13:41:16 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:34:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static void	tokenize_and_execute(t_state *state)
 	print_state(state, 1);
 	ft_putchar('\n');
 	args = parse(tokenize(state->input), state);
-	if (args && !ft_strisempty(args[0]))
-		execute(args[0], args, state);
+	execute(args[0], args, state);
 	ft_free_null_array((void **)args);
 	clear_input(state);
 	if (!set_input_config(state))

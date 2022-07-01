@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/30 12:00:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:39:07 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	execute(char *name, char *const *args, t_state *state)
 	char	*path;
 	int		return_value;
 
+	if (!args || ft_strisempty(name))
+		return (1);
 	built_in = get_built_in(name);
 	if (built_in)
 		return (run_built_in(built_in, args, state));
