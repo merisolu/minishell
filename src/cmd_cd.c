@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/30 13:05:59 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:24:45 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 static int	print_cd_error(char *name, char *message, int return_value)
 {
 	ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
-	ft_putstr_fd(name, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
+	if (name)
+	{
+		ft_putstr_fd(name, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+	}
 	ft_putendl_fd(message, STDERR_FILENO);
 	return (return_value);
 }
@@ -34,15 +37,25 @@ static int	check_destination_errors(char *name, char *path)
 
 static char	*get_target(char *const *args, size_t count, char *const *env)
 {
+	char	*temp;
+
 	if (count == 1)
-		return (env_get("HOME", env));
+	{
+		temp = env_get("HOME", env);
+		if (!temp)
+			print_cd_error(NULL, ERR_NO_HOME, 0);
+		return (temp);
+	}
 	else
 	{
 		if (ft_strequ(args[1], "-"))
 		{
-			if (ft_is_dir(env_get("OLDPWD", env)))
-				ft_putendl(env_get("OLDPWD", env));
-			return (env_get("OLDPWD", env));
+			temp = env_get("OLDPWD", env);
+			if (!temp)
+				print_cd_error(NULL, ERR_NO_OLDPWD, 0);
+			if (ft_is_dir(temp))
+				ft_putendl(temp);
+			return (temp);
 		}
 	}
 	return (args[1]);
@@ -65,6 +78,8 @@ static int	construct_path(char *target, char **result)
 			return (print_error(ERR_CANNOT_GET_CWD, 0));
 		ft_path_join(path, target, result);
 		free(path);
+		if (!(*result))
+			return (print_error(ERR_MALLOC_FAIL, 0));
 	}
 	return (1);
 }

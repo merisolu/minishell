@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 10:38:04 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:16:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 # define ERR_MALLOC_FAIL "memory allocation failed"
 # define ERR_TERMIOS_FAIL "failed to set terminal attributes"
 # define ERR_SIZE_GET_FAIL "failed to read terminal size"
+# define ERR_NO_HOME "HOME not set"
+# define ERR_NO_OLDPWD "OLDPWD not set"
 
 /* Signals */
 # define SIG_HUP 1
