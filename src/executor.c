@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/01 10:39:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 10:14:56 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,27 @@ int	check_path_validity(char *path)
 	return (1);
 }
 
-int	execute(char *name, char *const *args, t_state *state)
+int	execute(char *const *args, t_state *state)
 {
 	t_cmd	*built_in;
 	char	*path;
 	int		return_value;
 
-	if (!args || ft_strisempty(name))
+	if (!args || ft_strisempty(args[0]))
 		return (1);
-	built_in = get_built_in(name);
+	built_in = get_built_in(args[0]);
 	if (built_in)
 		return (run_built_in(built_in, args, state));
-	if (ft_strchr(name, '/'))
+	if (ft_strchr(args[0], '/'))
 	{
-		if (!check_path_validity(name))
+		if (!check_path_validity(args[0]))
 			return (1);
-		return (bin_execute(name, (char **)args, state->env, state));
+		return (bin_execute(args[0], (char **)args, state->env, state));
 	}
-	else if (!bin_env_find(name, state->env, &path))
+	else if (!bin_env_find(args[0], state->env, &path))
 		return (
 			print_named_error(
-				name, ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
+				args[0], ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
 			)
 		);
 	return_value = bin_execute(path, (char **)args, state->env, state);

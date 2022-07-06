@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/28 13:32:36 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 10:15:25 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ char	*search_for_built_in(const char *partial_name);
 int		run_built_in(t_cmd cmd, char *const *args, t_state *state);
 
 /* executor.c */
-int		execute(char *name, char *const *args, t_state *state);
+int		execute(char *const *args, t_state *state);
 
 /* return_value.c */
 void	set_return_value(int return_value, t_state *state);
