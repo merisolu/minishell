@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 10:38:18 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 11:43:01 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	execute(char *const *args, t_state *state)
 	int		return_value;
 
 	if (!args || ft_strisempty(args[0]))
-		return (1);
+		return (print_error(ERR_MALLOC_FAIL, 1));
 	built_in = get_built_in(args[0]);
 	if (built_in)
 		return (run_built_in(built_in, args, state));
