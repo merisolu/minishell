@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/30 12:01:41 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 10:37:55 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ int	bin_env_find(const char *name, char *const *env, char **result)
  *
  * If fork or execve calls fail, an error message is printed to stderr.
  */
-int	bin_execute(char *path, char **args, char *const *env, t_state *state)
+int	bin_execute(char *path, char **args, char *const *env)
 {
 	pid_t	process_pid;
 	int		status;
 
 	if (access(path, X_OK) == -1)
 		return (print_named_error(
-				(char *)path, ERR_NO_PERMISSION, RETURN_NO_PERMISSION
+				(char *)path, ERR_NO_PERMISSION, RETURN_NO_ACCESS
 			));
 	process_pid = fork();
 	if (process_pid == 0)
@@ -94,6 +94,5 @@ int	bin_execute(char *path, char **args, char *const *env, t_state *state)
 	else if (process_pid == -1)
 		return (print_error(ERR_CHILD_PROC_FAIL, 1));
 	waitpid(process_pid, &status, 0);
-	set_return_value_from_status(status, state);
-	return (0);
+	return (get_return_value_from_status(status));
 }

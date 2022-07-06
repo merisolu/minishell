@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 10:14:56 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 10:38:18 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int	check_path_validity(char *path)
 {
 	if (ft_is_dir(path))
-		return (print_named_error(path, ERR_IS_DIR, 0));
+		return (print_named_error(path, ERR_IS_DIR, RETURN_NO_ACCESS));
 	else if (path[ft_strlen(path) - 1] == '/')
-		return (print_named_error(path, ERR_IS_NOT_DIR, 0));
+		return (print_named_error(path, ERR_IS_NOT_DIR, RETURN_NO_ACCESS));
 	else if (!ft_path_has_valid_end(path))
-		return (print_named_error(path, ERR_NO_SUCH_FILE_OR_DIR, 0));
-	return (1);
+		return (print_named_error(
+				path, ERR_NO_SUCH_FILE_OR_DIR, RETURN_COMMAND_NOT_FOUND)
+		);
+	return (0);
 }
 
 int	execute(char *const *args, t_state *state)
@@ -36,9 +38,10 @@ int	execute(char *const *args, t_state *state)
 		return (run_built_in(built_in, args, state));
 	if (ft_strchr(args[0], '/'))
 	{
-		if (!check_path_validity(args[0]))
-			return (1);
-		return (bin_execute(args[0], (char **)args, state->env, state));
+		return_value = check_path_validity(args[0]);
+		if (return_value != 0)
+			return (return_value);
+		return (bin_execute(args[0], (char **)args, state->env));
 	}
 	else if (!bin_env_find(args[0], state->env, &path))
 		return (
@@ -46,7 +49,7 @@ int	execute(char *const *args, t_state *state)
 				args[0], ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
 			)
 		);
-	return_value = bin_execute(path, (char **)args, state->env, state);
+	return_value = bin_execute(path, (char **)args, state->env);
 	free(path);
 	return (return_value);
 }

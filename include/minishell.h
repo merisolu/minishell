@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 10:15:25 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/06 10:38:04 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define BUF_SIZE 16
 # define HISTORY_SIZE 50
 
-# define RETURN_NO_PERMISSION 126
+# define RETURN_NO_ACCESS 126
 # define RETURN_COMMAND_NOT_FOUND 127
 
 /* Errors */
@@ -218,7 +218,7 @@ char	**env_get_pointer(const char *name, char *const *env);
 /* bin.c */
 void	bin_find(const char *name, char **paths, char **result);
 int		bin_env_find(const char *name, char *const *env, char **result);
-int		bin_execute(char *path, char **args, char *const *env, t_state *state);
+int		bin_execute(char *path, char **args, char *const *env);
 int		bin_run(const char *name, char *const *args, char *const **env);
 
 /* built_ins.c */
@@ -230,8 +230,8 @@ int		run_built_in(t_cmd cmd, char *const *args, t_state *state);
 int		execute(char *const *args, t_state *state);
 
 /* return_value.c */
+int		get_return_value_from_status(int status);
 void	set_return_value(int return_value, t_state *state);
-void	set_return_value_from_status(int status, t_state *state);
 void	reset_return_value(t_state *state);
 
 /* Built-in commands */
