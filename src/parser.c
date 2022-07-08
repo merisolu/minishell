@@ -121,9 +121,7 @@ char	**parse(t_token *list, t_state *state)
 		return (NULL);
 	cursor = list;
 	result = (char **)ft_memalloc(sizeof(char *));
-	if (!result)
-		return (NULL);
-	while (cursor)
+	while (cursor && result)
 	{
 		func_result = run_functions(&cursor, state, &result);
 		if (func_result == 0 && cursor)
@@ -132,7 +130,7 @@ char	**parse(t_token *list, t_state *state)
 			cursor = cursor->next;
 		}
 		if (func_result == -1)
-			break ;
+			result = ft_free_null_array((void**)result);
 	}
 	token_list_free(&list);
 	return (result);
