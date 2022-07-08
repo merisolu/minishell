@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 11:43:01 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:47:45 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	execute(char *const *args, t_state *state)
 			return (return_value);
 		return (bin_execute(args[0], (char **)args, state->env));
 	}
-	else if (!bin_env_find(args[0], state->env, &path))
+	else if (bin_env_find(args[0], state->env, &path) == 0)
 		return (
 			print_named_error(
 				args[0], ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND

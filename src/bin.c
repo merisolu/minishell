@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 10:37:55 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:51:19 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
  * found, the result will be NULL.
  *
  * *result should be freed after it is no longer needed.
+ *
+ * Returns 1 on success, 0 on not found, -1 on failed malloc.
  */
-void	bin_find(const char *name, char **paths, char **result)
+static int	bin_find(const char *name, char **paths, char **result)
 {
 	size_t	i;
 
@@ -31,17 +33,22 @@ void	bin_find(const char *name, char **paths, char **result)
 		&& ft_points_to_file(name))
 	{
 		*result = ft_strdup(name);
-		return ;
+		if (!(*result))
+			return (print_error(ERR_MALLOC_FAIL, -1));
+		return (1);
 	}
 	while (paths[i])
 	{
 		ft_path_join(paths[i], name, result);
+		if (!(*result))
+			return (print_error(ERR_MALLOC_FAIL, -1));
 		if (ft_points_to_file(*result))
-			return ;
+			return (1);
 		ft_memdel((void **)result);
 		i++;
 	}
 	*result = NULL;
+	return (0);
 }
 
 /*
@@ -51,23 +58,26 @@ void	bin_find(const char *name, char **paths, char **result)
  * If the binary was found its path will be stored in result. If nothing was
  * found, the result will be empty.
  *
- * Returns one on success, zero on failure.
+ * Returns 1 on success, 0 on not found, -1 on malloc failure.
  */
 int	bin_env_find(const char *name, char *const *env, char **result)
 {
+	char	*path;
 	char	**paths;
+	int		return_value;
 
-	if (!env_get("PATH", env))
+	path = env_get("PATH", env);
+	if (!path)
 	{
 		*result = NULL;
 		return (0);
 	}
-	paths = ft_strsplit(env_get("PATH", env), ':');
+	paths = ft_strsplit(path, ':');
 	if (!paths)
-		return (print_error(ERR_MALLOC_FAIL, 0));
-	bin_find(name, paths, result);
+		return (print_error(ERR_MALLOC_FAIL, -1));
+	return_value = bin_find(name, paths, result);
 	ft_free_null_array((void **)paths);
-	return (*result != NULL);
+	return (return_value);
 }
 
 /*
@@ -81,6 +91,8 @@ int	bin_execute(char *path, char **args, char *const *env)
 	pid_t	process_pid;
 	int		status;
 
+	if (!path)
+		return (1);
 	if (access(path, X_OK) == -1)
 		return (print_named_error(
 				(char *)path, ERR_NO_PERMISSION, RETURN_NO_ACCESS
