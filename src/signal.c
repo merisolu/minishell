@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:20:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:51 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:46:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	set_signal_int(int signal)
 void	set_signal_handling(void)
 {
 	signal(SIG_INT, set_signal_int);
+	siginterrupt(SIG_INT, 1);
 }
 
 void	check_signal(t_state *state)
