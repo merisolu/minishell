@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 13:24:45 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:58:42 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	check_destination_errors(char *name, char *path)
 		return (print_cd_error(name, ERR_NO_SUCH_FILE_OR_DIR, 1));
 	if (!ft_path_is_within_limits(path))
 		return (print_cd_error(name, ERR_INVALID_PATH, 1));
+	if (access(path, X_OK) != 0)
+		return (print_cd_error(name, ERR_NO_PERMISSION, 1));
 	return (0);
 }
 
