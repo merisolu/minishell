@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 09:39:22 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:06:53 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ char	**parse(t_token *list, t_state *state)
 			cursor = cursor->next;
 		}
 		if (func_result == -1)
-			result = ft_free_null_array((void**)result);
+			result = ft_free_null_array((void **)result);
 	}
 	token_list_free(&list);
 	return (result);
