@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:07:51 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 13:08:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:13:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static void	search_from_paths(char *const *env, char *input, char **result)
 	if (!paths)
 	{
 		print_error(ERR_MALLOC_FAIL, -1);
-		ft_free_null_array((void **)paths);
 		return ;
 	}
 	i = 0;
@@ -99,7 +98,10 @@ static void	search_from_paths(char *const *env, char *input, char **result)
 	{
 		search_return_value = search_path(paths[i], input, result);
 		if (search_return_value == -1)
+		{
 			print_error(ERR_MALLOC_FAIL, -1);
+			break ;
+		}
 		i++;
 	}
 	ft_free_null_array((void **)paths);
