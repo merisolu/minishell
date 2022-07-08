@@ -45,7 +45,6 @@ static int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
 	(void)buf;
 	if (!(ft_strlen(state->input) > 0 && state->cursor > ft_strlen(PROMPT)))
 		return (0);
-	temp = NULL;
 	temp = ft_strdelchar(state->input, state->cursor - ft_strlen(PROMPT) - 1);
 	if (!temp)
 		return (-1);
