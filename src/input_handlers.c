@@ -6,20 +6,20 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:29:22 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 15:36:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 10:27:08 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_newline(char buf[BUF_SIZE], t_state *state)
+static int	handle_newline(char buf[BUF_SIZE], t_state *state)
 {
 	(void)buf;
 	state->cursor = ft_strlen(PROMPT);
 	return (1);
 }
 
-int	handle_delete_word(char buf[BUF_SIZE], t_state *state)
+static int	handle_delete_word(char buf[BUF_SIZE], t_state *state)
 {
 	char	*temp;
 	size_t	del_count;
@@ -38,7 +38,7 @@ int	handle_delete_word(char buf[BUF_SIZE], t_state *state)
 	return (0);
 }
 
-int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
+static int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
 {
 	char	*temp;
 
