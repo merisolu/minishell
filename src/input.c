@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 13:18:04 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:46:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	get_line(t_state *state)
 	i = check_escape_sequence(buf, state);
 	while (i < read_count)
 	{
-		if (handle_char(buf, &i, state))
+		if (handle_char(buf, &i, state) == 1)
 			return (1);
 		if (buf[i] == '\t')
 			autocomplete(state);
