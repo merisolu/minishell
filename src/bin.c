@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 12:51:19 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:04:57 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,10 @@ int	bin_env_find(const char *name, char *const *env, char **result)
 	char	**paths;
 	int		return_value;
 
+	*result = NULL;
 	path = env_get("PATH", env);
 	if (!path)
-	{
-		*result = NULL;
 		return (0);
-	}
 	paths = ft_strsplit(path, ':');
 	if (!paths)
 		return (print_error(ERR_MALLOC_FAIL, -1));
