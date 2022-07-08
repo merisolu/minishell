@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/30 11:58:27 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 09:39:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	add_to_result(char ***result, char *value, t_state *state)
 	char	*temp;
 
 	if (!value)
-		return (print_error(ERR_MALLOC_FAIL, -1));
+		return (-1);
 	if (state->continue_previous_node)
 	{
 		destination = ((*result) + ft_null_array_len((void **)(*result)) - 1);
 		temp = ft_strjoin(*destination, value);
 		if (!temp)
-			return (print_error(ERR_MALLOC_FAIL, -1));
+			return (-1);
 		free(*destination);
 		*destination = temp;
 		return (1);
@@ -74,11 +74,11 @@ int	add_to_result(char ***result, char *value, t_state *state)
 		state->continue_previous_node = 1;
 		temp = ft_strdup(value);
 		if (!temp)
-			return (print_error(ERR_MALLOC_FAIL, -1));
+			return (-1);
 		if (ft_add_to_null_array((void ***)result, temp))
 			return (1);
 	}
-	return (print_error(ERR_MALLOC_FAIL, -1));
+	return (-1);
 }
 
 int	run_functions(t_token **cursor, t_state *state, char ***result)
