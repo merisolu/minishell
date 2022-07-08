@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:42:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/15 15:39:41 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:18:04 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	get_input(t_state *state)
 {
 	int	result;
 
-	poll(&(state->pollfd), POLLIN, -1);
 	result = get_line(state);
 	if (result == 1)
 		return (1);

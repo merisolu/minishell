@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:20:24 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/03 14:45:23 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:22:17 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ int	configure_input(t_state *state)
 	state->orig_conf = state->input_conf;
 	state->input_conf.c_lflag &= ~(ICANON | ECHO);
 	state->input_conf.c_lflag |= ISIG;
+	state->input_conf.c_cc[VMIN] = 1;
+	state->input_conf.c_cc[VTIME] = 0;
 	state->input_flags = fcntl(STDIN_FILENO, F_GETFL);
 	if (state->input_flags == -1)
 		return (0);
 	state->orig_flags = state->input_flags;
-	state->input_flags |= O_NONBLOCK;
 	return (set_input_config(state));
 }
