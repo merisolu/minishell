@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:56:40 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 12:48:44 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:58:52 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_cmd_env *cmd)
 	{
 		cmd->env = (char **)ft_memalloc(sizeof(char *));
 		if (!cmd->env)
-			return (-1);
+			return (print_named_error("env", ERR_MALLOC_FAIL, -1));
 	}
 	else if (!ft_dup_null_array((void **)env, (void ***)&(cmd->env), var_copy))
-		return (-1);
+		return (print_named_error("env", ERR_MALLOC_FAIL, -1));
 	while (args[*index] && ft_strchr(args[*index], '='))
 	{
 		pair = args[*index];
