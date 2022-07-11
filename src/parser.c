@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 13:06:53 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:25:23 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	expect_token(t_token **cursor, t_token_type type, t_token *on_fail)
 
 	if (!cursor || !(*cursor))
 	{
-		*cursor = on_fail;
+		if (cursor)
+			*cursor = on_fail;
 		return (0);
 	}
 	result = (*cursor)->type == type;
