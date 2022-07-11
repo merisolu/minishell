@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/05/10 15:40:29 by jumanner         ###   ########.fr        #
+#    Updated: 2022/07/11 11:47:53 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ FT_PRINTF_LIB = $(FT_PRINTF_DIR)/libftprintf.a
 
 TEMP_LIB = .templib
 
-GCC_FLAGS = -O3 -Wall -Wextra -Werror
+GCC_FLAGS = -O2 -Wall -Wextra -Werror
 
 $(NAME): $(OBJS) $(FT_PRINTF_LIB)
 	ar rcs $(TEMP_LIB) $(OBJS)

@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/03/30 14:35:40 by jumanner         ###   ########.fr        #
+#    Updated: 2022/07/11 11:47:57 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS := $(patsubst %, $(SRC_DIR)/%, $(SRC_FILES))
 OBJ_DIR = ./obj
 OBJS := $(patsubst %, $(OBJ_DIR)/%, $(SRC_FILES:.c=.o))
 
-GCC_FLAGS = -O3 -Wall -Wextra -Werror
+GCC_FLAGS = -O2 -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
