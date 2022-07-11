@@ -6,19 +6,11 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:16:34 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/06 10:27:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:22:12 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
- * Resets the state's last_return_value to 0.
- */
-void	reset_return_value(t_state *state)
-{
-	set_return_value(0, state);
-}
 
 /*
  * Parses the given status code returned by wait() and sets

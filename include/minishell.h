@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 13:18:11 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:22:20 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,6 @@ int		execute(char *const *args, t_state *state);
 /* return_value.c */
 int		get_return_value_from_status(int status);
 void	set_return_value(int return_value, t_state *state);
-void	reset_return_value(t_state *state);
 
 /* Built-in commands */
 
