@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/11 13:22:20 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:48:04 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <termios.h>
-# include <fcntl.h>
 # include <sys/ioctl.h>
 # include <dirent.h>
 
@@ -95,8 +94,6 @@ typedef struct s_state
 	size_t			input_start_y;
 	struct termios	input_conf;
 	struct termios	orig_conf;
-	int				input_flags;
-	int				orig_flags;
 	char			*history[HISTORY_SIZE];
 	int				history_index;
 	int				last_return_value;

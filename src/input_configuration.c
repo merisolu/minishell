@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:20:24 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 13:22:17 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:43:57 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int	set_input_config(t_state *state)
 {
-	if (fcntl(STDIN_FILENO, F_SETFL, state->input_flags) == -1
-		|| tcsetattr(STDIN_FILENO, TCSANOW, &(state->input_conf)) == -1)
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &(state->input_conf)) == -1)
 		return (0);
 	return (1);
 }
 
 int	set_orig_config(t_state *state)
 {
-	if (fcntl(STDIN_FILENO, F_SETFL, state->orig_flags) == -1
-		|| tcsetattr(STDIN_FILENO, TCSANOW, &(state->orig_conf)) == -1)
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &(state->orig_conf)) == -1)
 		return (0);
 	return (1);
 }
@@ -52,9 +50,5 @@ int	configure_input(t_state *state)
 	state->input_conf.c_lflag |= ISIG;
 	state->input_conf.c_cc[VMIN] = 1;
 	state->input_conf.c_cc[VTIME] = 0;
-	state->input_flags = fcntl(STDIN_FILENO, F_GETFL);
-	if (state->input_flags == -1)
-		return (0);
-	state->orig_flags = state->input_flags;
 	return (set_input_config(state));
 }
