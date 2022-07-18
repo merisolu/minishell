@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/13 11:08:40 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:43:15 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	bin_execute(char *path, char **args, char *const *env)
 	process_pid = fork();
 	if (process_pid == 0)
 	{
-		signal(SIG_INT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		if (execve(path, args, env) == -1)
 			exit(print_error(ERR_CHILD_PROC_FAIL, 1));
 	}

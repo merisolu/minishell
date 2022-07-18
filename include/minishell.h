@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/12 15:48:04 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:42:18 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,6 @@
 # define ERR_SIZE_GET_FAIL "failed to read terminal size"
 # define ERR_NO_HOME "HOME not set"
 # define ERR_NO_OLDPWD "OLDPWD not set"
-
-/* Signals */
-# define SIG_HUP 1
-# define SIG_INT 2
-# define SIG_QUIT 3
-# define SIG_ILL 4
-# define SIG_TRAP 5
-# define SIG_ABRT 6
-# define SIG_EMT 7
-# define SIG_FPE 8
-# define SIG_KILL 9
-# define SIG_BUS 10
-# define SIG_SEGV 11
-# define SIG_SYS 12
-# define SIG_PIPE 13
-# define SIG_ALRM 14
-# define SIG_TERM 15
-# define SIG_URG 16
-# define SIG_STOP 17
-# define SIG_TSTP 18
-# define SIG_CONT 19
-# define SIG_CHLD 20
-# define SIG_TTIN 21
-# define SIG_TTOU 22
-# define SIG_IO 23
-# define SIG_XCPU 24
-# define SIG_XFSZ 25
-# define SIG_VTALRM 26
-# define SIG_PROF 27
-# define SIG_WINCH 28
-# define SIG_INFO 29
-# define SIG_USR1 30
-# define SIG_USR2 31
 
 /* Types */
 
