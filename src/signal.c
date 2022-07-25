@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:20:30 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/18 13:42:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:03:39 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_last_signal;
+extern int	g_last_signal;
 
 static void	set_signal_int(int signal)
 {

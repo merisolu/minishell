@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/25 13:57:52 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:03:28 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@
 # define ERR_SIZE_GET_FAIL "failed to read terminal size"
 # define ERR_NO_HOME "HOME not set"
 # define ERR_NO_OLDPWD "OLDPWD not set"
+
+/* Globals */
+
+int			g_last_signal;
 
 /* Types */
 
