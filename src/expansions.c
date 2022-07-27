@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/10 11:25:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:34:01 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ int	expand_tilde(t_token **cursor, t_state *state, char ***res)
 		orig = *cursor;
 		return (add_to_result(res, "~", state));
 	}
-	if (*cursor
-		&& ((*cursor)->value[0] != '/' && !ft_strisempty((*cursor)->value)))
+	if (*cursor && !ft_strisempty((*cursor)->value)
+		&& !ft_strchr(":/", (*cursor)->value[0]))
+	{
+		if ((*cursor)->value[0] == '=' && ft_strlen((*cursor)->value) > 1)
+			return (add_to_result(res, "~", state));
 		return (add_to_result(res, "~", state));
+	}
 	if (env_get("HOME", state->env) && !state->in_double_quotes)
 		return (
 			add_to_result(res, env_get("HOME", state->env), state)
 		);
-	else
-		return (add_to_result(res, "~", state));
-	return (0);
+	return (add_to_result(res, "~", state));
 }
 
 int	expand_variable(t_token **cursor, t_state *state, char ***res)
