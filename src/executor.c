@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 12:47:45 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/27 11:42:24 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	execute(char *const *args, t_state *state)
 	char	*path;
 	int		return_value;
 
-	if (!args || ft_strisempty(args[0]))
+	if (!args || ft_strisempty(args[0]) || !env_set("_", args[0], &state->env))
 		return (print_error(ERR_MALLOC_FAIL, 1));
 	built_in = get_built_in(args[0]);
 	if (built_in)
@@ -44,12 +44,12 @@ int	execute(char *const *args, t_state *state)
 		return (bin_execute(args[0], (char **)args, state->env));
 	}
 	else if (bin_env_find(args[0], state->env, &path) == 0)
-		return (
-			print_named_error(
+		return (print_named_error(
 				args[0], ERR_COM_NOT_FOUND, RETURN_COMMAND_NOT_FOUND
-			)
-		);
-	return_value = bin_execute(path, (char **)args, state->env);
+			));
+	return_value = env_set("_", path, &(state->env));
+	if (return_value)
+		return_value = bin_execute(path, (char **)args, state->env);
 	free(path);
 	return (return_value);
 }

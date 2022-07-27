@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:29:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/18 13:43:15 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/27 11:01:43 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	bin_execute(char *path, char **args, char *const *env)
 		return (print_named_error(
 				(char *)path, ERR_NO_PERMISSION, RETURN_NO_ACCESS
 			));
+	if (!env_set("_", path, &env))
+		return (1);
 	process_pid = fork();
 	if (process_pid == 0)
 	{
