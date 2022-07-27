@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/27 11:15:28 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/07/27 11:40:26 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static void	tokenize_and_execute(t_state *state)
 	}
 	if (ft_strisempty(state->input))
 	{
-		clear_input(state);
-		ft_putchar('\n');
+		clear_input(state, 1);
 		if (!set_input_config(state))
 			print_error(ERR_TERMIOS_FAIL, 1);
 		return ;
@@ -50,7 +49,7 @@ static void	tokenize_and_execute(t_state *state)
 	args = parse(tokenize(state->input), state);
 	set_return_value(execute(args, state), state);
 	ft_free_null_array((void **)args);
-	clear_input(state);
+	clear_input(state, 0);
 	if (!set_input_config(state))
 		print_error(ERR_TERMIOS_FAIL, 1);
 }
