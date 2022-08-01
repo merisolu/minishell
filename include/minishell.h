@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 09:32:26 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:58:14 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ typedef struct s_cmd_env
 /* signal.c */
 void	check_signal(t_state *state);
 void	set_signal_handling(void);
+
+/* shlvl.c */
+int		set_shlvl(char *const **env);
 
 /* input.c */
 int		get_input(t_state *state);
