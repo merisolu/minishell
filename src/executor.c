@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 09:33:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:17:17 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	execute(char *const *args, t_state *state)
 	built_in = get_built_in(args[0]);
 	if (built_in)
 		return (run_built_in(built_in, args, state));
-	if (ft_strchr(args[0], '/'))
+	if (ft_strchr(args[0], '/') || (args[0][0] == '.'))
 	{
 		return_value = check_path_validity(args[0]);
 		if (return_value != 0)
