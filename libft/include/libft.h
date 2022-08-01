@@ -6,17 +6,15 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/11 11:10:02 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:10:54 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <sys/errno.h>
 # include <sys/stat.h>
 
 /* Buffer size for ft_get_next_line(). */
