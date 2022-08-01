@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/27 11:42:24 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/01 09:33:06 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	execute(char *const *args, t_state *state)
 		return_value = check_path_validity(args[0]);
 		if (return_value != 0)
 			return (return_value);
-		return (bin_execute(args[0], (char **)args, state->env));
+		return (bin_execute(args[0], (char **)args, state->env, 1));
 	}
 	else if (bin_env_find(args[0], state->env, &path) == 0)
 		return (print_named_error(
@@ -49,7 +49,7 @@ int	execute(char *const *args, t_state *state)
 			));
 	return_value = env_set("_", path, &(state->env));
 	if (return_value)
-		return_value = bin_execute(path, (char **)args, state->env);
+		return_value = bin_execute(path, (char **)args, state->env, 1);
 	free(path);
 	return (return_value);
 }
