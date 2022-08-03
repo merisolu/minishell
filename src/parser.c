@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/11 13:25:23 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:22:49 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ char	**parse(t_token *list, t_state *state)
 	int		func_result;
 
 	state->continue_previous_node = 0;
+	state->in_assignment = 0;
+	state->has_seen_tilde_in_word = 0;
 	state->in_double_quotes = 0;
 	if (!list)
 		return (NULL);

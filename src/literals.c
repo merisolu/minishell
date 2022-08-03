@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:05:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/05 15:08:29 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:09:59 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_literals(t_token **cursor, t_state *state, char ***result)
 		if (state->in_double_quotes)
 			return (add_to_result(result, original->value, state));
 		state->continue_previous_node = 0;
+		state->has_seen_tilde_in_word = 0;
+		state->in_assignment = 0;
 		return (1);
 	}
 	if (expect_token(cursor, TOKEN_DOUBLEQUOTE, original))

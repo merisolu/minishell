@@ -6,39 +6,76 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/27 15:34:01 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:40:16 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	expand_tilde(t_token **cursor, t_state *state, char ***res)
+static int	is_in_assignment(t_state *state, char ***res)
 {
 	char	*previous;
-	t_token	*orig;
+	char	*first_equals;
+	char	*last_equals;
 
-	orig = *cursor;
-	if (!expect_token(cursor, TOKEN_TILDE, orig))
-		return (0);
 	previous = (*res)[ft_null_array_len((void **)(*res)) - 1];
-	if (state->continue_previous_node
-		&& !ft_strchr(":=", previous[ft_strlen(previous) - 1]))
+	first_equals = ft_strchr(previous, '=');
+	last_equals = ft_strrchr(previous, '=');
+	return (state->continue_previous_node && previous && first_equals
+		&& first_equals != previous && first_equals == last_equals
+		&& !ft_strchr(previous, '~'));
+}
+
+static int	expand_tilde_special(t_token **cursor, t_state *state, char ***res)
+{
+	t_token	*original;
+
+	original = *cursor;
+	if (expect_token(cursor, TOKEN_PLUS, original))
 	{
-		orig = *cursor;
-		return (add_to_result(res, "~", state));
+		if (token_is_word_end(*cursor)
+			|| ((*cursor)->type == TOKEN_LITERAL && (*cursor)->value[0] == '/'))
+			return (add_to_result(res,
+					env_get_or("PWD", "~+", state->env), state));
 	}
-	if (*cursor && !ft_strisempty((*cursor)->value)
-		&& !ft_strchr(":/", (*cursor)->value[0]))
+	if (expect_token(cursor, TOKEN_MINUS, original))
 	{
-		if ((*cursor)->value[0] == '=' && ft_strlen((*cursor)->value) > 1)
+		if (token_is_word_end(*cursor)
+			|| ((*cursor)->type == TOKEN_LITERAL && (*cursor)->value[0] == '/'))
+			return (add_to_result(res,
+					env_get_or("OLDPWD", "~-", state->env), state));
+	}
+	*cursor = original;
+	return (0);
+}
+
+int	expand_tilde(t_token **cursor, t_state *state, char ***res)
+{
+	t_token	*original;
+	int		special_result;
+
+	original = *cursor;
+	if (!expect_token(cursor, TOKEN_TILDE, original))
+		return (0);
+	if (state->has_seen_tilde_in_word && !state->in_assignment)
+		return (add_to_result(res, "~", state));
+	state->has_seen_tilde_in_word = 1;
+	state->in_assignment = is_in_assignment(state, res);
+	if (original->previous && original->previous->type == TOKEN_LITERAL)
+	{
+		if (!state->in_assignment)
 			return (add_to_result(res, "~", state));
-		return (add_to_result(res, "~", state));
 	}
-	if (env_get("HOME", state->env) && !state->in_double_quotes)
-		return (
-			add_to_result(res, env_get("HOME", state->env), state)
-		);
-	return (add_to_result(res, "~", state));
+	else if (!token_is_word_end(*cursor))
+	{
+		special_result = expand_tilde_special(cursor, state, res);
+		if (special_result != 0)
+			return (special_result);
+		if (!((*cursor)->value[0] == '/' || (!state->continue_previous_node
+					&& ft_strchr(":/", (*cursor)->value[0]))))
+			return (add_to_result(res, "~", state));
+	}
+	return (add_to_result(res, env_get_or("HOME", "~", state->env), state));
 }
 
 int	expand_variable(t_token **cursor, t_state *state, char ***res)

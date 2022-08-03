@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 11:17:34 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:22:53 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_state
 	size_t			prev_input_len;
 	int				continue_previous_node;
 	int				in_double_quotes;
+	int				in_assignment;
+	int				has_seen_tilde_in_word;
 	size_t			cursor;
 	size_t			input_start_x;
 	size_t			input_start_y;
