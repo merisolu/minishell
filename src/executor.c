@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 13:17:17 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:37:16 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_path_validity(char *path)
+static int	check_path_validity(char *path)
 {
 	if (ft_is_dir(path))
 		return (print_named_error(path, ERR_IS_DIR, RETURN_NO_ACCESS));

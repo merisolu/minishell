@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/27 11:39:59 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:35:49 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *
  * Returns 1 if successful, zero otherwise.
  */
-int	get_terminal_size(size_t *width, size_t *length)
+static int	get_terminal_size(size_t *width, size_t *length)
 {
 	struct winsize	size;
 

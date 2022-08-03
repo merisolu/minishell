@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 11:22:49 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:45:56 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	add_to_result(char ***result, char *value, t_state *state)
 	return (-1);
 }
 
-int	run_functions(t_token **cursor, t_state *state, char ***result)
+static int	run_functions(t_token **cursor, t_state *state, char ***result)
 {
 	int						func_return;
 	static t_parse_function	*functions[] = {
