@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 11:58:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 09:25:55 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_token
 	t_token_type	type;
 	char			*value;
 	struct s_token	*next;
+	struct s_token	*previous;
 }	t_token;
 
 typedef int	t_input_handler(char buf[16], t_state *state);
@@ -165,7 +166,6 @@ int		expand_tilde(t_token **cursor, t_state *state, char ***result);
 int		expand_variable(t_token **cursor, t_state *state, char ***result);
 
 /* token.c */
-t_token	*token_new(t_token_type type, char *value);
 t_token	*token_add(t_token **list, t_token_type type, char *value);
 void	token_free(t_token **token);
 

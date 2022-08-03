@@ -6,13 +6,13 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:54:56 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/15 10:56:13 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/02 11:10:54 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*token_new(t_token_type type, char *value)
+static t_token	*token_new(t_token_type type, char *value, t_token *previous)
 {
 	t_token	*result;
 
@@ -25,6 +25,7 @@ t_token	*token_new(t_token_type type, char *value)
 	result->value = value;
 	result->type = type;
 	result->next = NULL;
+	result->previous = previous;
 	return (result);
 }
 
@@ -39,13 +40,13 @@ t_token	*token_add(t_token **list, t_token_type type, char *value)
 	}
 	if (!(*list))
 	{
-		*list = token_new(type, value);
+		*list = token_new(type, value, NULL);
 		return (*list);
 	}
 	cursor = *list;
 	while (cursor->next)
 		cursor = cursor->next;
-	cursor->next = token_new(type, value);
+	cursor->next = token_new(type, value, cursor);
 	return (cursor->next);
 }
 
