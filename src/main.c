@@ -46,7 +46,8 @@ static void	tokenize_and_execute(t_state *state)
 	ft_putchar('\n');
 	args = parse(tokenize(state->input), state);
 	set_return_value(execute(args, state), state);
-	env_set("_", args[ft_null_array_len((void **)args) - 1], &(state->env));
+	if (args)
+		env_set("_", args[ft_null_array_len((void **)args) - 1], &(state->env));
 	ft_free_null_array((void **)args);
 	clear_input(state, 0);
 	if (!set_input_config(state))
