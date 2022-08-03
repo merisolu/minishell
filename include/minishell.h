@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 09:25:55 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:19:32 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ int		expand_variable(t_token **cursor, t_state *state, char ***result);
 /* token.c */
 t_token	*token_add(t_token **list, t_token_type type, char *value);
 void	token_free(t_token **token);
+int		token_is_word_end(t_token *token);
 
 /* token_list.c */
 void	token_list_free(t_token **list);
