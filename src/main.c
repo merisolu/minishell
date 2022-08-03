@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:13:35 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 10:20:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:08:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ static void	tokenize_and_execute(t_state *state)
 {
 	char		**args;
 
-	if (!set_orig_config(state))
-	{
-		print_error(ERR_TERMIOS_FAIL, 1);
-		return ;
-	}
 	if (ft_strisempty(state->input))
 	{
 		clear_input(state, 1);
-		if (!set_input_config(state))
-			print_error(ERR_TERMIOS_FAIL, 1);
+		return ;
+	}
+	if (!set_orig_config(state))
+	{
+		print_error(ERR_TERMIOS_FAIL, 1);
 		return ;
 	}
 	history_store(state->input, state);
