@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:32:06 by jumanner          #+#    #+#             */
-/*   Updated: 2022/05/24 09:35:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 09:27:55 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ static t_token_type	get_token_type(char value)
 		return (TOKEN_CURLY_OPEN);
 	if (value == '}')
 		return (TOKEN_CURLY_CLOSED);
+	if (value == '+')
+		return (TOKEN_PLUS);
+	if (value == '-')
+		return (TOKEN_MINUS);
 	return (TOKEN_LITERAL);
 }
 

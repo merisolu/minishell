@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 10:19:32 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:17:34 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ typedef enum e_token_type
 	TOKEN_TILDE,
 	TOKEN_DOUBLEQUOTE,
 	TOKEN_CURLY_OPEN,
-	TOKEN_CURLY_CLOSED
+	TOKEN_CURLY_CLOSED,
+	TOKEN_PLUS,
+	TOKEN_MINUS
 }	t_token_type;
 
 typedef struct s_token
