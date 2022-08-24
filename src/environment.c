@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:39:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/24 11:40:00 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:58:19 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,13 @@ size_t	valid_env_name_length(char *name)
 
 	if (!name)
 		return (0);
-	if (name[0] >= '0' && name[0] <= '9')
+	if (ft_isdigit(name[0]))
 		return (0);
 	result = 0;
 	while (name[result])
 	{
-		if ((name[result] >= '0' && name[result] <= '9')
-			|| (name[result] >= 'A' && name[result] <= 'Z')
-			|| (name[result] >= 'a' && name[result] <= 'z')
-			|| name[result] == '_')
-				result++;
+		if (ft_isalnum(name[result]) || name[result] == '_')
+			result++;
 		else
 			break ;
 	}
