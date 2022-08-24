@@ -6,11 +6,39 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:39:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/06/29 14:18:11 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:40:00 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Returns the length of the portion of the given string that's considered a
+ * valid environment variable name ([a-zA-Z_][a-zA-Z_0-9]*).
+ *
+ * Returns zero if the given string is null.
+ */
+size_t	valid_env_name_length(char *name)
+{
+	size_t	result;
+
+	if (!name)
+		return (0);
+	if (name[0] >= '0' && name[0] <= '9')
+		return (0);
+	result = 0;
+	while (name[result])
+	{
+		if ((name[result] >= '0' && name[result] <= '9')
+			|| (name[result] >= 'A' && name[result] <= 'Z')
+			|| (name[result] >= 'a' && name[result] <= 'z')
+			|| name[result] == '_')
+				result++;
+		else
+			break ;
+	}
+	return (result);
+}
 
 /*
  * Sets an environment variable to the given value.

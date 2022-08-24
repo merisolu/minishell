@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 11:40:16 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:22:07 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,44 @@ int	expand_tilde(t_token **cursor, t_state *state, char ***res)
 	return (add_to_result(res, env_get_or("HOME", "~", state->env), state));
 }
 
+static int	expand_name(char *value, t_state *state, char ***res)
+{
+	int		return_code;
+	char	*valid;
+	char	*temp;
+
+	if (ft_strequ(value, "?"))
+	{
+		temp = ft_itoa(state->last_return_value);
+		return_code = add_to_result(res, temp, state);
+		free(temp);
+		return (return_code);
+	}
+	if (valid_env_name_length(value) == 0)
+		return (0);
+	valid = ft_strsub(value, 0, valid_env_name_length(value));
+	if (!valid)
+		return (-1);
+	return_code = add_to_result(res, env_get_or(valid, "", state->env), state);
+	if (return_code == 1)
+		add_to_result(res, value + valid_env_name_length(value), state);
+	free(valid);
+	return (return_code);
+}
+
 int	expand_variable(t_token **cursor, t_state *state, char ***res)
 {
 	t_token	*original;
-	char	*temp;
 	int		return_code;
 
 	original = *cursor;
-	if (expect_token(cursor, TOKEN_DOLLAR, original) \
+	if (expect_token(cursor, TOKEN_DOLLAR, original)
 		&& expect_token(cursor, TOKEN_LITERAL, original))
 	{
-		temp = original->next->value;
-		if (ft_strequ(temp, "?"))
-		{
-			temp = ft_itoa(state->last_return_value);
-			return_code = add_to_result(res, temp, state);
-			free(temp);
-			return (return_code);
-		}
-		return (add_to_result(res, env_get_or(temp, "", state->env), state));
+		return_code = expand_name(original->next->value, state, res);
+		if (return_code == 0)
+			*cursor = original;
+		return (return_code);
 	}
 	if (expect_token(cursor, TOKEN_DOLLAR, original)
 		&& expect_token(cursor, TOKEN_CURLY_OPEN, original)
