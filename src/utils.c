@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 13:35:49 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/25 11:05:06 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	print_state(t_state *state, int newline)
 		if (state->input_start_y + rows + newline > length + 1)
 			state->input_start_y -= (state->input_start_y + rows + newline) \
 				- length - 1;
+		if (state->input_start_y > length)
+			state->input_start_y = 0;
 		load_cursor(state);
 		ft_printf("\033[0J%s%s", PROMPT, state->input);
 		move_cursor_to_saved_position(state, width);
