@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 16:30:45 by jumanner          #+#    #+#             */
-/*   Updated: 2021/11/23 15:08:05 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:50:11 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (((unsigned char *)s)[i] == (unsigned char) c)
-			return ((void *)(s + i));
+			return ((void *)(((unsigned char *)s) + i));
 		i++;
 	}
 	return (NULL);
