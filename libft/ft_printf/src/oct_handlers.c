@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:58:03 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/02 14:04:09 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:45:03 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	oct_writer(unsigned long long value, t_flags f)
 	len += (f.hash && (value != 0 || (f.precision == 0 && value == 0)));
 	if (!f.minus && !f.zero)
 		insert_width(f, ft_max(f.precision, len));
-	if (f.hash && (value != 0 || (f.precision == 0 && value == 0)))
+	if (f.hash && (value != 0 || f.precision == 0))
 		ft_putchar('0');
 	if (!f.minus && f.zero)
 		insert_width(f, ft_max(f.precision, len));

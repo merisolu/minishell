@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:36:10 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/16 11:59:49 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:41:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	parse_width(char **cursor, va_list args, t_flags *result)
 			if (parse_mode != 1)
 				(*result).width = 0;
 			(*result).width = ((*result).width * 10) + (**cursor) - '0';
-			parse_mode = 1;
 		}
 		else if (**cursor == '*')
 			(*result).width = va_arg(args, int);

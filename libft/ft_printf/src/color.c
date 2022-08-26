@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:21:48 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/21 16:20:21 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:40:49 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ static int	put_background_color(char *color_name)
 
 int	parse_color(char **cursor)
 {
-	char	**start;
 	char	*color_name;
 
-	start = cursor;
 	if (**cursor != '{' || !ft_strchr(*cursor, '}'))
 		return (0);
 	color_name = ft_strsub(*cursor, 1, ft_dstchr(*cursor, '}', 11) - 1);
@@ -76,6 +74,5 @@ int	parse_color(char **cursor)
 		return (1);
 	}
 	free(color_name);
-	cursor = start;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 12:28:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/17 16:23:50 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:43:09 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	divide_by_two(t_digits *digits)
 		remainder *= 10;
 		digits->decis++;
 		digits->digits[HFLT_SIZE - digits->decis] = (remainder / 2);
-		remainder %= 2;
 	}
 }
 
