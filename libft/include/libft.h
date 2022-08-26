@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 13:10:54 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:17:14 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,7 @@ void		ft_lstadd(t_list **alst, t_list *new);
 void		ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
-size_t		ft_dstchr(char *s, char c, size_t max);
+size_t		ft_dstchr(const char *s, char c, size_t max);
 
 /* Path functions. */
 int			ft_is_hidden(const char *path);

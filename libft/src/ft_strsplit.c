@@ -6,14 +6,14 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:08:15 by jumanner          #+#    #+#             */
-/*   Updated: 2021/12/03 13:35:57 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:50:34 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /* Returns the distance to char c in string s. */
-static int	dist_to_sep(char *s, char c)
+static int	dist_to_sep(const char *s, char c)
 {
 	int	result;
 
