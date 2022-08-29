@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:19:39 by jumanner          #+#    #+#             */
-/*   Updated: 2021/12/03 13:35:24 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:46:03 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	get_result(unsigned long result, int sign)
 {
 	if (result > 9223372036854775807)
 	{
-		if (result > 9223372036854775807 && sign == -1)
+		if (sign == -1)
 			return (0);
 		else if (result != 9223372036854775807)
 			return (-1);

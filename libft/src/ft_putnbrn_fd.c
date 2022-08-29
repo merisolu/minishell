@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 12:36:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 14:53:06 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_putnbrn_ullong_fd(t_ull n, int len, int fd)
 		ft_putnbrn_ullong_fd(n, len - 1, fd);
 		return ;
 	}
-	if (len && n > 9)
+	if (n > 9)
 		ft_putnbrn_ullong_fd(n / 10, len - 1, fd);
 	ft_putchar_fd((n % 10) + 48, fd);
 }
