@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 14:56:48 by jumanner          #+#    #+#             */
-/*   Updated: 2022/03/30 14:42:51 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:58:23 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_itoa_base(int n, int base)
 		result[0] = '-';
 	else if (n == 0)
 		result[0] = '0';
-	while (n)
+	while (n > 0)
 	{
 		result[(size--) - 1] = chars[ft_abs(n % base)];
 		n /= base;
@@ -44,7 +44,7 @@ char	*ft_itoa_base(int n, int base)
  * Turns the given unsigned integer n into a string representation 
  * in bases 2 to 36.
 */
-char	*ft_itoa_uint_base(unsigned int n, int base)
+char	*ft_itoa_uint_base(unsigned int n, unsigned int base)
 {
 	char	*result;
 	int		size;
@@ -62,7 +62,7 @@ char	*ft_itoa_uint_base(unsigned int n, int base)
 	while (n)
 	{
 		result[(size--) - 1] = chars[n % base];
-		n /= base;
+		n = n / base;
 	}
 	return (result);
 }
@@ -87,7 +87,7 @@ char	*ft_itoa_llong_base(long long n, int base)
 		result[0] = '-';
 	else if (n == 0)
 		result[0] = '0';
-	while (n)
+	while (n > 0)
 	{
 		result[(size--) - 1] = chars[ft_abs(n % base)];
 		n /= base;

@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:24:04 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/26 15:17:14 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:58:07 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ char		*ft_itoa_llong(long long n);
 char		*ft_itoa_ullong(t_ull n);
 
 char		*ft_itoa_base(int n, int base);
-char		*ft_itoa_uint_base(unsigned int n, int base);
+char		*ft_itoa_uint_base(unsigned int n, unsigned int base);
 char		*ft_itoa_llong_base(long long n, int base);
 char		*ft_itoa_ullong_base(t_ull n, int base);
 
