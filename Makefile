@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:02:44 by jumanner          #+#    #+#              #
-#    Updated: 2022/08/01 10:20:43 by jumanner         ###   ########.fr        #
+#    Updated: 2022/08/31 10:24:28 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJS := $(patsubst %, $(OBJ_DIR)/%, $(SRC_FILES:.c=.o))
 GCC_FLAGS = -O2 -Wall -Wextra -Werror
 
 $(NAME): $(LIB_PATH) $(OBJS)
-	$(CC) $(GCC_FLAGS) -L $(LIB_DIR) -lft $(OBJS) -o $(NAME)
+	$(CC) $(GCC_FLAGS) $(OBJS) -o $(NAME) -L $(LIB_DIR) -lft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(GCC_FLAGS) -I $(INCLUDE_DIR) -I $(LIB_INCLUDE_DIR) -c $< -o $@
