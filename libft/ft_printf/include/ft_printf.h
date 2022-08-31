@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:27:15 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/21 15:36:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:43:10 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include "libft.h"
 # include <stdarg.h>
+
+# if __linux__
+#  include <inttypes.h>
+#  include <stdint.h>
+# endif
 
 # define FLT_SIZE 32800
 # define HFLT_SIZE 16400

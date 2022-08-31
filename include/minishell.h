@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/31 10:25:10 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:54:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <dirent.h>
+
+# if __linux__
+#  include <sys/wait.h>
+# endif
 
 # define PROMPT "$> "
 
