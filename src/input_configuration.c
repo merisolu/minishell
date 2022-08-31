@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:20:24 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/18 13:42:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:16:22 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int	set_input_config(t_state *state)
 {
-	if (siginterrupt(SIGINT, 1) == -1
-		|| tcsetattr(STDIN_FILENO, TCSANOW, &(state->input_conf)) == -1)
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &(state->input_conf)) == -1)
 		return (0);
 	return (1);
 }
 
 int	set_orig_config(t_state *state)
 {
-	if (siginterrupt(SIGINT, 0) == -1
-		|| tcsetattr(STDIN_FILENO, TCSANOW, &(state->orig_conf)) == -1)
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &(state->orig_conf)) == -1)
 		return (0);
 	return (1);
 }
@@ -50,7 +48,7 @@ int	configure_input(t_state *state)
 	state->orig_conf = state->input_conf;
 	state->input_conf.c_lflag &= ~(ICANON | ECHO);
 	state->input_conf.c_lflag |= ISIG;
-	state->input_conf.c_cc[VMIN] = 1;
-	state->input_conf.c_cc[VTIME] = 0;
+	state->input_conf.c_cc[VMIN] = 0;
+	state->input_conf.c_cc[VTIME] = 1;
 	return (set_input_config(state));
 }
