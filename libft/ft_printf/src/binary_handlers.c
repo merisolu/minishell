@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:58:03 by jumanner          #+#    #+#             */
-/*   Updated: 2022/02/03 22:30:50 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:44:03 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	get_allocations(char **prefix, char **str, long long value)
 	*str = ft_itoa_llong_base(value, 2);
 	if (!(*prefix) || !(*str))
 	{
-		free(prefix);
-		free(str);
+		free(*prefix);
+		free(*str);
 		return (0);
 	}
 	return (1);
