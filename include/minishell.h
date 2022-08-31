@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/24 09:57:20 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 10:25:10 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 /* Globals */
 
-int			g_last_signal;
+extern int	g_last_signal;
 
 /* Types */
 
