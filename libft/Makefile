@@ -6,7 +6,7 @@
 #    By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 16:25:00 by jumanner          #+#    #+#              #
-#    Updated: 2022/07/11 11:47:53 by jumanner         ###   ########.fr        #
+#    Updated: 2022/08/31 13:52:50 by jumanner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,16 +49,23 @@ OBJ_DIR = ./obj
 OBJS := $(patsubst %, $(OBJ_DIR)/%, $(SRC_FILES:.c=.o))
 
 FT_PRINTF_DIR = ./ft_printf
-FT_PRINTF_LIB = $(FT_PRINTF_DIR)/libftprintf.a
 
-TEMP_LIB = .templib
+FT_PRINTF_SRC_FILES = ft_printf.c component_parsers.c dispatchers.c \
+	text_handlers.c num_handlers.c unum_handlers.c \
+	float_handlers.c float_helpers.c \
+	double_writer.c double_writer_helpers.c \
+	hex_handlers.c oct_handlers.c binary_handlers.c base36_handlers.c \
+	written_chars_handler.c width.c color.c
+FT_PRINTF_SRC_DIR = $(FT_PRINTF_DIR)/src
+FT_PRINTF_SRCS := $(patsubst %, $(FT_PRINTF_SRC_DIR)/%, $(FT_PRINTF_SRC_FILES))
+FT_PRINTF_OBJ_DIR = $(FT_PRINTF_DIR)/obj
+FT_PRINTF_OBJS := $(patsubst %, $(FT_PRINTF_OBJ_DIR)/%, $(FT_PRINTF_SRC_FILES:.c=.o))
+FT_PRINTF_INCLUDE_DIR = $(FT_PRINTF_DIR)/include
 
 GCC_FLAGS = -O2 -Wall -Wextra -Werror
 
-$(NAME): $(OBJS) $(FT_PRINTF_LIB)
-	ar rcs $(TEMP_LIB) $(OBJS)
-	libtool -static -o $(NAME) $(TEMP_LIB) $(FT_PRINTF_LIB)
-	rm -f $(TEMP_LIB)
+$(NAME): $(OBJS) $(FT_PRINTF_OBJS)
+	ar rcs $(NAME) $(OBJS) $(FT_PRINTF_OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(GCC_FLAGS) -I $(INCLUDE_DIR) -c $< -o $@
@@ -66,17 +73,21 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
+$(FT_PRINTF_OBJ_DIR)%.o: $(FT_PRINTF_SRC_DIR)/%.c | $(FT_PRINTF_OBJ_DIR)
+	$(CC) $(GCC_FLAGS) -I $(INCLUDE_DIR) -I $(FT_PRINTF_INCLUDE_DIR) -c $< -o $@
+
+$(FT_PRINTF_OBJ_DIR):
+	mkdir -p $(FT_PRINTF_OBJ_DIR)
+
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 clean:
 	rm -rf $(OBJ_DIR)
+	rm -rf $(FT_PRINTF_OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-$(FT_PRINTF_LIB):
-	make -C $(FT_PRINTF_DIR)
