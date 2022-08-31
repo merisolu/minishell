@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 11:18:22 by jumanner          #+#    #+#             */
-/*   Updated: 2022/01/18 13:35:23 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 10:20:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_putcharn_fd(char c, int n, int fd)
 {
 	while (n > 0)
 	{
-		write(fd, &c, 1);
+		if (write(fd, &c, 1) == -1)
+			return ;
 		n--;
 	}	
 }

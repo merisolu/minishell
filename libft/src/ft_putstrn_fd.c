@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 10:48:27 by jumanner          #+#    #+#             */
-/*   Updated: 2022/01/18 12:10:18 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 10:21:06 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_putstrn_fd(char const *s, const int n, int fd)
 	i = 0;
 	while (i < n && s[i])
 	{
-		write(fd, s + i, 1);
+		if (write(fd, s + i, 1) == -1)
+			return ;
 		i++;
 	}
 }
