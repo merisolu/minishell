@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:18:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 13:51:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:14:05 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static const t_cmd_dispatch	*get_built_in_dispatch(void)
 {
-	const static t_cmd_dispatch	dispatch_table[] = {
+	static const t_cmd_dispatch	dispatch_table[] = {
 	{"cd", &cmd_cd},
 	{"echo", &cmd_echo},
 	{"env", &cmd_env},

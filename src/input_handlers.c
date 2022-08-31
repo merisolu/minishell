@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:29:22 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 10:27:08 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:14:39 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	handle_delete_char(char buf[BUF_SIZE], t_state *state)
 int	handle_char(char buf[BUF_SIZE], int *index, t_state *state)
 {
 	size_t									i;
-	const static t_input_handler_dispatch	dispatch_table[] = {
+	static const t_input_handler_dispatch	dispatch_table[] = {
 	{0xA, &handle_newline},
 	{0x17, &handle_delete_word},
 	{0x7F, &handle_delete_char},
