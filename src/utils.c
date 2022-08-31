@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/25 11:05:06 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:41:12 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_terminal_size(size_t *width, size_t *length)
 {
 	struct winsize	size;
 
-	if (ioctl(STDIN_FILENO, TIOCGSIZE, &size) == -1)
+	if (ioctl(STDIN_FILENO, TIOCGWINSZ, &size) == -1)
 		return (0);
 	*width = size.ws_col;
 	*length = size.ws_row;
