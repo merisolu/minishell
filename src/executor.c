@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:02 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 13:37:16 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:07:39 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	execute(char *const *args, t_state *state)
 	char	*path;
 	int		return_value;
 
-	if (!args || ft_strisempty(args[0]) || !env_set("_", args[0], &state->env))
+	if (!args || !(args[0]) || !env_set("_", args[0], &state->env))
 		return (print_error(ERR_MALLOC_FAIL, 1));
 	built_in = get_built_in(args[0]);
 	if (built_in)

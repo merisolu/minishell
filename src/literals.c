@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:05:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/01 16:09:59 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:06:30 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	check_literals(t_token **cursor, t_state *state, char ***result)
 	if (expect_token(cursor, TOKEN_DOUBLEQUOTE, original))
 	{
 		state->in_double_quotes = !state->in_double_quotes;
+		if (original && original->previous
+			&& original->previous->type == TOKEN_DOUBLEQUOTE)
+			return (add_to_result(result, "", state));
 		return (1);
 	}
 	if (expect_token(cursor, TOKEN_LITERAL, original))

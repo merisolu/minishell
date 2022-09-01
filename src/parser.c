@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:11:55 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/03 13:45:56 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:12:17 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,16 @@ static int	run_functions(t_token **cursor, t_state *state, char ***result)
 	return (0);
 }
 
+static void	reset_state(t_state *state)
+{
+	if (!state)
+		return ;
+	state->continue_previous_node = 0;
+	state->in_assignment = 0;
+	state->has_seen_tilde_in_word = 0;
+	state->in_double_quotes = 0;
+}
+
 /*
  * Parses the given list of tokens, handles expansions and whitespace, puts the
  * result into a char**, then returns it. 
@@ -116,12 +126,9 @@ char	**parse(t_token *list, t_state *state)
 	char	**result;
 	int		func_result;
 
-	state->continue_previous_node = 0;
-	state->in_assignment = 0;
-	state->has_seen_tilde_in_word = 0;
-	state->in_double_quotes = 0;
-	if (!list)
+	if (!list || !state)
 		return (NULL);
+	reset_state(state);
 	cursor = list;
 	result = (char **)ft_memalloc(sizeof(char *));
 	while (cursor && result)
@@ -135,6 +142,8 @@ char	**parse(t_token *list, t_state *state)
 		if (func_result == -1)
 			result = ft_free_null_array((void **)result);
 	}
+	if (state->in_double_quotes && add_to_result(&result, "", state) == -1)
+		result = ft_free_null_array((void **)result);
 	token_list_free(&list);
 	return (result);
 }
