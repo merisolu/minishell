@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/07/08 13:58:42 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:22:51 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*get_target(char *const *args, size_t count, char *const *env)
 {
 	char	*temp;
 
-	if (count == 1)
+	if (count <= 1 || (count == 2 && ft_strequ(args[1], "--")))
 	{
 		temp = env_get("HOME", env);
 		if (!temp)
@@ -60,6 +60,8 @@ static char	*get_target(char *const *args, size_t count, char *const *env)
 			return (temp);
 		}
 	}
+	if (count > 2 && ft_strequ(args[1], "--"))
+		return (args[2]);
 	return (args[1]);
 }
 
