@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:15:25 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/31 13:54:38 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:05:38 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "libft.h"
-# include <signal.h>
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <dirent.h>
