@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:03:49 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/31 11:41:12 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:43:24 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static void	move_cursor_to_saved_position(t_state *state, size_t width)
 {
 	size_t	cursor_rows;
 	size_t	text_rows;
+	size_t	column;
 
-	ft_printf(
-		"\033[%zuG", ((state->input_start_x + state->cursor - 2) % width) + 2
-		);
-	cursor_rows = (state->input_start_x + state->cursor - 2) / width;
-	text_rows = (ft_strlen(state->input) + ft_strlen(PROMPT) \
-		+ state->input_start_x - 2) / width;
-	if ((text_rows - cursor_rows) > 0)
+	column = ((state->input_start_x + state->cursor - 1) % width) + 1;
+	cursor_rows = (state->input_start_x + state->cursor - 1) / width;
+	text_rows = (ft_strlen(state->input) + ft_strlen(PROMPT)
+			+ state->input_start_x - 1) / width;
+	ft_printf("\033[%zuG", column);
+	if (text_rows - cursor_rows > 0)
 		ft_printf("\033[%zuA", text_rows - cursor_rows);
 }
 
@@ -89,10 +89,10 @@ void	print_state(t_state *state, int newline)
 		if (state->input_start_y > length)
 			state->input_start_y = 0;
 		load_cursor(state);
-		ft_printf("\033[0J%s%s", PROMPT, state->input);
+		ft_printf("\033[0J%s%s ", PROMPT, state->input);
 		move_cursor_to_saved_position(state, width);
 	}
 	else if (!newline)
 		ft_putstr(PROMPT);
-	state->prev_input_len = ft_strlen(PROMPT) + ft_strlen(state->input);
+	state->prev_input_len = ft_strlen(PROMPT) + ft_strlen(state->input) + 1;
 }
