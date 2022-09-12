@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:27:43 by jumanner          #+#    #+#             */
-/*   Updated: 2022/09/01 13:52:37 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:50:33 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	cmd_cd(char *const *args, t_state *state)
 
 	arg_count = ft_null_array_len((void **)args);
 	target = get_target(args, arg_count, state->env);
-	if (!ft_path_is_within_limits(target))
+	if (!target)
+		return (print_cd_error(target, ERR_MALLOC_FAIL, 1));
+	if (!ft_path_is_within_limits(target) || !construct_path(target, &path))
 		return (print_cd_error(target, ERR_INVALID_PATH, 1));
-	if (!target || !construct_path(target, &path))
-		return (1);
 	return_value = check_destination_errors(target, path);
 	if (return_value != 0)
 	{
