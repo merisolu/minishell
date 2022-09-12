@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 14:56:48 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/29 10:58:23 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:04:27 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_itoa_base(int n, int base)
 	if (base != 10 && n < 0)
 		return (ft_itoa_uint_base((unsigned int) n, base));
 	chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	size = ft_getdigits_base(n, base);
+	size = ft_getdigits_base(n, base) + (n < 0);
 	result = ft_strnew(size);
 	if (!result)
 		return (NULL);
@@ -32,10 +32,10 @@ char	*ft_itoa_base(int n, int base)
 		result[0] = '-';
 	else if (n == 0)
 		result[0] = '0';
-	while (n > 0)
+	while (n)
 	{
 		result[(size--) - 1] = chars[ft_abs(n % base)];
-		n /= base;
+		n = n / base;
 	}
 	return (result);
 }
@@ -79,7 +79,7 @@ char	*ft_itoa_llong_base(long long n, int base)
 	if (base != 10 && n < 0)
 		return (ft_itoa_ullong_base((t_ull) n, base));
 	chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	size = ft_getdigits_llong_base(n, base);
+	size = ft_getdigits_llong_base(n, base) + (n < 0);
 	result = ft_strnew(size);
 	if (!result)
 		return (NULL);
@@ -87,10 +87,10 @@ char	*ft_itoa_llong_base(long long n, int base)
 		result[0] = '-';
 	else if (n == 0)
 		result[0] = '0';
-	while (n > 0)
+	while (n)
 	{
 		result[(size--) - 1] = chars[ft_abs(n % base)];
-		n /= base;
+		n = n / base;
 	}
 	return (result);
 }
