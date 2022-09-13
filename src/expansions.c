@@ -6,7 +6,7 @@
 /*   By: jumanner <jumanner@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:47:12 by jumanner          #+#    #+#             */
-/*   Updated: 2022/08/24 11:22:07 by jumanner         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:35:39 by jumanner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ static int	expand_tilde_special(t_token **cursor, t_state *state, char ***res)
 					env_get_or("OLDPWD", "~-", state->env), state));
 	}
 	*cursor = original;
+	if (!((*cursor)->value[0] == '/' || (!state->continue_previous_node
+				&& ft_strchr(":/", (*cursor)->value[0]))))
+		return (add_to_result(res, "~", state));
 	return (0);
 }
 
@@ -71,10 +74,9 @@ int	expand_tilde(t_token **cursor, t_state *state, char ***res)
 		special_result = expand_tilde_special(cursor, state, res);
 		if (special_result != 0)
 			return (special_result);
-		if (!((*cursor)->value[0] == '/' || (!state->continue_previous_node
-					&& ft_strchr(":/", (*cursor)->value[0]))))
-			return (add_to_result(res, "~", state));
 	}
+	if (*cursor && (*cursor)->value && !ft_strchr(":/ \t", (*cursor)->value[0]))
+		return (add_to_result(res, "~", state));
 	return (add_to_result(res, env_get_or("HOME", "~", state->env), state));
 }
 
